@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI特效 | BlogWorld</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js 代码高亮 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        header {
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4a6fa5;
+        }
+        .logo span {
+            color: #32a852;
+        }
+        .back-link {
+            color: #4a6fa5;
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        .back-link i {
+            margin-right: 6px;
+        }
+        .article-header {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .article-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #166088;
+        }
+        .article-meta {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .article-meta span + span {
+            margin-left: 15px;
+        }
+        .article-cover {
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .article-cover img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        
+        /* 文章内容样式 */
+        .article-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .article-content h2 {
+            margin-top: 32px;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            color: #166088;
+        }
+        
+        .article-content h3 {
+            margin-top: 24px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #4a6fa5;
+        }
+        
+        .article-content p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 16px auto;
+            border-radius: 8px;
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin: 10px 0 10px 1.2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 6px;
+        }
+        
+        .article-content code:not(pre code) {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* 代码块样式 */
+        .code-block-wrapper {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .code-block-header {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .code-language {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .copy-button {
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+        
+        .copy-button:hover {
+            background-color: #718096;
+        }
+        
+        .copy-button.copied {
+            background-color: #38a169;
+        }
+        
+        .code-block {
+            margin: 0 !important;
+            border-radius: 0 !important;
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+            font-size: 0.95em !important;
+            background: #2d2d2d !important;
+        }
+        
+        /* Prism.js 主题覆盖 */
+        pre[class*="language-"] {
+            margin: 0 !important;
+            border-radius: 0 !important;
+        }
+        
+        pre.line-numbers {
+            position: relative;
+            padding-left: 3.8em;
+            counter-reset: linenumber;
+        }
+        
+        pre.line-numbers > code {
+            position: relative;
+        }
+        
+        .line-numbers .line-numbers-rows {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            font-size: 100%;
+            left: -3.8em;
+            width: 3em;
+            letter-spacing: -1px;
+            border-right: 1px solid #999;
+            user-select: none;
+        }
+        
+        .line-numbers-rows > span {
+            display: block;
+            counter-increment: linenumber;
+        }
+        
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+        
+        .tag-list {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .tag-list span {
+            background-color: #e9f5ff;
+            color: #4a6fa5;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-right: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 0 10px;
+            font-size: 0.85rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="logo"><span>BLOG</span>WORLD</div>
+            <a href="index.html#blog" class="back-link"><i class="fas fa-arrow-left"></i>返回博客列表</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <article>
+            <header class="article-header">
+                <h1 class="article-title">UI特效</h1>
+                <div class="article-meta">
+                    <span>编程技术</span>
+                    <span>2025年12月03日</span>
+                    <span>阅读时间：1 分钟</span>
+                </div>
+            </header>
+
+            <div class="article-cover">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80" alt="UI特效">
+            </div>
+    <div class="article-content">
+<p>ChildCanvas2 这个脚本用来调整特效的层级的.</p>
+<p>现在UIParticle用的多了ChildCanvas2脚本就用的少了.</p>
+<div class="code-block-wrapper">
+  <div class="code-block-header">
+    <span class="code-language">csharp</span>
+    <button class="copy-button" onclick="copyCode(this)">
+      <i class="fas fa-copy"></i> 复制代码
+    </button>
+  </div>
+  <pre class="code-block language-csharp"><code>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+public class ChildCanvas2 : MonoBehaviour
+{
+    public List&lt;SortingGroup&gt; FrontEffectArr; // 设置在前面的特效
+                                              // Use this for initialization
+    public List&lt;Canvas&gt; FrontCanvas;//设置canvas
+    public Canvas canvas;
+
+    private Dictionary&lt;int,int&gt; sortOrderDic = new Dictionary&lt;int, int&gt;();
+    private bool isInit = false;
+    private void Awake()
+    {
+        InitDic();
+    }
+
+    private void InitDic()
+    {
+        if (isInit)
+        {
+            return;
+        }
+        isInit = true;
+
+        if (!FrontEffectArr.IsNullOrEmpty())
+        {
+            for (int i = 0; i &lt; FrontEffectArr.Count; i++)
+            {
+                var item = FrontEffectArr[i];
+                if (item != null)
+                {
+                    sortOrderDic[item.GetInstanceID()] = item.sortingOrder;
+                }
+            }
+        }
+
+        if (!FrontCanvas.IsNullOrEmpty())
+        {
+
+            for (int i = 0; i &lt; FrontCanvas.Count; i++)
+            {
+                var item = FrontCanvas[i];
+                if (item != null)
+                {
+                    sortOrderDic[item.GetInstanceID()] = item.sortingOrder;
+                }
+            }
+        }
+    }
+
+    void Start()
+    {
+        if (canvas == null)
+        {
+            canvas = GetComponentInParent&lt;Canvas&gt;();
+        }
+        SetSortOrder();
+        SetSortOrderCanvas();
+    }
+    public void SetSortOrder()
+    {
+        if (canvas == null)
+        {
+            return;
+        }
+        string sortingLayerName = canvas.sortingLayerName;
+         int order = canvas.sortingOrder;
+
+        if (FrontEffectArr != null)
+        {
+            foreach (var item in FrontEffectArr)
+            {
+                if (item != null)
+                {
+                    if(sortOrderDic.TryGetValue(item.GetInstanceID(),out var originOrder))
+                    {
+                        item.sortingOrder = order + originOrder;
+                    }
+                    else
+                    {
+                        item.sortingOrder = order + item.sortingOrder;
+                    }
+
+                    item.sortingLayerName = sortingLayerName;
+                }
+            }
+        }
+    }
+    /// &lt;summary&gt;
+    /// 立即调用
+    /// &lt;/summary&gt;
+    public void Init()
+    {
+        if (canvas == null)
+        {
+            canvas = GetComponentInParent&lt;Canvas&gt;();
+        }
+        if (canvas == null)
+        {
+            return;
+        }
+        SetSortOrder();
+        SetSortOrderCanvas();
+    }
+
+    public void SetSortOrderCanvas()
+    {
+        if (canvas == null)
+        {
+            return;
+        }
+        if (FrontCanvas == null || FrontCanvas.Count == 0)
+        {
+            return;
+        }
+        int order = canvas.sortingOrder;
+        string sortingLayerName = canvas.sortingLayerName;
+
+        foreach (var item in FrontCanvas)
+        {
+            if (item != null)
+            {
+                if (sortOrderDic.TryGetValue(item.GetInstanceID(), out var originOrder))
+                {
+                    item.sortingOrder = order + originOrder;
+                }
+                else
+                {
+                    item.sortingOrder = order + item.sortingOrder;
+                }
+
+                item.overrideSorting = true;
+                item.sortingLayerName = sortingLayerName;
+            }
+        }
+    }
+}</code></pre>
+</div>
+<p>命名规则如下</p>
+<p><img src="UISprite/bg_nameruler.jpg" alt="" style="max-width: 100%;"></p>
+    </div>
+            <div class="tag-list">
+                <span>游戏开发</span>
+                <span>RPG</span>
+                <span>Unity</span>
+                <span>前端</span>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © 2023 BlogWorld. 保留所有权利。
+    </footer>
+    
+    <script>
+    // 复制代码功能
+    function copyCode(button) {
+        const codeBlock = button.parentElement.nextElementSibling;
+        const codeText = codeBlock.textContent;
+        
+        // 创建临时文本区域
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText;
+        document.body.appendChild(textArea);
+        
+        // 选择和复制
+        textArea.select();
+        document.execCommand('copy');
+        
+        // 清理
+        document.body.removeChild(textArea);
+        
+        // 显示复制成功反馈
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> 已复制';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    
+    // 页面加载完成后初始化Prism
+    document.addEventListener('DOMContentLoaded', function() {
+        // 为所有代码块添加行号
+        document.querySelectorAll('pre.code-block').forEach((block) => {
+            if (!block.classList.contains('line-numbers')) {
+                block.classList.add('line-numbers');
+            }
+        });
+        
+        // 手动触发Prism高亮（以防万一）
+        if (typeof Prism !== 'undefined') {
+            // 先移除行号，让Prism重新处理
+            document.querySelectorAll('pre.code-block').forEach((block) => {
+                const lineNumbers = block.querySelector('.line-numbers-rows');
+                if (lineNumbers) {
+                    lineNumbers.remove();
+                }
+            });
+            
+            // 应用Prism高亮
+            Prism.highlightAll();
+            
+            // 确保行号显示正确
+            document.querySelectorAll('pre.line-numbers').forEach((block) => {
+                if (!block.querySelector('.line-numbers-rows')) {
+                    block.classList.add('line-numbers');
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
