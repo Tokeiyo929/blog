@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客 | 多语言支持</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #32a852;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --gray-color: #6c757d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .language-selector button {
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .language-selector button:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .language-selector button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* 主要内容区 */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2a8c42;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 博客文章区域 */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .post-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .post-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            padding: 25px;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .post-excerpt {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* 关于区域 */
+        .about {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-img {
+            flex: 0 0 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background-color: #e9f5ff;
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* 联系区域 */
+        .contact {
+            background-color: white;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 80px;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #e9f5ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-img {
+                flex: 0 0 250px;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact {
+                padding: 40px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航栏 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><span>BLOG</span>WORLD</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" data-key="nav.home">nav.home</a></li>
+                        <li><a href="#blog" data-key="nav.blog">nav.blog</a></li>
+                        <li><a href="#about" data-key="nav.about">nav.about</a></li>
+                        <li><a href="#contact" data-key="nav.contact">nav.contact</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="zh">中文</button>
+                    <button class="lang-btn" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="ja">日本語</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主标题区域 -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-key="hero.title">hero.title</h1>
+            <p data-key="hero.subtitle">hero.subtitle</p>
+            <a href="#blog" class="btn" data-key="hero.button">hero.button</a>
+        </div>
+    </section>
+
+    <!-- 博客文章区域 -->
+    <section id="blog" class="container">
+        <div class="section-title">
+            <h2 data-key="blog.title">blog.title</h2>
+        </div>
+        
+        <div class="blog-posts">
+            <!-- 文章4 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="编程技术" class="post-img">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>编程技术</span>
+                        <span>2024年1月15日</span>
+                    </div>
+                    <h3 class="post-title">RPG游戏开发指南</h3>
+                    <p class="post-excerpt">探索RPG游戏开发的核心要素和系统设计</p>
+                    <a href="post4.html" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <!-- 文章6 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="编程技术" class="post-img">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>编程技术</span>
+                        <span>2025年12月03日</span>
+                    </div>
+                    <h3 class="post-title">UI特效</h3>
+                    <p class="post-excerpt">探索RPG游戏开发的核心要素和系统设计</p>
+                    <a href="post6.html" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+                                                <!-- 文章3 -->
+            <article class="post-card">
+                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="语言学习" class="post-img">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>语言学习</span>
+                        <span>2023年7月5日</span>
+                    </div>
+                    <h3 class="post-title">多语言学习的科学方法</h3>
+                    <p class="post-excerpt">如何高效学习多种语言？基于认知科学的语言学习策略分享...</p>
+                    <a href="post3.html" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2 data-key="about.title">about.title</h2>
+        </div>
+        
+        <div class="about">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="博主照片">
+            </div>
+            <div class="about-content">
+                <h2 data-key="about.name">about.name</h2>
+                <p data-key="about.bio">about.bio</p>
+                <p data-key="about.mission">about.mission</p>
+                
+                <div class="skills">
+                    <span class="skill-tag" data-key="about.skill1">about.skill1</span>
+                    <span class="skill-tag" data-key="about.skill2">about.skill2</span>
+                    <span class="skill-tag" data-key="about.skill3">about.skill3</span>
+                    <span class="skill-tag" data-key="about.skill4">about.skill4</span>
+                    <span class="skill-tag" data-key="about.skill5">about.skill5</span>
+                    <span class="skill-tag" data-key="about.skill6">about.skill6</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2 data-key="contact.title">contact.title</h2>
+        </div>
+        
+        <div class="contact">
+            <p data-key="contact.message">contact.message</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 data-key="contact.email.title">contact.email.title</h3>
+                    <p>contact@blogworld.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 data-key="contact.location.title">contact.location.title</h3>
+                    <p data-key="contact.location.value">contact.location.value</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 data-key="contact.phone.title">contact.phone.title</h3>
+                    <p>+86 138-0000-0000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo"><span>BLOG</span>WORLD</div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="copyright">
+                    <p data-key="footer.copyright">footer.copyright</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 多语言脚本（从外部 JSON 文件加载） -->
+    <script>
+        // 从外部 JSON 文件加载后的翻译缓存
+        const translations = {};
+
+        // 默认语言
+        let currentLang = 'zh';
+
+        // 检查localStorage中保存的语言偏好（只记录语言代码，实际内容从 JSON 加载）
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang) {
+            currentLang = savedLang;
+        }
+
+        // 初始化页面时应用语言
+        document.addEventListener('DOMContentLoaded', function() {
+            // 先加载默认语言 JSON 文件
+            loadLanguage(currentLang);
+            
+            // 为语言切换按钮添加事件监听器
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const lang = this.getAttribute('data-lang');
+                    loadLanguage(lang);
+                });
+            });
+            
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        // 从外部 JSON 加载语言数据
+        function loadLanguage(lang) {
+            // 已经加载过了，直接用缓存
+            if (translations[lang]) {
+                applyLanguage(lang);
+                setActiveLanguageButton(lang);
+                localStorage.setItem('preferredLanguage', lang);
+                return;
+            }
+
+            const fileName = `lang.${lang}.json`; // 例如 lang.zh.json、lang.en.json
+
+            fetch(fileName)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`无法加载语言文件：${fileName}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    translations[lang] = data;
+                    applyLanguage(lang);
+                    setActiveLanguageButton(lang);
+                    localStorage.setItem('preferredLanguage', lang);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+
+        // 应用语言函数
+        function applyLanguage(lang) {
+            currentLang = lang;
+
+            // 更新页面中所有带有data-key属性的元素
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                const dict = translations[lang] || {};
+                if (dict[key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = dict[key];
+                    } else {
+                        element.textContent = dict[key];
+                    }
+                }
+            });
+
+            // 更新页面语言属性
+            document.documentElement.lang = lang;
+        }
+
+        // 设置活动语言按钮
+        function setActiveLanguageButton(lang) {
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                if (button.getAttribute('data-lang') === lang) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
