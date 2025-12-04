@@ -1,0 +1,29 @@
+{
+  "nav.home": "ホーム",
+  "nav.blog": "ブログ",
+  "nav.about": "私について",
+  "nav.contact": "連絡先",
+  "hero.title": "私の個人ブログへようこそ",
+  "hero.subtitle": "ここは、技術的な洞察、生活の感想、創造的なアイデアを共有する場所です。多様なトピックを探索し、多言語文化の魅力を感じてください。",
+  "hero.button": "ブログを閲覧",
+  "blog.title": "最新記事",
+  "about.title": "私について",
+  "about.name": "張明 | フルスタック開発者",
+  "about.bio": "私は情熱的なフルスタック開発者で、Web開発と多言語アプリケーションに特化しています。8年以上の開発経験を持ち、異なる文化と技術の交差点を探求することに熱心です。中国語、英語、日本語、韓国語に堪能であり、これにより多角的な視点からユーザーエクスペリエンスとインターフェースデザインを理解することができます。",
+  "about.mission": "私の使命は、異なる言語のユーザーをシームレスに接続するデジタルエクスペリエンスを作り、言語の障壁を取り除き、技術が真にグローバルなユーザーに役立つようにすることです。",
+  "about.skill1": "HTML/CSS/JavaScript",
+  "about.skill2": "多言語開発",
+  "about.skill3": "React/Vue.js",
+  "about.skill4": "Node.js",
+  "about.skill5": "UI/UXデザイン",
+  "about.skill6": "異文化コミュニケーション",
+  "contact.title": "連絡先",
+  "contact.message": "私のブログコンテンツに興味がある場合、または協力のアイデアがある場合は、以下の方法でお気軽にご連絡ください。できるだけ早くご返信いたします。",
+  "contact.email.title": "メール",
+  "contact.location.title": "所在地",
+  "contact.location.value": "中国、上海",
+  "contact.phone.title": "電話",
+  "footer.copyright": "© 2023 BlogWorld. 無断複写・転載を禁じます。"
+}
+
+
