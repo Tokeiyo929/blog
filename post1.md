@@ -1,10 +1,10 @@
 ---
 title: PrefabHolder
-category: 代码解析
-date: 2025年12月03日
+category: [代码解析]
+date: 2025-12-03
 cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
-tags: 美术,程序
+tags: [美术, 程序]
 ---
 
 # prefab中特效的处理方式
