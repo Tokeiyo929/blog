@@ -1,10 +1,10 @@
 ---
 title: 通用UI组件文档与备注
-category: 代码解析
-date: 2025年12月03日
+category: [代码解析]
+date: 2025-12-03
 cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
 excerpt: 为了能够快速复用组件，请大伙尽量写的能够复用
-tags: 美术,程序
+tags: [美术, 程序]
 ---
 
 为了能够快速复用组件，请大伙尽量写的能够复用  
