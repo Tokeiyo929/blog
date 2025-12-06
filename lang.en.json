@@ -1,0 +1,29 @@
+{
+  "nav.home": "Home",
+  "nav.blog": "Blog",
+  "nav.about": "About Me",
+  "nav.contact": "Contact",
+  "hero.title": "Welcome to My Personal Blog",
+  "hero.subtitle": "This is where I share technical insights, life reflections, and creative ideas. Explore diverse topics and experience the charm of multilingual culture.",
+  "hero.button": "Browse Blog",
+  "blog.title": "Latest Articles",
+  "about.title": "About Me",
+  "about.name": "Ming Zhang | Full-Stack Developer",
+  "about.bio": "I am a passionate full-stack developer specializing in web development and multilingual applications. With over 8 years of development experience, I am passionate about exploring the intersection between different cultures and technologies. I am proficient in Chinese, English, Japanese and Korean, which allows me to understand user experience and interface design from multiple perspectives.",
+  "about.mission": "My mission is to create digital experiences that seamlessly connect users in different languages, break down language barriers, and make technology truly serve global users.",
+  "about.skill1": "HTML/CSS/JavaScript",
+  "about.skill2": "Multilingual Development",
+  "about.skill3": "React/Vue.js",
+  "about.skill4": "Node.js",
+  "about.skill5": "UI/UX Design",
+  "about.skill6": "Cross-cultural Communication",
+  "contact.title": "Contact Me",
+  "contact.message": "If you are interested in my blog content or have any collaboration ideas, please feel free to contact me through the following methods. I will reply to your message as soon as possible.",
+  "contact.email.title": "Email",
+  "contact.location.title": "Location",
+  "contact.location.value": "Shanghai, China",
+  "contact.phone.title": "Phone",
+  "footer.copyright": "© 2023 BlogWorld. All rights reserved."
+}
+
+
