@@ -99,7 +99,7 @@ Assets\PackageRes\Raw\Category\Prefabs\UI\Cell
 - CoroutineRunner.Start();不返回对象,由CoroutineRunner内部管理.协程执行完成后,自行入池,或者内部销毁
 - CoroutineRunner.StartManual();返回对象,需要手动管理.常用模式:
 
-```c#
+```csharp
 if (cor != null) //使用前先保证清理.
 {
 	CoroutineRunner.Stop(cor);
@@ -117,7 +117,7 @@ if (cor != null)
 
 ### 12. LoadObjectProxy使用 
 
-```c#
+```csharp
 private LoadObjectProxy effectProxy;
 
 private void OnDestroy()
@@ -183,7 +183,7 @@ UIParticle使用
 1. 创建的RenderTexture会安全的释放.
 1. 确保内部的尺寸变化时候,能正常维护.
 
-```c#
+```csharp
 var catcher = rawImage.gameObject.GetOrAddComponent<RenderTextureCatcher>();
 RectTransform tran = rawImage.rectTransform;
 catcher.Catch((int)tran.rect.width, (int)tran.rect.height, RenderTextureFormat.ARGB32);
