@@ -1,0 +1,23 @@
+{
+  "blog_title": "BlogWorld",
+  "author": "作者",
+  "copyright": "© 2023 BlogWorld. 保留所有权利。",
+  "default_category": "其他",
+  "default_cover_image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80",
+  "posts_per_page": 10,
+  "reading_speed_chinese": 300,
+  "reading_speed_english": 200,
+  "excerpt_length": 100,
+  "max_excerpt_lines": 3,
+  "code_highlight_theme": "prism-tomorrow",
+  "supported_languages": [
+    "python",
+    "javascript",
+    "css",
+    "bash",
+    "json",
+    "markdown",
+    "yaml",
+    "csharp"
+  ]
+}
