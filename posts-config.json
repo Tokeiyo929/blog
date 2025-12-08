@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "id": 4,
+      "title": "LocalCache&LRUCache",
+      "excerpt": "LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。",
+      "date": "2025-12-08",
+      "readTime": "5分钟",
+      "category": "[代码解析]",
+      "mode": "🔄",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80",
+      "link": "post4.html"
+    },
+    {
+      "id": 2,
+      "title": "通用UI组件文档与备注",
+      "excerpt": "为了能够快速复用组件，请大伙尽量写的能够复用",
+      "date": "2025-12-03",
+      "readTime": "5分钟",
+      "category": "[代码解析]",
+      "mode": "🔄",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80",
+      "link": "post2.html"
+    },
+    {
+      "id": 1,
+      "title": "PrefabHolder",
+      "excerpt": "本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。",
+      "date": "2025-12-03",
+      "readTime": "5分钟",
+      "category": "[代码解析]",
+      "mode": "🔄",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80",
+      "link": "post1.html"
+    }
+  ]
+}

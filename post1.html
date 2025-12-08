@@ -592,11 +592,11 @@
                 <div class="article-meta">
                     <div class="article-meta-item">
                         <i class="fas fa-folder"></i>
-                        <span>代码解析</span>
+                        <span>[代码解析]</span>
                     </div>
                     <div class="article-meta-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>2025年12月03日</span>
+                        <span>2025-12-03</span>
                     </div>
                     <div class="article-meta-item">
                         <i class="fas fa-clock"></i>
@@ -634,8 +634,8 @@
             </div>
             
             <div class="tag-list">
-                <span>美术</span>
-                <span>程序</span>
+                <span>[美术</span>
+                <span>程序]</span>
             </div>
         </article>
     </main>
@@ -744,11 +744,11 @@
             document.getElementById('markdown-content').style.display = 'none';
             
             // 获取Markdown文件名
-            const mdFile = 'https://cdn.jsdelivr.net/gh/tokeiyo929/blog@main/post1.md';
+            const mdFile = 'post1.md';
             
             // 加载Markdown文件
             const response = await fetch(mdFile, {
-                cache: 'no-store',
+                cache: 'no-store'
             });
             
             if (!response.ok) {
