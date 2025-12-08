@@ -463,46 +463,9 @@
             <h2 data-key="blog.title">blog.title</h2>
         </div>
         
-        <div class="blog-posts">
-        
-            
-                        <!-- 文章2 -->
-            <article class="post-card">
-                <div class="post-header">
-                    <span class="post-mode">🔄</span>
-                    <span class="post-category">其他</span>
-                </div>
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="其他" class="post-img" loading="lazy">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span>2025年12月04日</span>
-                        <span>阅读时间: 6分钟</span>
-                    </div>
-                    <h3 class="post-title">通用UI组件文档与备注​</h3>
-                    <p class="post-excerpt">为了能够快速复用组件，请大伙尽量写的能够复用</p>
-                    <a href="post2.html" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-            
-                                                <!-- 文章1 -->
-            <article class="post-card">
-                <div class="post-header">
-                    <span class="post-mode">🔄</span>
-                    <span class="post-category">代码解析</span>
-                </div>
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="代码解析" class="post-img" loading="lazy">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span>2025年12月03日</span>
-                        <span>阅读时间: 5分钟</span>
-                    </div>
-                    <h3 class="post-title">PrefabHolder</h3>
-                    <p class="post-excerpt">本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。</p>
-                    <a href="post1.html" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-            
-                    </div>
+        <div class="blog-posts" id="blog-posts-container">
+            <!-- 文章将通过 JavaScript 动态加载 -->
+        </div>
     </section>
 
     <!-- 关于我区域 -->
@@ -606,6 +569,9 @@
             // 先加载默认语言 JSON 文件
             loadLanguage(currentLang);
             
+            // 加载博客文章
+            loadBlogPosts();
+            
             // 为语言切换按钮添加事件监听器
             document.querySelectorAll('.lang-btn').forEach(button => {
                 button.addEventListener('click', function () {
@@ -631,6 +597,105 @@
                 });
             });
         });
+
+        // 动态加载博客文章
+        async function loadBlogPosts() {
+            try {
+                // 尝试从配置文件加载文章列表
+                const response = await fetch('posts-config.json');
+                if (!response.ok) {
+                    // 如果配置文件不存在，尝试自动检测
+                    await autoDetectPosts();
+                    return;
+                }
+                
+                const config = await response.json();
+                const postsContainer = document.getElementById('blog-posts-container');
+                
+                // 按照配置文件中的顺序（通常是倒序，最新的在前）渲染文章
+                config.posts.forEach(post => {
+                    const postCard = createPostCard(post);
+                    postsContainer.appendChild(postCard);
+                });
+                
+            } catch (error) {
+                console.error('加载文章失败:', error);
+                // 如果加载失败，尝试自动检测
+                await autoDetectPosts();
+            }
+        }
+
+        // 自动检测文章（尝试加载 html1.html, html2.html, html3.html 等）
+        async function autoDetectPosts() {
+            const postsContainer = document.getElementById('blog-posts-container');
+            const maxAttempts = 50; // 最多尝试检测50个文件
+            const posts = [];
+            
+            // 尝试检测文件
+            for (let i = 1; i <= maxAttempts; i++) {
+                try {
+                    const fileName = `html${i}.html`;
+                    const response = await fetch(fileName, { method: 'HEAD' });
+                    if (response.ok) {
+                        // 文件存在，添加到列表
+                        posts.push({
+                            id: i,
+                            title: `文章 ${i}`,
+                            excerpt: `这是第 ${i} 篇文章的摘要`,
+                            date: new Date().toLocaleDateString('zh-CN'),
+                            readTime: '5分钟',
+                            category: '未分类',
+                            image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80',
+                            link: fileName
+                        });
+                    }
+                } catch (error) {
+                    // 文件不存在或出错，继续检测下一个
+                    continue;
+                }
+            }
+            
+            // 倒序显示（最新的在前）
+            posts.reverse().forEach(post => {
+                const postCard = createPostCard(post);
+                postsContainer.appendChild(postCard);
+            });
+            
+            // 如果没有检测到任何文章，显示提示
+            if (posts.length === 0) {
+                postsContainer.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">暂无文章，请创建 posts-config.json 配置文件或添加 html1.html, html2.html 等文件</p>';
+            }
+        }
+
+        // 创建文章卡片
+        function createPostCard(post) {
+            const article = document.createElement('article');
+            article.className = 'post-card';
+            
+            const categoryEmoji = post.mode || '🔄';
+            
+            article.innerHTML = `
+                <div class="post-header">
+                    <span class="post-mode">${categoryEmoji}</span>
+                    <span class="post-category">${post.category || '未分类'}</span>
+                </div>
+                <img src="${post.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80'}" 
+                     alt="${post.category || '文章'}" 
+                     class="post-img" 
+                     loading="lazy">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>${post.date || '未知日期'}</span>
+                        <span>阅读时间: ${post.readTime || '5分钟'}</span>
+                    </div>
+                    <h3 class="post-title">${post.title || '无标题'}</h3>
+                    <p class="post-excerpt">${post.excerpt || '暂无摘要'}</p>
+                    <a href="${post.link}" class="read-more">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            `;
+            
+            return article;
+        }
 
         // 从外部 JSON 加载语言数据
         function loadLanguage(lang) {
