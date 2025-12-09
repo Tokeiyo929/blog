@@ -480,29 +480,29 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 ![img](https://i.postimg.cc/zD4wwp9R/image_11.png)
 
-![img](https://i.postimg.cc/nc743BJC/image_12.jpg)
 
- 
+
+ ![img](https://i.postimg.cc/FscyT34f/image_12.png)
 
 - **把水面下的河床以及远景的地面分离出独立模型（这部分由于面积很大并且非常次要，在烘培lightmap的时候需要把他们缩小烘培，烘培好再等比例还原回来。这样游戏主要区域的lightmap是精度最高**
 
 **场景动态光设置**
 
-![img](https://i.postimg.cc/FscyT34f/image_12.png)
+
 
 ![img](https://i.postimg.cc/Qx5Qf13M/image_13.png)
-
+![img](https://i.postimg.cc/Yqg6dYHL/image_14.png)
  
 
 动态光要放在LightGroup组并且设置Layer在Player层，保持跟角色所在层一致，一个关卡中动态光不能超过2个
 
-![img](https://i.postimg.cc/Yqg6dYHL/image_14.png)
 
- 
-
-烘培时候注意要关闭动态光
 
 ![img](https://i.postimg.cc/RVf7gKBQ/image_15.png)
+
+烘培时候注意要关闭动态光
+![img](https://i.postimg.cc/xTHv6M2L/image_16.png)
+
 
  
 
@@ -514,7 +514,7 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 比如这个蘑菇柄的部分段数太多了，伞状结构的也完全没必要给太多面。把面用在对轮廓结构起作用的位置即可。
 
- 
+
 
 - **模型精度占画面比例的统一性**
 
@@ -523,7 +523,7 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 - **关卡中同一高度的模型要注意精度的统一，不要出现明显的贴图精度差**
 -  **如下图出现的这种**
 
-![img](https://i.postimg.cc/xTHv6M2L/image_16.png)
+ ![img](https://i.postimg.cc/nc743BJC/image_12.jpg)
 
  
 
@@ -531,15 +531,15 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 **Hard Edge通常是下面这样的效果（注意中间的折痕部分）：**
 
-![img](https://i.postimg.cc/zXWCxKrC/image_17.png)
 
- 
+
+![img](https://i.postimg.cc/bNbxmkh9/image_18.png)
 
 **实际在软件中顶点法线，就会发现，折痕处每个顶点其实包含了两个不同的法线。因此，对于GPU来说，它同样无法理解这样的事情，因此会把顶点一分为二。** 
 
  
+![img](https://i.postimg.cc/dtd25rYB/image_19.png)
 
-![img](https://i.postimg.cc/bNbxmkh9/image_18.png)
 
  
 
@@ -547,13 +547,13 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
  
 
-![img](https://i.postimg.cc/dtd25rYB/image_19.png)
+
 
  
 
 ![img](https://i.postimg.cc/KvLP0B2Q/image_20.png)
 
- 
+![img](https://i.postimg.cc/RVf7gKBD/image-21.png)
 
 **移除不必要的Hard Edge以及纹理衔接，即避免Smoothing splits和UV splits**
 
@@ -1073,8 +1073,7 @@ HitPoint为攻击帧事件，定义一些攻击行为发生的时刻，并用来
 11.**优化**
 
 **LEVEL提交前的检查**
-
-![img](https://i.postimg.cc/RVf7gKBD/image_21.png)
+![img](https://i.postimg.cc/zXWCxKrC/image_17.png)
 
  
 
