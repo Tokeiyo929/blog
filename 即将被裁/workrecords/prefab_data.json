@@ -1,0 +1,13 @@
+{
+    "prefabData": [
+        {
+            "name": "ItemSelectTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemSelectTipsView.prefab"
+        },
+        {
+            "name": "ItemRandomTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemRandomTipsView.prefab"
+        }
+    ],
+    "lastUpdateTime": "2025-12-08 16:26:44"
+}

@@ -1,0 +1,2577 @@
+{
+    "prefabIndex": [
+        {
+            "name": "cloud",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\cloud.prefab"
+        },
+        {
+            "name": "UIAchievementItemViewCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\AchieveMent\\UIAchievementItemViewCell.prefab"
+        },
+        {
+            "name": "Arenabutton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\Arenabutton.prefab"
+        },
+        {
+            "name": "ProgressBoxCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\ProgressBoxCell.prefab"
+        },
+        {
+            "name": "UIArenaBattleRecordCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaBattleRecordCell.prefab"
+        },
+        {
+            "name": "UIArenaBattleRecordView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaBattleRecordView.prefab"
+        },
+        {
+            "name": "UIArenaBattleResultReward",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaBattleResultReward.prefab"
+        },
+        {
+            "name": "UIArenabattleRewardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenabattleRewardCell.prefab"
+        },
+        {
+            "name": "UIArenaBattleVSView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaBattleVSView.prefab"
+        },
+        {
+            "name": "UIArenaProgressBoxCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaProgressBoxCell.prefab"
+        },
+        {
+            "name": "UIArenaProgressBoxTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaProgressBoxTips.prefab"
+        },
+        {
+            "name": "UIArenaRoundMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIArenaRoundMainView.prefab"
+        },
+        {
+            "name": "UIRoundArenaChallengeCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArenaBattle\\UIRoundArenaChallengeCell.prefab"
+        },
+        {
+            "name": "UIArmsCompositeItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsCompositeItemCell.prefab"
+        },
+        {
+            "name": "UIArmsCompositeItemListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsCompositeItemListCell.prefab"
+        },
+        {
+            "name": "UIArmsCompositeItemListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsCompositeItemListView.prefab"
+        },
+        {
+            "name": "UIArmsCompositeOneClickView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsCompositeOneClickView.prefab"
+        },
+        {
+            "name": "UIArmsCompositeViewItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsCompositeViewItem.prefab"
+        },
+        {
+            "name": "UIArmsItemOpDetailView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsItemOpDetailView.prefab"
+        },
+        {
+            "name": "UIArmsItemRecastSkillSelfSelectListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsItemRecastSkillSelfSelectListView.prefab"
+        },
+        {
+            "name": "UIArmsItemRecastSkillSelfSelectView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsItemRecastSkillSelfSelectView.prefab"
+        },
+        {
+            "name": "UIArmsItemRecastView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsItemRecastView.prefab"
+        },
+        {
+            "name": "UIArmsItemTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsItemTipsView.prefab"
+        },
+        {
+            "name": "UIArmsSkillCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsSkillCell.prefab"
+        },
+        {
+            "name": "UIArmsSkillInfoListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsSkillInfoListCell.prefab"
+        },
+        {
+            "name": "UIArmsSkillInfoPreview",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsSkillInfoPreview.prefab"
+        },
+        {
+            "name": "UIArmsSkillInfoTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsSkillInfoTips.prefab"
+        },
+        {
+            "name": "UIArmsSkillInfoTypeToggle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Arms\\UIArmsSkillInfoTypeToggle.prefab"
+        },
+        {
+            "name": "UIRoleHeadInfoCom",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArmySkillView\\UIRoleHeadInfoCom.prefab"
+        },
+        {
+            "name": "UIRoleHeadInfoComView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ArmySkillView\\UIRoleHeadInfoComView.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoAvatarCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoAvatarCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoAvatarListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoAvatarListCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoFrameCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoFrameCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoFrameListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoFrameListCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoTitleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoTitleCell.prefab"
+        },
+        {
+            "name": "UIPlayerAvatarInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerAvatarInfoView.prefab"
+        },
+        {
+            "name": "UIPlayerTitleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Avatar\\UIPlayerTitleCell.prefab"
+        },
+        {
+            "name": "BackPackView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\BackPackView.prefab"
+        },
+        {
+            "name": "ExternaIItemDetailTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ExternaIItemDetailTipsView.prefab"
+        },
+        {
+            "name": "ExternaIItemTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ExternaIItemTipsView.prefab"
+        },
+        {
+            "name": "ExternalMultItemTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ExternalMultItemTipsView.prefab"
+        },
+        {
+            "name": "GetWayView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\GetWayView.prefab"
+        },
+        {
+            "name": "ItemCellView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemCellView.prefab"
+        },
+        {
+            "name": "ItemCompoundTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemCompoundTipsView.prefab"
+        },
+        {
+            "name": "ItemGiftPackCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemGiftPackCell.prefab"
+        },
+        {
+            "name": "ItemOneKeyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemOneKeyView.prefab"
+        },
+        {
+            "name": "ItemRandomTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemRandomTipsView.prefab"
+        },
+        {
+            "name": "ItemSelectTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemSelectTipsView.prefab"
+        },
+        {
+            "name": "ItemStarGroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemStarGroup.prefab"
+        },
+        {
+            "name": "ItemTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemTipsView.prefab"
+        },
+        {
+            "name": "ItemUseTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\ItemUseTipsView.prefab"
+        },
+        {
+            "name": "SliderGroupView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\BackPack\\SliderGroupView.prefab"
+        },
+        {
+            "name": "UILimitedConditionText",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\UILimitedConditionText.prefab"
+        },
+        {
+            "name": "UILoadingView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\UILoadingView.prefab"
+        },
+        {
+            "name": "UIReconectWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\UIReconectWindow.prefab"
+        },
+        {
+            "name": "UISoldierEquipTwoButtonDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\UISoldierEquipTwoButtonDialog.prefab"
+        },
+        {
+            "name": "UIWindowRootScreenCanvas",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\UIWindowRootScreenCanvas.prefab"
+        },
+        {
+            "name": "HeroBattleResultInfo",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\HeroBattleResultInfo.prefab"
+        },
+        {
+            "name": "PlayerBattleResultInfo",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\PlayerBattleResultInfo.prefab"
+        },
+        {
+            "name": "UIBattleRecommand",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\UIBattleRecommand.prefab"
+        },
+        {
+            "name": "UIBattleResultInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\UIBattleResultInfoView.prefab"
+        },
+        {
+            "name": "UIBattleReward",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\UIBattleReward.prefab"
+        },
+        {
+            "name": "UIPauseDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Battle\\UIPauseDialog.prefab"
+        },
+        {
+            "name": "UIBountyTaskCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIBountyTaskCell.prefab"
+        },
+        {
+            "name": "UIBountyTaskTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIBountyTaskTips.prefab"
+        },
+        {
+            "name": "UIBountyTaskView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIBountyTaskView.prefab"
+        },
+        {
+            "name": "UIDispatchHeroCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIDispatchHeroCell.prefab"
+        },
+        {
+            "name": "UIDispatchHeroView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIDispatchHeroView.prefab"
+        },
+        {
+            "name": "UIDispatchTipsDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Bounty\\UIDispatchTipsDialog.prefab"
+        },
+        {
+            "name": "ActiveItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\ActiveItem.prefab"
+        },
+        {
+            "name": "ActivityTabItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\ActivityTabItemCell.prefab"
+        },
+        {
+            "name": "CollectionBaseCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\CollectionBaseCell.prefab"
+        },
+        {
+            "name": "ConerFrame",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\ConerFrame.prefab"
+        },
+        {
+            "name": "DailyItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\DailyItemCell.prefab"
+        },
+        {
+            "name": "EquipmentItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\EquipmentItemCell.prefab"
+        },
+        {
+            "name": "EquipmentItemCellB",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\EquipmentItemCellB.prefab"
+        },
+        {
+            "name": "HeroEquipItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\HeroEquipItemCell.prefab"
+        },
+        {
+            "name": "TitleIconCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\TitleIconCell.prefab"
+        },
+        {
+            "name": "UIAvatarCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIAvatarCell.prefab"
+        },
+        {
+            "name": "UIAvatarframeCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIAvatarframeCell.prefab"
+        },
+        {
+            "name": "UIBagItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIBagItemCell.prefab"
+        },
+        {
+            "name": "UIBestTeamAvatarCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIBestTeamAvatarCell.prefab"
+        },
+        {
+            "name": "UIButtonCommonConsume",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIButtonCommonConsume.prefab"
+        },
+        {
+            "name": "UIHeroTitleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIHeroTitleCell.prefab"
+        },
+        {
+            "name": "UIItemStatisticCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIItemStatisticCell.prefab"
+        },
+        {
+            "name": "UISkillItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UISkillItemCell.prefab"
+        },
+        {
+            "name": "UIVipRGCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Cell\\UIVipRGCell.prefab"
+        },
+        {
+            "name": "SmallMapElement",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMapElement.prefab"
+        },
+        {
+            "name": "UIChapterDescript",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\UIChapterDescript.prefab"
+        },
+        {
+            "name": "UISmallMapOwner",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\UISmallMapOwner.prefab"
+        },
+        {
+            "name": "UIWorldMap",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\UIWorldMap.prefab"
+        },
+        {
+            "name": "WorldMapElement",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\WorldMapElement.prefab"
+        },
+        {
+            "name": "ChatBtn",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatBtn.prefab"
+        },
+        {
+            "name": "ChatBtngroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatBtngroup.prefab"
+        },
+        {
+            "name": "ChatCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell.prefab"
+        },
+        {
+            "name": "ChatMsgViewOther",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatMsgViewOther.prefab"
+        },
+        {
+            "name": "ChatSessionCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatSessionCell.prefab"
+        },
+        {
+            "name": "GuildChatMsgListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\GuildChatMsgListView.prefab"
+        },
+        {
+            "name": "LeftChat",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\LeftChat.prefab"
+        },
+        {
+            "name": "PerSonalChatMsgListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\PerSonalChatMsgListView.prefab"
+        },
+        {
+            "name": "RadioChatMsgListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\RadioChatMsgListView.prefab"
+        },
+        {
+            "name": "UIChatDialogWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatDialogWindow.prefab"
+        },
+        {
+            "name": "UIChatMainWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatMainWindow.prefab"
+        },
+        {
+            "name": "UIChatPopupMenu",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatPopupMenu.prefab"
+        },
+        {
+            "name": "UIChatRedEnvelopeGetWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatRedEnvelopeGetWindow.prefab"
+        },
+        {
+            "name": "UIChatRedEnvelopeWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatRedEnvelopeWindow.prefab"
+        },
+        {
+            "name": "UIChatShareCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIChatShareCell.prefab"
+        },
+        {
+            "name": "UIGuildJoinViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIGuildJoinViewController.prefab"
+        },
+        {
+            "name": "UIGuildListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIGuildListCell.prefab"
+        },
+        {
+            "name": "UIHeadClickView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIHeadClickView.prefab"
+        },
+        {
+            "name": "UIInvitationShareReportWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UIInvitationShareReportWindow.prefab"
+        },
+        {
+            "name": "UISystemNotice",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\UISystemNotice.prefab"
+        },
+        {
+            "name": "WorldChatMsgListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\WorldChatMsgListView.prefab"
+        },
+        {
+            "name": "Exclamation",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Exclamation.prefab"
+        },
+        {
+            "name": "RollNumber",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RollNumber.prefab"
+        },
+        {
+            "name": "SubTitle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\SubTitle.prefab"
+        },
+        {
+            "name": "Title",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Title.prefab"
+        },
+        {
+            "name": "TitleWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\TitleWindow.prefab"
+        },
+        {
+            "name": "TopBar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\TopBar.prefab"
+        },
+        {
+            "name": "UIClickAnyPosCloseTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIClickAnyPosCloseTips.prefab"
+        },
+        {
+            "name": "UICommonAvatarCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonAvatarCell.prefab"
+        },
+        {
+            "name": "UICommonDimensional",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonDimensional.prefab"
+        },
+        {
+            "name": "UICommonLevelUpWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonLevelUpWindow.prefab"
+        },
+        {
+            "name": "UICommonListBg",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonListBg.prefab"
+        },
+        {
+            "name": "UICommonProgressBarSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonProgressBarSmall.prefab"
+        },
+        {
+            "name": "UICommonRankCellDimensional",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonRankCellDimensional.prefab"
+        },
+        {
+            "name": "UICommonRankListBg",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonRankListBg.prefab"
+        },
+        {
+            "name": "UICommonRankListMy",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonRankListMy.prefab"
+        },
+        {
+            "name": "UICommonResponsivePopWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonResponsivePopWindow.prefab"
+        },
+        {
+            "name": "UICommonStarUpgradeWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonStarUpgradeWindow.prefab"
+        },
+        {
+            "name": "UICommonTeamnum",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonTeamnum.prefab"
+        },
+        {
+            "name": "UICommonTipsWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonTipsWindow.prefab"
+        },
+        {
+            "name": "UICommonWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICommonWindow.prefab"
+        },
+        {
+            "name": "UICountdown",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UICountdown.prefab"
+        },
+        {
+            "name": "UIDiscountTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIDiscountTip.prefab"
+        },
+        {
+            "name": "UIDoubleTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIDoubleTip.prefab"
+        },
+        {
+            "name": "UIIconTextGroupCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIIconTextGroupCell.prefab"
+        },
+        {
+            "name": "UILevelProgressComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UILevelProgressComponent.prefab"
+        },
+        {
+            "name": "UILine",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UILine.prefab"
+        },
+        {
+            "name": "UIMaskView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIMaskView.prefab"
+        },
+        {
+            "name": "UIMoneyCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIMoneyCell.prefab"
+        },
+        {
+            "name": "UIMoneySimpleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIMoneySimpleCell.prefab"
+        },
+        {
+            "name": "UIPlyer",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIPlyer.prefab"
+        },
+        {
+            "name": "UIPopupCountDownDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIPopupCountDownDialog.prefab"
+        },
+        {
+            "name": "UIPowerRoot",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIPowerRoot.prefab"
+        },
+        {
+            "name": "UIRadarSystemLevelCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIRadarSystemLevelCell.prefab"
+        },
+        {
+            "name": "UIStepChangeComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIStepChangeComponent.prefab"
+        },
+        {
+            "name": "UIUseAmount",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIUseAmount.prefab"
+        },
+        {
+            "name": "UIVipIcon",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\UIVipIcon.prefab"
+        },
+        {
+            "name": "UICommunityTaskCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Community\\UICommunityTaskCell.prefab"
+        },
+        {
+            "name": "UICommunityTypeCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Community\\UICommunityTypeCell.prefab"
+        },
+        {
+            "name": "UICorridorBattlePassView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorBattlePassView.prefab"
+        },
+        {
+            "name": "UICorridorBPBuyDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorBPBuyDialog.prefab"
+        },
+        {
+            "name": "UICorridorLevelBonusView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorLevelBonusView.prefab"
+        },
+        {
+            "name": "UICorridorLevelRewardView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorLevelRewardView.prefab"
+        },
+        {
+            "name": "UICorridorLevelView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorLevelView.prefab"
+        },
+        {
+            "name": "UICorridorMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorMainView.prefab"
+        },
+        {
+            "name": "UICorridorMilestoneAwardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorMilestoneAwardCell.prefab"
+        },
+        {
+            "name": "UICorridorMilestoneClaimView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorMilestoneClaimView.prefab"
+        },
+        {
+            "name": "UICorridorMilestoneRankCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorMilestoneRankCell.prefab"
+        },
+        {
+            "name": "UICorridorMilestoneWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorMilestoneWindow.prefab"
+        },
+        {
+            "name": "UICorridorPlotReplayListItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorPlotReplayListItem.prefab"
+        },
+        {
+            "name": "UICorridorPlotReplayListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorPlotReplayListView.prefab"
+        },
+        {
+            "name": "UICorridorPowerBuyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorPowerBuyView.prefab"
+        },
+        {
+            "name": "UICorridorRewardView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorRewardView.prefab"
+        },
+        {
+            "name": "UICorridorShop",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorShop.prefab"
+        },
+        {
+            "name": "UICorridorUnlockLevelView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Corridor\\UICorridorUnlockLevelView.prefab"
+        },
+        {
+            "name": "UICrucibleWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Crucible\\UICrucibleWindow.prefab"
+        },
+        {
+            "name": "UIHeroEquipInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Crucible\\UIHeroEquipInfoView.prefab"
+        },
+        {
+            "name": "UIHeroEquipMakeTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Crucible\\UIHeroEquipMakeTips.prefab"
+        },
+        {
+            "name": "UIABTestCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIABTestCell.prefab"
+        },
+        {
+            "name": "UIABTestViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIABTestViewController.prefab"
+        },
+        {
+            "name": "UIBundleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIBundleCell.prefab"
+        },
+        {
+            "name": "UIBundleViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIBundleViewController.prefab"
+        },
+        {
+            "name": "UICityDebugCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UICityDebugCell.prefab"
+        },
+        {
+            "name": "UICityDebugDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UICityDebugDialog.prefab"
+        },
+        {
+            "name": "UIDebugBuffCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIDebugBuffCell.prefab"
+        },
+        {
+            "name": "UIDebugBuffWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIDebugBuffWindow.prefab"
+        },
+        {
+            "name": "UIDebugInfoWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIDebugInfoWindow.prefab"
+        },
+        {
+            "name": "UIDebugTextView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIDebugTextView.prefab"
+        },
+        {
+            "name": "UIEmpty",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIEmpty.prefab"
+        },
+        {
+            "name": "UIGMStoreViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIGMStoreViewController.prefab"
+        },
+        {
+            "name": "UIGuideDebugView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIGuideDebugView.prefab"
+        },
+        {
+            "name": "UIOptimizeViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UIOptimizeViewController.prefab"
+        },
+        {
+            "name": "UISpeedTestWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Debug\\UISpeedTestWindow.prefab"
+        },
+        {
+            "name": "UIDownloadRewardWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Download\\UIDownloadRewardWindow.prefab"
+        },
+        {
+            "name": "UIDownloadRewardWindow2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Download\\UIDownloadRewardWindow2.prefab"
+        },
+        {
+            "name": "UIDownloadRewardWindow3",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Download\\UIDownloadRewardWindow3.prefab"
+        },
+        {
+            "name": "UIForceDownloadWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Download\\UIForceDownloadWindow.prefab"
+        },
+        {
+            "name": "UIUJMLoading",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Download\\UIUJMLoading.prefab"
+        },
+        {
+            "name": "BtnDownload",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DownloadCell\\BtnDownload.prefab"
+        },
+        {
+            "name": "UIDrawHeroScorePointView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIDrawHeroScorePointView.prefab"
+        },
+        {
+            "name": "UIDrawHeroTypeComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIDrawHeroTypeComponent.prefab"
+        },
+        {
+            "name": "UIDrawHeroView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIDrawHeroView.prefab"
+        },
+        {
+            "name": "UIDrawHeroWinItemComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIDrawHeroWinItemComponent.prefab"
+        },
+        {
+            "name": "UIDrawHeroWinView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIDrawHeroWinView.prefab"
+        },
+        {
+            "name": "UIGetDrawItemTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawHero\\UIGetDrawItemTip.prefab"
+        },
+        {
+            "name": "UIDrawRaceMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceMainView.prefab"
+        },
+        {
+            "name": "UIDrawRaceResultCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceResultCell.prefab"
+        },
+        {
+            "name": "UIDrawRaceResultListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceResultListCell.prefab"
+        },
+        {
+            "name": "UIDrawRaceResultListTitle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceResultListTitle.prefab"
+        },
+        {
+            "name": "UIDrawRaceResultView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceResultView.prefab"
+        },
+        {
+            "name": "UIDrawRaceScorePointItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceScorePointItem.prefab"
+        },
+        {
+            "name": "UIDrawRaceScorePointResultView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceScorePointResultView.prefab"
+        },
+        {
+            "name": "UIDrawRaceScorePointView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceScorePointView.prefab"
+        },
+        {
+            "name": "UIDrawRaceTypeComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceTypeComponent.prefab"
+        },
+        {
+            "name": "UIDrawRaceView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\DrawRace\\UIDrawRaceView.prefab"
+        },
+        {
+            "name": "UIElsTempleHeroGridCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleHeroGridCell.prefab"
+        },
+        {
+            "name": "UIElsTempleHeroRecordView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleHeroRecordView.prefab"
+        },
+        {
+            "name": "UIElsTempleStageItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleStageItem.prefab"
+        },
+        {
+            "name": "UIElsTempleTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleTip.prefab"
+        },
+        {
+            "name": "UIElsTempleUpgradeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleUpgradeView.prefab"
+        },
+        {
+            "name": "UIElsTempleView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsTempleView.prefab"
+        },
+        {
+            "name": "UIElsWishView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ElsTemple\\UIElsWishView.prefab"
+        },
+        {
+            "name": "UIAchievementEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIAchievementEntrance.prefab"
+        },
+        {
+            "name": "UIActivityBoxIcon",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityBoxIcon.prefab"
+        },
+        {
+            "name": "UIActivityBoxIcon_v2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityBoxIcon_v2.prefab"
+        },
+        {
+            "name": "UIActivityHalloweenViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityHalloweenViewController.prefab"
+        },
+        {
+            "name": "UIActivityIconsPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityIconsPanel.prefab"
+        },
+        {
+            "name": "UIActivityIntegrationViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityIntegrationViewController.prefab"
+        },
+        {
+            "name": "UIActivityIntegrationViewController1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIActivityIntegrationViewController1.prefab"
+        },
+        {
+            "name": "UIBoxLevelBPRGDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIBoxLevelBPRGDialog.prefab"
+        },
+        {
+            "name": "UICrazyRushController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UICrazyRushController.prefab"
+        },
+        {
+            "name": "UIDay7SigninBPBuyDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIDay7SigninBPBuyDialog.prefab"
+        },
+        {
+            "name": "UIExcessValuePackageViewController1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIExcessValuePackageViewController1.prefab"
+        },
+        {
+            "name": "UIHallowEventDailyBPBuyDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIHallowEventDailyBPBuyDialog.prefab"
+        },
+        {
+            "name": "UIIconActivityCenter",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconActivityCenter.prefab"
+        },
+        {
+            "name": "UIIconApocalypseWastelandEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconApocalypseWastelandEntrance.prefab"
+        },
+        {
+            "name": "UIIconCyberpunkEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconCyberpunkEntrance.prefab"
+        },
+        {
+            "name": "UIIconEventCelebrationEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconEventCelebrationEntrance.prefab"
+        },
+        {
+            "name": "UIIconFirstRecharge3in1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconFirstRecharge3in1.prefab"
+        },
+        {
+            "name": "UIIconHalloweenEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconHalloweenEntrance.prefab"
+        },
+        {
+            "name": "UIIconIceBreakerGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconIceBreakerGift.prefab"
+        },
+        {
+            "name": "UIIconMailSystem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconMailSystem.prefab"
+        },
+        {
+            "name": "UIIconMonopolyGoGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconMonopolyGoGift.prefab"
+        },
+        {
+            "name": "UIIconMonopolyGoGift2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconMonopolyGoGift2.prefab"
+        },
+        {
+            "name": "UIIconNewServerGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconNewServerGift.prefab"
+        },
+        {
+            "name": "UIIconNewSisterActive",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconNewSisterActive.prefab"
+        },
+        {
+            "name": "UIIconNewYearRGEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconNewYearRGEntrance.prefab"
+        },
+        {
+            "name": "UIIconPushGift3in1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconPushGift3in1.prefab"
+        },
+        {
+            "name": "UIIconSocialSystem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconSocialSystem.prefab"
+        },
+        {
+            "name": "UIIconSprintActivityRGEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconSprintActivityRGEntrance.prefab"
+        },
+        {
+            "name": "UIIconWhiteDayEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIconWhiteDayEntrance.prefab"
+        },
+        {
+            "name": "UIIntegrationGardenViewController1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIIntegrationGardenViewController1.prefab"
+        },
+        {
+            "name": "UILevelBPRGBuyDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UILevelBPRGBuyDialog.prefab"
+        },
+        {
+            "name": "UIMonthCardDetailWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIMonthCardDetailWindow.prefab"
+        },
+        {
+            "name": "UINewServerGiftViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UINewServerGiftViewController.prefab"
+        },
+        {
+            "name": "UIOnlineRewardsNewWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIOnlineRewardsNewWindow.prefab"
+        },
+        {
+            "name": "UIOnlineRewardsWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIOnlineRewardsWindow.prefab"
+        },
+        {
+            "name": "UIOptionalGiftPackageWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIOptionalGiftPackageWindow.prefab"
+        },
+        {
+            "name": "UIPrivacyPolicyDialog",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIPrivacyPolicyDialog.prefab"
+        },
+        {
+            "name": "UIPropsProbabilityTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIPropsProbabilityTips.prefab"
+        },
+        {
+            "name": "UIResourcesWeeksCardController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIResourcesWeeksCardController.prefab"
+        },
+        {
+            "name": "UISuperMonthlyCardController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UISuperMonthlyCardController.prefab"
+        },
+        {
+            "name": "UIVenuePreviewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIVenuePreviewController.prefab"
+        },
+        {
+            "name": "UIWeekActivityViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\UIWeekActivityViewController.prefab"
+        },
+        {
+            "name": "UIAttributeDetailsWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIAttributeDetailsWindow.prefab"
+        },
+        {
+            "name": "UIBlacklistCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIBlacklistCell.prefab"
+        },
+        {
+            "name": "UIFriendInforWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendInforWindow.prefab"
+        },
+        {
+            "name": "UIFriendReplaceWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendReplaceWindow.prefab"
+        },
+        {
+            "name": "UIFriendsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsCell.prefab"
+        },
+        {
+            "name": "UIFriendsLabelCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsLabelCell.prefab"
+        },
+        {
+            "name": "UIFriendsRequestCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsRequestCell.prefab"
+        },
+        {
+            "name": "UIFriendsTitleLabelCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsTitleLabelCell.prefab"
+        },
+        {
+            "name": "UIFriendsViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsViewController.prefab"
+        },
+        {
+            "name": "UIFriendsViewController100098",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIFriendsViewController100098.prefab"
+        },
+        {
+            "name": "UIInviteFriendsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIInviteFriendsCell.prefab"
+        },
+        {
+            "name": "UIRemarkWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UIRemarkWindow.prefab"
+        },
+        {
+            "name": "UISuggestFriendsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Friend\\UISuggestFriendsCell.prefab"
+        },
+        {
+            "name": "UIGardenCard",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenCard.prefab"
+        },
+        {
+            "name": "UIGardenChallengeLevelCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenChallengeLevelCell.prefab"
+        },
+        {
+            "name": "UIGardenChallengeWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenChallengeWindow.prefab"
+        },
+        {
+            "name": "UIGardenLevelPreviewWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenLevelPreviewWindow.prefab"
+        },
+        {
+            "name": "UIGardenLevelRewardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenLevelRewardCell.prefab"
+        },
+        {
+            "name": "UIGardenMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenMainView.prefab"
+        },
+        {
+            "name": "UIGardenOneClickHarvestCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenOneClickHarvestCell.prefab"
+        },
+        {
+            "name": "UIGardenOneClickHarvestWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenOneClickHarvestWindow.prefab"
+        },
+        {
+            "name": "UIGardenPlantBubble",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenPlantBubble.prefab"
+        },
+        {
+            "name": "UIGardenPlantCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Garden\\UIGardenPlantCell.prefab"
+        },
+        {
+            "name": "UIGiftPackMallComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GiftPackMall\\UIGiftPackMallComponent.prefab"
+        },
+        {
+            "name": "UIGiftPackMallDiamondMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GiftPackMall\\UIGiftPackMallDiamondMainView.prefab"
+        },
+        {
+            "name": "UIGiftPackMallMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GiftPackMall\\UIGiftPackMallMainView.prefab"
+        },
+        {
+            "name": "UIGiftPackMallViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GiftPackMall\\UIGiftPackMallViewController.prefab"
+        },
+        {
+            "name": "UIShopDiamondCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GiftPackMall\\UIShopDiamondCell.prefab"
+        },
+        {
+            "name": "UIGrowthFundBuyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GrowthFund\\UIGrowthFundBuyView.prefab"
+        },
+        {
+            "name": "UIGrowthFundView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GrowthFund\\UIGrowthFundView.prefab"
+        },
+        {
+            "name": "UIGrowthFundWelfareCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GrowthFund\\UIGrowthFundWelfareCell.prefab"
+        },
+        {
+            "name": "UIGrowthFundWelfareView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GrowthFund\\UIGrowthFundWelfareView.prefab"
+        },
+        {
+            "name": "GuideRELogicRoot",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideMainUI\\GuideRELogicRoot.prefab"
+        },
+        {
+            "name": "Joystick",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideMainUI\\Joystick.prefab"
+        },
+        {
+            "name": "UIBaseViewTipsClose",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIBaseViewTipsClose.prefab"
+        },
+        {
+            "name": "UIGuideBeautyRescue",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIGuideBeautyRescue.prefab"
+        },
+        {
+            "name": "UIGuideStoryLogItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIGuideStoryLogItem.prefab"
+        },
+        {
+            "name": "UIGuideTipView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIGuideTipView.prefab"
+        },
+        {
+            "name": "UIHeartTaskCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIHeartTaskCell.prefab"
+        },
+        {
+            "name": "UIHeartTaskGrid",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIHeartTaskGrid.prefab"
+        },
+        {
+            "name": "UIHeartTaskView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIHeartTaskView.prefab"
+        },
+        {
+            "name": "UIMultiMask",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UIMultiMask.prefab"
+        },
+        {
+            "name": "UISaveBeautyItemView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UISaveBeautyItemView.prefab"
+        },
+        {
+            "name": "UISaveBeautyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UISaveBeautyView.prefab"
+        },
+        {
+            "name": "UISaveBeautyViewNew",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideNew\\UISaveBeautyViewNew.prefab"
+        },
+        {
+            "name": "UIGuideView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\GuideView\\UIGuideView.prefab"
+        },
+        {
+            "name": "UIHeroAdvancedView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroAdvancedView.prefab"
+        },
+        {
+            "name": "UIHeroArchiveCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroArchiveCell.prefab"
+        },
+        {
+            "name": "UIHeroArmsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroArmsCell.prefab"
+        },
+        {
+            "name": "UIHeroArmsSkillCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroArmsSkillCell.prefab"
+        },
+        {
+            "name": "UIHeroAttributeCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroAttributeCell.prefab"
+        },
+        {
+            "name": "UIHeroAttributeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroAttributeView.prefab"
+        },
+        {
+            "name": "UIHeroBiographyCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroBiographyCell.prefab"
+        },
+        {
+            "name": "UIHeroBiographyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroBiographyView.prefab"
+        },
+        {
+            "name": "UIHeroCommentCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroCommentCell.prefab"
+        },
+        {
+            "name": "UIHeroCommentView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroCommentView.prefab"
+        },
+        {
+            "name": "UIHeroEquipCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroEquipCell.prefab"
+        },
+        {
+            "name": "UIHeroEquipSelectView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroEquipSelectView.prefab"
+        },
+        {
+            "name": "UIHeroEquipSlot",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroEquipSlot.prefab"
+        },
+        {
+            "name": "UIHeroListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroListView.prefab"
+        },
+        {
+            "name": "UIHeroRatingView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroRatingView.prefab"
+        },
+        {
+            "name": "UIHeroRebirthView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroRebirthView.prefab"
+        },
+        {
+            "name": "UIHeroRelationCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroRelationCell.prefab"
+        },
+        {
+            "name": "UIHeroResCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroResCell.prefab"
+        },
+        {
+            "name": "UIHeroRisingStarView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroRisingStarView.prefab"
+        },
+        {
+            "name": "UIHeroSelectView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroSelectView.prefab"
+        },
+        {
+            "name": "UIHeroSkillBuffCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroSkillBuffCell.prefab"
+        },
+        {
+            "name": "UIHeroSkillLevelCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroSkillLevelCell.prefab"
+        },
+        {
+            "name": "UIHeroSkillView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroSkillView.prefab"
+        },
+        {
+            "name": "UIHeroView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Hero\\UIHeroView.prefab"
+        },
+        {
+            "name": "UIHeroAltarDissConfimWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroAltar\\UIHeroAltarDissConfimWindow.prefab"
+        },
+        {
+            "name": "UIHeroAltarItemBackViewCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroAltar\\UIHeroAltarItemBackViewCell.prefab"
+        },
+        {
+            "name": "UIHeroAltarItemViewCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroAltar\\UIHeroAltarItemViewCell.prefab"
+        },
+        {
+            "name": "UIHeroAltarMainWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroAltar\\UIHeroAltarMainWindow.prefab"
+        },
+        {
+            "name": "UIHeroFactionDetailView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroFaction\\UIHeroFactionDetailView.prefab"
+        },
+        {
+            "name": "UIHeroFactionIconComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroFaction\\UIHeroFactionIconComponent.prefab"
+        },
+        {
+            "name": "UIHeroSwitchHeroCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchHeroCell.prefab"
+        },
+        {
+            "name": "UIHeroSwitchHeroListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchHeroListCell.prefab"
+        },
+        {
+            "name": "UIHeroSwitchRaceToggle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchRaceToggle.prefab"
+        },
+        {
+            "name": "UIHeroSwitchResultListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchResultListCell.prefab"
+        },
+        {
+            "name": "UIHeroSwitchResultListTitle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchResultListTitle.prefab"
+        },
+        {
+            "name": "UIHeroSwitchResultView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchResultView.prefab"
+        },
+        {
+            "name": "UIHeroSwitchSuccessView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchSuccessView.prefab"
+        },
+        {
+            "name": "UIHeroSwitchTopItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchTopItem.prefab"
+        },
+        {
+            "name": "UIHeroSwitchView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\HeroSwitch\\UIHeroSwitchView.prefab"
+        },
+        {
+            "name": "UIGoldFlyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIGoldFlyView.prefab"
+        },
+        {
+            "name": "UIIdleOneKeySpeedWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIIdleOneKeySpeedWindow.prefab"
+        },
+        {
+            "name": "UIIdleRewardWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIIdleRewardWindow.prefab"
+        },
+        {
+            "name": "UIIdleSpeedMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIIdleSpeedMainView.prefab"
+        },
+        {
+            "name": "UIIdleSpeedRewardsWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIIdleSpeedRewardsWindow.prefab"
+        },
+        {
+            "name": "UIIdleSpeedWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Idle\\UIIdleSpeedWindow.prefab"
+        },
+        {
+            "name": "UIInterludeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\InterludeView\\UIInterludeView.prefab"
+        },
+        {
+            "name": "UIItemSourceCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Item\\UIItemSourceCell.prefab"
+        },
+        {
+            "name": "UIOpenTheBoxlist",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Item\\UIOpenTheBoxlist.prefab"
+        },
+        {
+            "name": "LimitedEventCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\LimitedEventCell.prefab"
+        },
+        {
+            "name": "UICommonActivityRankView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UICommonActivityRankView.prefab"
+        },
+        {
+            "name": "UILimitedEventMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UILimitedEventMainView.prefab"
+        },
+        {
+            "name": "UILimitedEventMainViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UILimitedEventMainViewController.prefab"
+        },
+        {
+            "name": "UINewPackageView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UINewPackageView.prefab"
+        },
+        {
+            "name": "UIPromoteStarAdvantageView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UIPromoteStarAdvantageView.prefab"
+        },
+        {
+            "name": "UIReputationRewardView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedEvent\\UIReputationRewardView.prefab"
+        },
+        {
+            "name": "UILimitedGiftPushEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedGiftPush\\UILimitedGiftPushEntrance.prefab"
+        },
+        {
+            "name": "UILimitedGiftPushMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\LimitedGiftPush\\UILimitedGiftPushMainView.prefab"
+        },
+        {
+            "name": "UIHeroFactionIcon",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UIHeroFactionIcon.prefab"
+        },
+        {
+            "name": "UIHeroListViewCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UIHeroListViewCell.prefab"
+        },
+        {
+            "name": "UILineUpController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UILineUpController.prefab"
+        },
+        {
+            "name": "UILineupDefenderHeroModel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UILineupDefenderHeroModel.prefab"
+        },
+        {
+            "name": "UILineUpFightWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UILineUpFightWindow.prefab"
+        },
+        {
+            "name": "UILineupHeroModel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UILineupHeroModel.prefab"
+        },
+        {
+            "name": "UILineUpWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UILineUpWindow.prefab"
+        },
+        {
+            "name": "UIStartFightWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lineup\\UIStartFightWindow.prefab"
+        },
+        {
+            "name": "UISocialController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Lord\\UISocialController.prefab"
+        },
+        {
+            "name": "UIMailCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\UIMailCell.prefab"
+        },
+        {
+            "name": "UIMailContentViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\UIMailContentViewController.prefab"
+        },
+        {
+            "name": "UIMailViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\UIMailViewController.prefab"
+        },
+        {
+            "name": "UIMonthlyShelterMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MonthlyShelter\\UIMonthlyShelterMainView.prefab"
+        },
+        {
+            "name": "UIMonthlyShelterSelectWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MonthlyShelter\\UIMonthlyShelterSelectWindow.prefab"
+        },
+        {
+            "name": "ActivityButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\ActivityButton.prefab"
+        },
+        {
+            "name": "ActivityIconCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\ActivityIconCell.prefab"
+        },
+        {
+            "name": "ActivityListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\ActivityListCell.prefab"
+        },
+        {
+            "name": "BasicButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\BasicButton.prefab"
+        },
+        {
+            "name": "BattleCollection",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\BattleCollection.prefab"
+        },
+        {
+            "name": "LordAvatar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\LordAvatar.prefab"
+        },
+        {
+            "name": "MainAssistant",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\MainAssistant.prefab"
+        },
+        {
+            "name": "MainLevel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\MainLevel.prefab"
+        },
+        {
+            "name": "MosaicMainButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\MosaicMainButton.prefab"
+        },
+        {
+            "name": "NextChapter",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\NextChapter.prefab"
+        },
+        {
+            "name": "OnHookChestBtn",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\OnHookChestBtn.prefab"
+        },
+        {
+            "name": "RedBag",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\RedBag.prefab"
+        },
+        {
+            "name": "RoundBattleButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\RoundBattleButton.prefab"
+        },
+        {
+            "name": "UIBannerScroller_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\UIBannerScroller_New.prefab"
+        },
+        {
+            "name": "UIMosaicMainView_GamesScene_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\UIMosaicMainView_GamesScene_New.prefab"
+        },
+        {
+            "name": "UIMosaicMainView_MainScene_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\UIMosaicMainView_MainScene_New.prefab"
+        },
+        {
+            "name": "UIMosaicMainView_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\UIMosaicMainView_New.prefab"
+        },
+        {
+            "name": "UIMosaicMainView_TrainingScene_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\MosaicMainUI\\UIMosaicMainView_TrainingScene_New.prefab"
+        },
+        {
+            "name": "UIHeroesAssemble",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UIHeroesAssemble.prefab"
+        },
+        {
+            "name": "UILevelDamage",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UILevelDamage.prefab"
+        },
+        {
+            "name": "UILevelDamageIcon",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UILevelDamageIcon.prefab"
+        },
+        {
+            "name": "UINewCelebrationChallengeBossView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationChallengeBossView.prefab"
+        },
+        {
+            "name": "UINewCelebrationChallengeSettlementView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationChallengeSettlementView.prefab"
+        },
+        {
+            "name": "UINewCelebrationLuckyDrawView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationLuckyDrawView.prefab"
+        },
+        {
+            "name": "UINewCelebrationMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationMainView.prefab"
+        },
+        {
+            "name": "UINewCelebrationSevenDayTaskView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationSevenDayTaskView.prefab"
+        },
+        {
+            "name": "UINewCelebrationThreeDayView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UINewCelebrationThreeDayView.prefab"
+        },
+        {
+            "name": "UIRankReward",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UIRankReward.prefab"
+        },
+        {
+            "name": "UIRechargeRecords",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UIRechargeRecords.prefab"
+        },
+        {
+            "name": "UITaskTrial",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UITaskTrial.prefab"
+        },
+        {
+            "name": "UIThunderboltRecharge",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\NewCelebration\\UIThunderboltRecharge.prefab"
+        },
+        {
+            "name": "OnlineRewardMainWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\OnlineReward\\OnlineRewardMainWindow.prefab"
+        },
+        {
+            "name": "OnlineRewardViewCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\OnlineReward\\OnlineRewardViewCell.prefab"
+        },
+        {
+            "name": "UIOnlineRewardEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\OnlineReward\\UIOnlineRewardEntrance.prefab"
+        },
+        {
+            "name": "HealthBarEnemy",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\HealthBarEnemy.prefab"
+        },
+        {
+            "name": "HealthBarGeneral",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\HealthBarGeneral.prefab"
+        },
+        {
+            "name": "HealthBarGeneralNew",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\HealthBarGeneralNew.prefab"
+        },
+        {
+            "name": "UIBossDamageVaulePanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\UIBossDamageVaulePanel.prefab"
+        },
+        {
+            "name": "UIFloatingBuffText",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\UIFloatingBuffText.prefab"
+        },
+        {
+            "name": "UIFloatingText",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\UIFloatingText.prefab"
+        },
+        {
+            "name": "UIFloatingTextNew",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourBattleUJM\\UIFloatingTextNew.prefab"
+        },
+        {
+            "name": "BoxDropEffect",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\BoxDropEffect.prefab"
+        },
+        {
+            "name": "EquipListPanelBetter",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\EquipListPanelBetter.prefab"
+        },
+        {
+            "name": "EquipListPanelOrigin",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\EquipListPanelOrigin.prefab"
+        },
+        {
+            "name": "MainEquipItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\MainEquipItem.prefab"
+        },
+        {
+            "name": "MessageTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\MessageTips.prefab"
+        },
+        {
+            "name": "OpenBoxPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\OpenBoxPanel.prefab"
+        },
+        {
+            "name": "ParkourResBar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\ParkourResBar.prefab"
+        },
+        {
+            "name": "QuickBattleUI",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\QuickBattleUI.prefab"
+        },
+        {
+            "name": "RELogicRoot",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\RELogicRoot.prefab"
+        },
+        {
+            "name": "RGLogicRoot",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\RGLogicRoot.prefab"
+        },
+        {
+            "name": "UIAutoBattleFailsTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIAutoBattleFailsTipsView.prefab"
+        },
+        {
+            "name": "UIBoxOpen",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIBoxOpen.prefab"
+        },
+        {
+            "name": "UIFightBuffListWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIFightBuffListWindow.prefab"
+        },
+        {
+            "name": "UIGameDisplayView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIGameDisplayView.prefab"
+        },
+        {
+            "name": "UIGameDropView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIGameDropView.prefab"
+        },
+        {
+            "name": "UIGamePauseView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIGamePauseView.prefab"
+        },
+        {
+            "name": "UIGameViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIGameViewController.prefab"
+        },
+        {
+            "name": "UIGetShellTips",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIGetShellTips.prefab"
+        },
+        {
+            "name": "UIIconActiveItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIIconActiveItem.prefab"
+        },
+        {
+            "name": "UIIconIceWeapGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIIconIceWeapGift.prefab"
+        },
+        {
+            "name": "UILineUpBuffView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UILineUpBuffView.prefab"
+        },
+        {
+            "name": "UIMainTaskInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIMainTaskInfoView.prefab"
+        },
+        {
+            "name": "UIParkourFightSettingWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\UIParkourFightSettingWindow.prefab"
+        },
+        {
+            "name": "UIPetChangeWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Pet\\UIPetChangeWindow.prefab"
+        },
+        {
+            "name": "UIPlutoTreasuryView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\PlutoTreasury\\UIPlutoTreasuryView.prefab"
+        },
+        {
+            "name": "UITwoButtonDialogCountDown",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\PopupWindow\\UITwoButtonDialogCountDown.prefab"
+        },
+        {
+            "name": "UIRankCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankCell.prefab"
+        },
+        {
+            "name": "UIRankListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankListView.prefab"
+        },
+        {
+            "name": "UIRankMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankMainView.prefab"
+        },
+        {
+            "name": "UIRankRewardListCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankRewardListCell.prefab"
+        },
+        {
+            "name": "UIRankRewardListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankRewardListView.prefab"
+        },
+        {
+            "name": "UIRankTopHeroInfo",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankTopHeroInfo.prefab"
+        },
+        {
+            "name": "UIRankTopPlayerInfo",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Rank\\UIRankTopPlayerInfo.prefab"
+        },
+        {
+            "name": "UISaveBeautyBar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\SaveBeautyBar\\UISaveBeautyBar.prefab"
+        },
+        {
+            "name": "UIScreenVideoShow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ScreenVideoShow\\UIScreenVideoShow.prefab"
+        },
+        {
+            "name": "UIAccountView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Setting\\UIAccountView.prefab"
+        },
+        {
+            "name": "UIShopBuyCountView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Shop\\UIShopBuyCountView.prefab"
+        },
+        {
+            "name": "UIShopItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Shop\\UIShopItemCell.prefab"
+        },
+        {
+            "name": "UIShopItemMarkView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Shop\\UIShopItemMarkView.prefab"
+        },
+        {
+            "name": "UIShopRefreshView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Shop\\UIShopRefreshView.prefab"
+        },
+        {
+            "name": "UIShopWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Shop\\UIShopWindow.prefab"
+        },
+        {
+            "name": "StarUpItemTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\StarUpCenter\\StarUpItemTipsView.prefab"
+        },
+        {
+            "name": "UIItemHeroAcquisitionCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\StarUpCenter\\UIItemHeroAcquisitionCell.prefab"
+        },
+        {
+            "name": "UIStarUpCenterView_New",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\StarUpCenter\\UIStarUpCenterView_New.prefab"
+        },
+        {
+            "name": "UIStoreEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\StoreRGNew\\UIStoreEntrance.prefab"
+        },
+        {
+            "name": "UIEquipAttTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Tips\\UIEquipAttTip.prefab"
+        },
+        {
+            "name": "UIDrawHeroInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UJMFirst\\UIDrawHeroInfoView.prefab"
+        },
+        {
+            "name": "UIProfileChangeNameView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileChangeNameView.prefab"
+        },
+        {
+            "name": "UIProfileMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainView.prefab"
+        },
+        {
+            "name": "UIProfileMainViewExchange",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainViewExchange.prefab"
+        },
+        {
+            "name": "UIProfileMainViewHeroCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainViewHeroCell.prefab"
+        },
+        {
+            "name": "UIProfileMainViewNotice",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainViewNotice.prefab"
+        },
+        {
+            "name": "UIProfileMainViewNoticeBannerCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainViewNoticeBannerCell.prefab"
+        },
+        {
+            "name": "UIProfileMainViewSetting",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileMainViewSetting.prefab"
+        },
+        {
+            "name": "UIProfileUpgradeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\UserInfo\\UIProfileUpgradeView.prefab"
+        },
+        {
+            "name": "UIWelfareBannerScroller",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareBannerScroller.prefab"
+        },
+        {
+            "name": "UIWelfareBannerTab",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareBannerTab.prefab"
+        },
+        {
+            "name": "UIWelFareCrazyDrawsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelFareCrazyDrawsCell.prefab"
+        },
+        {
+            "name": "UIWelFareCrazyDrawsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelFareCrazyDrawsView.prefab"
+        },
+        {
+            "name": "UIWelfareDotTab",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareDotTab.prefab"
+        },
+        {
+            "name": "UIWelfareDotTabList",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareDotTabList.prefab"
+        },
+        {
+            "name": "UIWelfareEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareEntrance.prefab"
+        },
+        {
+            "name": "UIWelfareGradeGiftPackView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareGradeGiftPackView.prefab"
+        },
+        {
+            "name": "UIWelfareLightTrialView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareLightTrialView.prefab"
+        },
+        {
+            "name": "UIWelFareMainWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelFareMainWindow.prefab"
+        },
+        {
+            "name": "UIWelFareMonthlyCard",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelFareMonthlyCard.prefab"
+        },
+        {
+            "name": "UIWelFareMonthlyCardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelFareMonthlyCardCell.prefab"
+        },
+        {
+            "name": "UIWelfareMonthlyRewardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareMonthlyRewardCell.prefab"
+        },
+        {
+            "name": "UIWelfareMonthlySignInCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareMonthlySignInCell.prefab"
+        },
+        {
+            "name": "UIWelfareMonthlySignInView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareMonthlySignInView.prefab"
+        },
+        {
+            "name": "UIWelfareTaskCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareTaskCell.prefab"
+        },
+        {
+            "name": "UIWelfareViewController",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Welfare\\UIWelfareViewController.prefab"
+        },
+        {
+            "name": "UIDailyDealsCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\DailyFirstPay\\UIDailyDealsCell.prefab"
+        },
+        {
+            "name": "UIDailyFirstPayMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\DailyFirstPay\\UIDailyFirstPayMainView.prefab"
+        },
+        {
+            "name": "UIEightDayGiftCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\EightDayGift\\UIEightDayGiftCell.prefab"
+        },
+        {
+            "name": "UIEightDayGiftEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\EightDayGift\\UIEightDayGiftEntrance.prefab"
+        },
+        {
+            "name": "UIEightDayGiftView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\EightDayGift\\UIEightDayGiftView.prefab"
+        },
+        {
+            "name": "UIEightDayTip",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\EightDayGift\\UIEightDayTip.prefab"
+        },
+        {
+            "name": "UIExclusivePrivilegeInfoView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\ExclusivePrivilege\\UIExclusivePrivilegeInfoView.prefab"
+        },
+        {
+            "name": "UIExclusivePrivilegeRewardView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\ExclusivePrivilege\\UIExclusivePrivilegeRewardView.prefab"
+        },
+        {
+            "name": "UIExclusivePrivilegeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\ExclusivePrivilege\\UIExclusivePrivilegeView.prefab"
+        },
+        {
+            "name": "UIFirstPayGiftDailyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\FirstPayGift\\UIFirstPayGiftDailyView.prefab"
+        },
+        {
+            "name": "UIFirstPayGiftEntrance",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\FirstPayGift\\UIFirstPayGiftEntrance.prefab"
+        },
+        {
+            "name": "UIFirstPayGiftView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\FirstPayGift\\UIFirstPayGiftView.prefab"
+        },
+        {
+            "name": "UIFirstPayGiftView2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\FirstPayGift\\UIFirstPayGiftView2.prefab"
+        },
+        {
+            "name": "UIGradeGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\GradeGift\\UIGradeGift.prefab"
+        },
+        {
+            "name": "UIUIGradeGiftCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\GradeGift\\UIUIGradeGiftCell.prefab"
+        },
+        {
+            "name": "UIVipMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\Vip\\UIVipMainView.prefab"
+        },
+        {
+            "name": "UIVipUpgradeView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Activity5V\\Vip\\UIVipUpgradeView.prefab"
+        },
+        {
+            "name": "UIActiveCategory",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\Category\\UIActiveCategory.prefab"
+        },
+        {
+            "name": "UICommonTopCategory",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\Category\\UICommonTopCategory.prefab"
+        },
+        {
+            "name": "UIHeroTopCategory",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\Category\\UIHeroTopCategory.prefab"
+        },
+        {
+            "name": "UIIconCategory",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\Category\\UIIconCategory.prefab"
+        },
+        {
+            "name": "UITextCategory",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\Category\\UITextCategory.prefab"
+        },
+        {
+            "name": "UIComButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIComButton.prefab"
+        },
+        {
+            "name": "UIComToggle01",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIComToggle01.prefab"
+        },
+        {
+            "name": "UIComToggle02",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIComToggle02.prefab"
+        },
+        {
+            "name": "UIComToggle03",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIComToggle03.prefab"
+        },
+        {
+            "name": "UIWindowBottomButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIWindowBottomButton.prefab"
+        },
+        {
+            "name": "UIWindowBottomToggleGroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIWindowBottomToggleGroup.prefab"
+        },
+        {
+            "name": "UIWindowTopBarRes",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIWindowTopBarRes.prefab"
+        },
+        {
+            "name": "UIWindowTopBarTitle",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\WindowParts\\UIWindowTopBarTitle.prefab"
+        },
+        {
+            "name": "SmallMap1-0",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-0.prefab"
+        },
+        {
+            "name": "SmallMap1-1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-1.prefab"
+        },
+        {
+            "name": "SmallMap1-2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-2.prefab"
+        },
+        {
+            "name": "SmallMap1-3",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-3.prefab"
+        },
+        {
+            "name": "SmallMap1-4",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-4.prefab"
+        },
+        {
+            "name": "SmallMap1-5",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-5.prefab"
+        },
+        {
+            "name": "SmallMap1-6",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-6.prefab"
+        },
+        {
+            "name": "SmallMap1-7",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-7.prefab"
+        },
+        {
+            "name": "SmallMap1-8",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chapter\\SmallMap\\SmallMap1-8.prefab"
+        },
+        {
+            "name": "ChatActiveLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatActiveLeft.prefab"
+        },
+        {
+            "name": "ChatActiveRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatActiveRight.prefab"
+        },
+        {
+            "name": "ChatBattleReportLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatBattleReportLeft.prefab"
+        },
+        {
+            "name": "ChatBattleReportRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatBattleReportRight.prefab"
+        },
+        {
+            "name": "ChatCopyActiveWhiteDayLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatCopyActiveWhiteDayLeft.prefab"
+        },
+        {
+            "name": "ChatCopyActiveWhiteDayRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatCopyActiveWhiteDayRight.prefab"
+        },
+        {
+            "name": "ChatCopyTrialLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatCopyTrialLeft.prefab"
+        },
+        {
+            "name": "ChatCopyTrialRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatCopyTrialRight.prefab"
+        },
+        {
+            "name": "ChatLoadMoreCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatLoadMoreCell.prefab"
+        },
+        {
+            "name": "ChatMsgCellTextLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatMsgCellTextLeft.prefab"
+        },
+        {
+            "name": "ChatMsgCellTextRadioLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatMsgCellTextRadioLeft.prefab"
+        },
+        {
+            "name": "ChatMsgCellTextRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatMsgCellTextRight.prefab"
+        },
+        {
+            "name": "ChatMsgCellTimeText",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatMsgCellTimeText.prefab"
+        },
+        {
+            "name": "ChatRedEnvelopeLeft",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatRedEnvelopeLeft.prefab"
+        },
+        {
+            "name": "ChatRedEnvelopeRight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ChatRedEnvelopeRight.prefab"
+        },
+        {
+            "name": "CommonHead",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\CommonHead.prefab"
+        },
+        {
+            "name": "MyRedEnvelopeWindowButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\MyRedEnvelopeWindowButton.prefab"
+        },
+        {
+            "name": "ReceivePlayerCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ReceivePlayerCell.prefab"
+        },
+        {
+            "name": "ReceivePlayMyCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\ReceivePlayMyCell.prefab"
+        },
+        {
+            "name": "RedEnvelopeReceivedWindowButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\RedEnvelopeReceivedWindowButton.prefab"
+        },
+        {
+            "name": "RedEnvelopeWindowButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\RedEnvelopeWindowButton.prefab"
+        },
+        {
+            "name": "TeamInvitationPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\ChatCell\\TeamInvitationPanel.prefab"
+        },
+        {
+            "name": "LeftChat_v2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V20\\LeftChat_v2.prefab"
+        },
+        {
+            "name": "UISystemNotice_v2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V20\\UISystemNotice_v2.prefab"
+        },
+        {
+            "name": "UIChatChannelToggleCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V5\\UIChatChannelToggleCell.prefab"
+        },
+        {
+            "name": "UIChatEntry",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V5\\UIChatEntry.prefab"
+        },
+        {
+            "name": "UIChatFriendListView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V5\\UIChatFriendListView.prefab"
+        },
+        {
+            "name": "UIChatMainView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V5\\UIChatMainView.prefab"
+        },
+        {
+            "name": "UIChatSettingsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Chat\\V5\\UIChatSettingsView.prefab"
+        },
+        {
+            "name": "UIHeroCardCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Atoms\\UIHeroCardCell.prefab"
+        },
+        {
+            "name": "UIHeroFilter",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Atoms\\UIHeroFilter.prefab"
+        },
+        {
+            "name": "UIHeroGridCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Atoms\\UIHeroGridCell.prefab"
+        },
+        {
+            "name": "UIHeroSkillCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Atoms\\UIHeroSkillCell.prefab"
+        },
+        {
+            "name": "UIHeroStar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Atoms\\UIHeroStar.prefab"
+        },
+        {
+            "name": "BtnClose",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\BtnClose.prefab"
+        },
+        {
+            "name": "CommonBtn",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtn.prefab"
+        },
+        {
+            "name": "CommonBtn1",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtn1.prefab"
+        },
+        {
+            "name": "CommonBtn2",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtn2.prefab"
+        },
+        {
+            "name": "CommonBtn3",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtn3.prefab"
+        },
+        {
+            "name": "CommonBtnActivity",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnActivity.prefab"
+        },
+        {
+            "name": "CommonBtnActivityScreen",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnActivityScreen.prefab"
+        },
+        {
+            "name": "CommonBtnBig",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnBig.prefab"
+        },
+        {
+            "name": "CommonBtnBigScreen",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnBigScreen.prefab"
+        },
+        {
+            "name": "CommonBtnSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnSmall.prefab"
+        },
+        {
+            "name": "CommonBtnSmallScreen",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonBtnSmallScreen.prefab"
+        },
+        {
+            "name": "CommonCostSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonCostSmall.prefab"
+        },
+        {
+            "name": "CommonIconBtn",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Button\\CommonIconBtn.prefab"
+        },
+        {
+            "name": "Mask",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Other\\Mask.prefab"
+        },
+        {
+            "name": "UICommonActivityItemComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonActivityItemComponent.prefab"
+        },
+        {
+            "name": "UICommonActivityRankItemComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonActivityRankItemComponent.prefab"
+        },
+        {
+            "name": "UICommonActivityTaskView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonActivityTaskView.prefab"
+        },
+        {
+            "name": "UICommonBuyItemWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonBuyItemWindow.prefab"
+        },
+        {
+            "name": "UICommonTipsView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonTipsView.prefab"
+        },
+        {
+            "name": "UICommonWorshipView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UICommonWorshipView.prefab"
+        },
+        {
+            "name": "UIHeroAltarBackHeroSelectWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UIHeroAltarBackHeroSelectWindow.prefab"
+        },
+        {
+            "name": "UIMainStageResultView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Pages\\UIMainStageResultView.prefab"
+        },
+        {
+            "name": "NotiLegacy",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\NotiLegacy.prefab"
+        },
+        {
+            "name": "RedDotComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotComponent.prefab"
+        },
+        {
+            "name": "RedDotNew",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotNew.prefab"
+        },
+        {
+            "name": "RedDotNumComponent",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotNumComponent.prefab"
+        },
+        {
+            "name": "RedDotNumLegacy",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotNumLegacy.prefab"
+        },
+        {
+            "name": "RedDotObj",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotObj.prefab"
+        },
+        {
+            "name": "RedDotObjLegacy",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\RedDot\\RedDotObjLegacy.prefab"
+        },
+        {
+            "name": "ActivityTab",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Tab\\ActivityTab.prefab"
+        },
+        {
+            "name": "CommonTopTab",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Tab\\CommonTopTab.prefab"
+        },
+        {
+            "name": "CommonTopTabGroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Tab\\CommonTopTabGroup.prefab"
+        },
+        {
+            "name": "UICommonTopTab",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Tab\\UICommonTopTab.prefab"
+        },
+        {
+            "name": "UICommonTopTabGroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\Tab\\UICommonTopTabGroup.prefab"
+        },
+        {
+            "name": "Btncommonbig_Base",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\V5\\Btncommonbig_Base.prefab"
+        },
+        {
+            "name": "Btncommonmini_Base",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\V5\\Btncommonmini_Base.prefab"
+        },
+        {
+            "name": "Btncommonpay_Base",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\V5\\Btncommonpay_Base.prefab"
+        },
+        {
+            "name": "Btncommonsmall_Base",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\V5\\Btncommonsmall_Base.prefab"
+        },
+        {
+            "name": "UIDoubleBtnPopupWindow",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Common\\V5\\UIDoubleBtnPopupWindow.prefab"
+        },
+        {
+            "name": "MultiPackGift",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Event\\MainEvents\\MultiPackGift.prefab"
+        },
+        {
+            "name": "UIMailActiveStartPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Elemet\\UIMailActiveStartPanel.prefab"
+        },
+        {
+            "name": "UImailAwardBox",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Elemet\\UImailAwardBox.prefab"
+        },
+        {
+            "name": "UIMailBufferCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Elemet\\UIMailBufferCell.prefab"
+        },
+        {
+            "name": "UIMailGuildEventPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Elemet\\UIMailGuildEventPanel.prefab"
+        },
+        {
+            "name": "UIMailGuildPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Elemet\\UIMailGuildPanel.prefab"
+        },
+        {
+            "name": "UIMailAttributeModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailAttributeModule.prefab"
+        },
+        {
+            "name": "UIMailHeroDetailModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailHeroDetailModule.prefab"
+        },
+        {
+            "name": "UIMailHeroGearsModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailHeroGearsModule.prefab"
+        },
+        {
+            "name": "UIMailHeroSkillsModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailHeroSkillsModule.prefab"
+        },
+        {
+            "name": "UIMailResourceModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailResourceModule.prefab"
+        },
+        {
+            "name": "UIMailRewardModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailRewardModule.prefab"
+        },
+        {
+            "name": "UIMailTroopDetailModule",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Mail\\Module\\UIMailTroopDetailModule.prefab"
+        },
+        {
+            "name": "UIRoundFight",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\RoundMainUI\\UIRoundFight.prefab"
+        },
+        {
+            "name": "UIRoundFightSetting",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\ParkourMainUI\\RoundMainUI\\UIRoundFightSetting.prefab"
+        },
+        {
+            "name": "UIBattleOrderItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIBattleOrderItem.prefab"
+        },
+        {
+            "name": "UICommonTaskPrompt",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UICommonTaskPrompt.prefab"
+        },
+        {
+            "name": "UIDailyBattleActivateView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyBattleActivateView.prefab"
+        },
+        {
+            "name": "UIDailyBattleView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyBattleView.prefab"
+        },
+        {
+            "name": "UIDailyCommonItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyCommonItem.prefab"
+        },
+        {
+            "name": "UIDailyTaskBoxItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyTaskBoxItem.prefab"
+        },
+        {
+            "name": "UIDailyTaskItem",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyTaskItem.prefab"
+        },
+        {
+            "name": "UIDailyView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Task\\DailyTask\\UIDailyView.prefab"
+        },
+        {
+            "name": "CountdownBar",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Bar\\CountdownBar.prefab"
+        },
+        {
+            "name": "TopTabBlue",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Bar\\TopTabBlue.prefab"
+        },
+        {
+            "name": "UIBigBubbleView",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Bubble\\UIBigBubbleView.prefab"
+        },
+        {
+            "name": "UISimpleBubble",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Bubble\\UISimpleBubble.prefab"
+        },
+        {
+            "name": "Dropdown",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\Dropdown.prefab"
+        },
+        {
+            "name": "IconButton",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\IconButton.prefab"
+        },
+        {
+            "name": "OneLineButtonBig",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\OneLineButtonBig.prefab"
+        },
+        {
+            "name": "OneLineButtonSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\OneLineButtonSmall.prefab"
+        },
+        {
+            "name": "ToggleOnly",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\ToggleOnly.prefab"
+        },
+        {
+            "name": "ToggleTopGroup",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\ToggleTopGroup.prefab"
+        },
+        {
+            "name": "TwoLineButtonBig",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\TwoLineButtonBig.prefab"
+        },
+        {
+            "name": "TwoLineButtonSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Button\\TwoLineButtonSmall.prefab"
+        },
+        {
+            "name": "BuffCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Cell\\BuffCell.prefab"
+        },
+        {
+            "name": "CommonTimeCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Cell\\CommonTimeCell.prefab"
+        },
+        {
+            "name": "ItemCell",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Cell\\ItemCell.prefab"
+        },
+        {
+            "name": "ReddotNum",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Cell\\ReddotNum.prefab"
+        },
+        {
+            "name": "ReddotOnly",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Cell\\ReddotOnly.prefab"
+        },
+        {
+            "name": "BottomTitlePanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Dialog\\BottomTitlePanel.prefab"
+        },
+        {
+            "name": "TitleDialogPanel",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Dialog\\TitleDialogPanel.prefab"
+        },
+        {
+            "name": "Slider",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Slider\\Slider.prefab"
+        },
+        {
+            "name": "SliderSmall",
+            "path": "Assets\\PackageRes\\Raw\\Category\\Prefabs\\UI\\Base\\BaseComponent\\Slider\\SliderSmall.prefab"
+        }
+    ],
+    "lastUpdateTime": "2025-12-08 16:26:46"
+}
