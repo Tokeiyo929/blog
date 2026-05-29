@@ -13,17 +13,29 @@ from datetime import datetime
 from html import escape, unescape
 import sys
 
+POST_FILE_PATTERN = re.compile(r'^post(\d+)\.html$')
+CONFIG_PATH = 'posts-config.json'
+DEFAULT_COVER_IMAGE = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80"
+
+def configure_stdio():
+    """让 Windows 控制台也能稳定输出中文和图标"""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8')
+
+def extract_post_number(filename):
+    """从文章文件名中提取编号"""
+    match = POST_FILE_PATTERN.match(os.path.basename(filename))
+    return int(match.group(1)) if match else None
+
+def new_posts_config():
+    """创建空的文章配置，避免共享可变默认值"""
+    return {"posts": []}
+
 def get_all_post_files():
     """获取所有文章文件列表"""
-    # 查找HTML文件
-    html_files = [f for f in os.listdir('.') if f.startswith('post') and f.endswith('.html')]
-    
-    # 按编号排序
-    def extract_number(filename):
-        match = re.search(r'post(\d+)\.html', filename)
-        return int(match.group(1)) if match else 0
-    
-    html_files.sort(key=extract_number)
+    html_files = [f for f in os.listdir('.') if extract_post_number(f) is not None]
+    html_files.sort(key=extract_post_number)
     return html_files
 
 def get_next_post_number():
@@ -31,14 +43,51 @@ def get_next_post_number():
     post_files = get_all_post_files()
     if not post_files:
         return 1
-    
-    numbers = []
-    for f in post_files:
-        match = re.search(r'post(\d+)\.html', f)
-        if match:
-            numbers.append(int(match.group(1)))
-    
+
+    numbers = [extract_post_number(f) for f in post_files]
     return max(numbers) + 1 if numbers else 1
+
+def load_posts_config(config_path=CONFIG_PATH, warn=True):
+    """读取 posts-config.json，缺失或损坏时返回默认结构"""
+    if not os.path.exists(config_path):
+        if warn:
+            print(f"未找到 {config_path}，将创建新配置文件")
+        return new_posts_config()
+
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+    except json.JSONDecodeError:
+        if warn:
+            print(f"警告: {config_path} 格式错误，将创建新配置")
+        return new_posts_config()
+
+    if not isinstance(config, dict):
+        return new_posts_config()
+
+    posts = config.get('posts')
+    if not isinstance(posts, list):
+        config['posts'] = []
+    return config
+
+def save_posts_config(config, config_path=CONFIG_PATH):
+    """保存 posts-config.json"""
+    with open(config_path, 'w', encoding='utf-8') as f:
+        json.dump(config, f, ensure_ascii=False, indent=2)
+
+def build_post_config(post_data, post_filename):
+    """构建首页使用的文章配置对象"""
+    return {
+        "id": post_data.get('post_number', 0),
+        "title": post_data.get('title', '无标题'),
+        "excerpt": post_data.get('excerpt') or '暂无摘要',
+        "date": post_data.get('date', datetime.now().strftime("%Y年%m月%d日")),
+        "readTime": f"{post_data.get('reading_time', 5)}分钟",
+        "category": post_data.get('category', '未分类'),
+        "mode": "🔄",
+        "image": post_data.get('cover_image', DEFAULT_COVER_IMAGE),
+        "link": post_filename
+    }
 
 def calculate_reading_time(content):
     """根据内容估算阅读时间"""
@@ -105,7 +154,7 @@ def parse_markdown_file(md_file_path):
         post_data['date'] = datetime.now().strftime("%Y年%m月%d日")
     
     if 'cover_image' not in post_data:
-        post_data['cover_image'] = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80"
+        post_data['cover_image'] = DEFAULT_COVER_IMAGE
     
     if 'excerpt' not in post_data:
         # 从内容前几行提取摘要
@@ -1143,22 +1192,11 @@ def create_post_html(post_data, post_filename):
 
 def get_excerpt_from_config(post_filename):
     """从 posts-config.json 中提取文章摘要"""
-    config_path = 'posts-config.json'
-    if not os.path.exists(config_path):
-        return None
-    
-    try:
-        with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-        
-        # 查找对应的文章
-        for post in config.get('posts', []):
-            if post.get('link') == post_filename:
-                return post.get('excerpt')
-        
-        return None
-    except (json.JSONDecodeError, Exception):
-        return None
+    config = load_posts_config(warn=False)
+    for post in config.get('posts', []):
+        if post.get('link') == post_filename:
+            return post.get('excerpt')
+    return None
 
 def parse_existing_post(post_filename):
     """解析现有文章，提取信息"""
@@ -1202,45 +1240,17 @@ def parse_existing_post(post_filename):
     post_data['excerpt'] = get_excerpt_from_config(post_filename)
     
     # 提取文章编号
-    match = re.search(r'post(\d+)\.html', post_filename)
-    if match:
-        post_data['post_number'] = int(match.group(1))
-    
+    post_number = extract_post_number(post_filename)
+    if post_number is not None:
+        post_data['post_number'] = post_number
+
     return post_data
 
 def update_posts_config(post_data, post_filename, is_new_post=True):
     """更新 posts-config.json，添加新文章或更新现有文章"""
-    config_path = 'posts-config.json'
-    
-    # 读取现有配置
-    if os.path.exists(config_path):
-        try:
-            with open(config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-        except json.JSONDecodeError:
-            print(f"警告: {config_path} 格式错误，将创建新配置")
-            config = {"posts": []}
-    else:
-        print(f"未找到 {config_path}，将创建新配置文件")
-        config = {"posts": []}
-    
-    # 确保 posts 键存在
-    if 'posts' not in config:
-        config['posts'] = []
-    
-    # 构建文章配置对象
-    post_config = {
-        "id": post_data['post_number'],
-        "title": post_data['title'],
-        "excerpt": post_data['excerpt'],
-        "date": post_data['date'],
-        "readTime": f"{post_data['reading_time']}分钟",
-        "category": post_data['category'],
-        "mode": "🔄",
-        "image": post_data['cover_image'],
-        "link": post_filename
-    }
-    
+    config = load_posts_config()
+    post_config = build_post_config(post_data, post_filename)
+
     if is_new_post:
         # 新文章：添加到列表开头（最新的文章在最前面）
         config['posts'].insert(0, post_config)
@@ -1262,9 +1272,8 @@ def update_posts_config(post_data, post_filename, is_new_post=True):
     
     # 保存配置文件（带缩进，便于阅读）
     try:
-        with open(config_path, 'w', encoding='utf-8') as f:
-            json.dump(config, f, ensure_ascii=False, indent=2)
-        print(f"✓ 配置文件已保存: {config_path}")
+        save_posts_config(config)
+        print(f"✓ 配置文件已保存: {CONFIG_PATH}")
         print(f"  当前共有 {len(config['posts'])} 篇文章")
         return True
     except Exception as e:
@@ -1273,19 +1282,12 @@ def update_posts_config(post_data, post_filename, is_new_post=True):
 
 def delete_post_from_config(post_filename):
     """从 posts-config.json 中删除文章"""
-    config_path = 'posts-config.json'
-    
-    if not os.path.exists(config_path):
-        print(f"警告: 找不到 {config_path}")
+    if not os.path.exists(CONFIG_PATH):
+        print(f"警告: 找不到 {CONFIG_PATH}")
         return False
-    
-    try:
-        with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-    except json.JSONDecodeError:
-        print(f"错误: {config_path} 格式错误")
-        return False
-    
+
+    config = load_posts_config()
+
     # 查找并删除文章
     original_length = len(config['posts'])
     config['posts'] = [post for post in config['posts'] if post.get('link') != post_filename]
@@ -1293,14 +1295,13 @@ def delete_post_from_config(post_filename):
     if len(config['posts']) < original_length:
         # 保存更新后的配置
         try:
-            with open(config_path, 'w', encoding='utf-8') as f:
-                json.dump(config, f, ensure_ascii=False, indent=2)
+            save_posts_config(config)
             return True
         except Exception as e:
             print(f"错误: 保存配置文件失败 - {e}")
             return False
     else:
-        print(f"警告: 无法在 {config_path} 中找到文章 {post_filename}")
+        print(f"警告: 无法在 {CONFIG_PATH} 中找到文章 {post_filename}")
         return False
 
 def delete_post(post_filename):
@@ -1318,7 +1319,7 @@ def delete_post(post_filename):
         if confirm != 'y':
             print("操作已取消")
             return False
-    except:
+    except Exception:
         confirm = input(f"\n确认删除 {post_filename}? (y/n，默认: n): ").strip().lower()
         if confirm != 'y':
             print("操作已取消")
@@ -1346,17 +1347,7 @@ def delete_post(post_filename):
 
 def list_all_posts():
     """列出所有文章及其在配置中的状态"""
-    config_path = 'posts-config.json'
-    
-    # 读取配置文件
-    config_posts = []
-    if os.path.exists(config_path):
-        try:
-            with open(config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-                config_posts = config.get('posts', [])
-        except:
-            pass
+    config_posts = load_posts_config(warn=False).get('posts', [])
     
     print("\n" + "=" * 80)
     print("当前博客文章列表")
@@ -1420,8 +1411,6 @@ def sync_all_posts():
         print("操作已取消")
         return
     
-    # 读取或创建配置
-    config_path = 'posts-config.json'
     config = {"posts": []}
     
     print("\n开始同步...")
@@ -1438,18 +1427,16 @@ def sync_all_posts():
                 error_count += 1
                 continue
             
-            # 构建配置对象
-            post_config = {
-                "id": post_data.get('post_number', 0),
-                "title": post_data.get('title', '无标题'),
-                "excerpt": post_data.get('excerpt', '暂无摘要'),
-                "date": post_data.get('date', datetime.now().strftime("%Y年%m月%d日")),
-                "readTime": "5分钟",  # 默认值
-                "category": post_data.get('category', '未分类'),
-                "mode": "🔄",
-                "image": post_data.get('cover_image', 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80'),
-                "link": post_file
-            }
+            md_file = post_file.replace('.html', '.md')
+            if os.path.exists(md_file):
+                md_data = parse_markdown_file(md_file)
+                if md_data:
+                    post_data.update({
+                        'excerpt': md_data.get('excerpt', post_data.get('excerpt')),
+                        'reading_time': md_data.get('reading_time', 5),
+                    })
+            post_data.setdefault('reading_time', 5)
+            post_config = build_post_config(post_data, post_file)
             
             config['posts'].append(post_config)
             print(f"  ✓ 已添加: {post_data.get('title', '无标题')}")
@@ -1464,8 +1451,7 @@ def sync_all_posts():
     
     # 保存配置文件
     try:
-        with open(config_path, 'w', encoding='utf-8') as f:
-            json.dump(config, f, ensure_ascii=False, indent=2)
+        save_posts_config(config)
         
         print("\n" + "=" * 80)
         print("✓ 同步完成！")
@@ -1473,7 +1459,7 @@ def sync_all_posts():
         print(f"成功同步: {synced_count} 篇文章")
         if error_count > 0:
             print(f"失败: {error_count} 篇文章")
-        print(f"配置文件: {config_path}")
+        print(f"配置文件: {CONFIG_PATH}")
         print("\n提示: 刷新 index.html 即可看到所有文章")
         print("=" * 80)
         
@@ -1518,7 +1504,7 @@ def main():
                     title = data.get('title', '未知标题') if data else '未知标题'
                     mode_text = '🔄动态模式'
                     print(f"  {i}. {f} - {title} [{mode_text}]")
-                except:
+                except Exception:
                     print(f"  {i}. {f}")
             
             print()
@@ -1586,7 +1572,7 @@ def main():
                 if existing_data and existing_data.get('title') == post_data['title']:
                     existing_post = post_file
                     break
-            except:
+            except Exception:
                 continue
         
         is_new_post = True
@@ -1597,9 +1583,9 @@ def main():
             update_choice = input("是否更新现有文章? (y/n，默认: y): ").strip().lower()
             if update_choice != 'n':
                 post_filename = existing_post
-                match = re.search(r'post(\d+)\.html', post_filename)
-                if match:
-                    post_data['post_number'] = int(match.group(1))
+                post_number = extract_post_number(post_filename)
+                if post_number is not None:
+                    post_data['post_number'] = post_number
                 is_new_post = False
             else:
                 is_new_post = True
@@ -1671,4 +1657,5 @@ def main():
         traceback.print_exc()
 
 if __name__ == '__main__':
+    configure_stdio()
     main()
