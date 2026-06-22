@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' https: data:; connect-src 'self' https://cdn.jsdelivr.net; upgrade-insecure-requests">
     <title>图文混排制作使用 | 博客世界</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
     <!-- Marked.js 库 -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js" integrity="sha384-ZD0fTOwPMHi7zM6WTVIWJR21I07lq0ccnqz3J6WMvQKG9thh4y7TA1QE6PJu0Af8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.4.10/dist/purify.min.js" integrity="sha384-eguRoJERj8ghOpzO//Rl7+ScQsQIR1cH+ajll7+fG+IpbNPlkZsQn9h8ccr+wPXx" crossorigin="anonymous"></script>
     <!-- Prism.js 代码高亮 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" integrity="sha384-wFjoQjtV1y5jVHbt0p35Ui8aV8GVpEZkyF99OXWqP/eNJDU93D3Ugxkoyh6Y2I4A" crossorigin="anonymous">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha384-06z5D//U/xpvxZHuUz92xBvq3DqBBFi7Up53HRrbV7Jlv7Yvh/MZ7oenfUe9iCEt" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha384-WJdEkJKrbsqw0evQ4GB6mlsKe5cGTxBOw4KAEIa52ZLB7DDpliGkwdme/HMa5n1m" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha384-D44bgYYKvaiDh4cOGlj1dbSDpSctn2FSUj118HZGmZEShZcO2v//Q5vvhNy206pp" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" integrity="sha384-0mV13Neu0xhJFylI+HV43C+XiR13bGSeL7D0/7e6hK7sJgvyvK6HVjeQwmvXTstY" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" integrity="sha384-9WmlN8ABpoFSSHvBGGjhvB3E/D8UkNB9HpLJjBQFC2VSQsM1odiQDv4NbEo+7l15" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js" integrity="sha384-RhrmFFMb0ZCHImjFMpR/UE3VEtIVTCtNrtKQqXCzqXZNJala02N3UbVhi+qzw3CY" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js" integrity="sha384-s888ApkYHxfPsp8n81g77Unl/0XYnYltLvWbwqKHcheRE8/dZPlT4IjW3mRGv/Hd" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js" integrity="sha384-AKAiycghK0jDCjD+aavMHzDkLzRR7Yzcwh3+xL/295cvyVMe+cxQfyQC8xxGGcI8" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" integrity="sha384-nMKYzg6yfy0qgpaRpVhHvZp0gT5sgvmZYlFC0XAKZSp+zFUB9rE6zsdmIEiou4bV" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha384-6QJu8apxMmB9TiPVWzYKF5pRgKcz7snO0/QU+MrWmgBLECQjoa6erxX2VQ5t41Jd" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" integrity="sha384-nUkTNLI8COlMCRJ0FHIdX76If83145OTCLUx4gQyfnO0gGeO/sD9czGEUBxtkcUv" crossorigin="anonymous">
     <style>
         /* 全局样式 */
         :root {
@@ -57,6 +64,12 @@
         a:hover {
             color: var(--secondary-color);
             text-decoration: underline;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(50, 168, 82, 0.85);
+            outline-offset: 3px;
         }
         
         /* 布局容器 */
@@ -175,6 +188,7 @@
         .article-cover img {
             width: 100%;
             height: 320px;
+            aspect-ratio: 3 / 2;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
@@ -537,8 +551,263 @@
         .markdown-content > * {
             animation: fadeIn 0.3s ease-out forwards;
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
         
         /* 深色模式支持 */
+        /* UI refresh: match the knowledge-base homepage */
+        :root {
+            --primary-color: #1f4d7a;
+            --secondary-color: #b84c27;
+            --text-color: #191a1d;
+            --text-light: #62666d;
+            --background-color: #f7f3ea;
+            --card-bg: #fffdf8;
+            --border-color: #ded6c8;
+            --ink: #101820;
+            --shadow: 6px 6px 0 rgba(16, 24, 32, 0.1);
+            --shadow-heavy: 9px 9px 0 rgba(16, 24, 32, 0.16);
+        }
+
+        body {
+            background:
+                linear-gradient(90deg, rgba(16, 24, 32, 0.035) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(16, 24, 32, 0.035) 1px, transparent 1px),
+                var(--background-color);
+            background-size: 34px 34px;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline-color: rgba(184, 76, 39, 0.85);
+        }
+
+        .container,
+        .header-inner {
+            max-width: 980px;
+        }
+
+        header {
+            border-bottom: 2px solid var(--ink);
+            background: rgba(255, 253, 248, 0.94);
+            box-shadow: none;
+        }
+
+        .header-inner {
+            min-height: 82px;
+        }
+
+        .logo {
+            color: var(--ink);
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .back-link {
+            min-height: 44px;
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            background: var(--ink);
+            color: #fffdf8;
+            padding: 0 16px;
+        }
+
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: #fffdf8;
+            text-decoration: none;
+        }
+
+        .article-header {
+            margin-top: 54px;
+            padding: 30px;
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .article-title {
+            max-width: 760px;
+            color: var(--ink);
+            font-size: clamp(2.1rem, 5vw, 4rem);
+            line-height: 1.02;
+        }
+
+        .article-meta {
+            gap: 10px;
+            border-top: 2px solid var(--ink);
+        }
+
+        .article-meta-item,
+        .mode-badge {
+            min-height: 34px;
+            padding: 0 10px;
+            border: 1px solid var(--ink);
+            background: #f1dfc8;
+            color: var(--ink);
+        }
+
+        .mode-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 0;
+            font-size: 0.86rem;
+        }
+
+        .article-cover {
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .article-cover img {
+            height: clamp(220px, 34vw, 380px);
+            display: block;
+            filter: saturate(0.82) contrast(1.08);
+        }
+
+        .article-cover:hover img {
+            transform: none;
+        }
+
+        .markdown-content {
+            max-width: 820px;
+            margin: 48px auto;
+            font-size: 1.04rem;
+            line-height: 1.82;
+        }
+
+        .markdown-content p {
+            text-align: left;
+        }
+
+        .markdown-content a,
+        .markdown-content code:not(pre code) {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4 {
+            color: var(--ink);
+        }
+
+        .markdown-content h2 {
+            padding-left: 14px;
+            border-left: 6px solid var(--secondary-color);
+        }
+
+        .markdown-content img {
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .markdown-content blockquote {
+            border-left-color: var(--secondary-color);
+            background: #fff8ea;
+            color: var(--text-color);
+        }
+
+        .code-block-wrapper {
+            max-width: 100%;
+            overflow: hidden;
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .code-block-header {
+            min-height: 48px;
+            background: var(--ink);
+        }
+
+        .copy-button {
+            min-height: 44px;
+            border: 1px solid rgba(255, 253, 248, 0.48);
+            border-radius: 0;
+        }
+
+        pre[class*="language-"],
+        pre.line-numbers {
+            max-width: 100%;
+            overflow-x: auto !important;
+            white-space: pre !important;
+        }
+
+        .tag-list {
+            max-width: 820px;
+            margin: 42px auto 0;
+        }
+
+        .tag-list span {
+            min-height: 34px;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--ink);
+            border-radius: 0;
+            background: #f1dfc8;
+            color: var(--ink);
+        }
+
+        .loading-indicator,
+        .error-container {
+            border: 2px solid var(--ink);
+            border-radius: 0;
+            box-shadow: var(--shadow);
+        }
+
+        footer {
+            border-top: 2px solid var(--ink);
+            background: rgba(255, 253, 248, 0.72);
+        }
+
+        @media (max-width: 480px) {
+            .article-header {
+                margin-top: 28px;
+                padding: 22px;
+            }
+
+            .article-title {
+                font-size: clamp(2rem, 13vw, 2.9rem);
+            }
+
+            .article-meta-item,
+            .mode-badge {
+                width: 100%;
+            }
+
+            .markdown-content {
+                margin: 34px 0;
+                font-size: 1rem;
+            }
+
+            .copy-button {
+                min-height: 44px;
+            }
+        }
+
         @media (prefers-color-scheme: dark) {
             :root {
                 --primary-color: #63b3ed;
@@ -611,7 +880,7 @@
             </header>
 
             <div class="article-cover">
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80" alt="图文混排制作使用" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80" alt="图文混排制作使用" width="1170" height="780" loading="eager" fetchpriority="high">
             </div>
             
             <div class="loading-indicator" id="loading">
@@ -624,7 +893,7 @@
                 <i class="fas fa-exclamation-triangle"></i>
                 <h3>内容加载失败</h3>
                 <p id="error-message">未知错误</p>
-                <button onclick="loadAndRenderMarkdown()" class="copy-button" style="margin-top: 15px;">
+                <button type="button" id="retry-load" class="copy-button" style="margin-top: 15px;">
                     <i class="fas fa-redo"></i> 重试加载
                 </button>
             </div>
@@ -641,7 +910,7 @@
     </main>
 
     <footer>
-        <p>© 2025 博客世界. 保留所有权利.</p>
+        <p>© 2026 博客世界. 保留所有权利.</p>
         <p style="margin-top: 10px; font-size: 0.85rem; color: #888;">
             文章采用动态解析技术，内容实时从 Markdown 文件加载
         </p>
@@ -737,6 +1006,10 @@
             if (typeof marked === 'undefined') {
                 throw new Error('marked.js 库加载失败');
             }
+
+            if (typeof DOMPurify === 'undefined') {
+                throw new Error('DOMPurify 库加载失败');
+            }
             
             // 隐藏错误提示，显示加载指示器
             document.getElementById('error-container').style.display = 'none';
@@ -744,7 +1017,7 @@
             document.getElementById('markdown-content').style.display = 'none';
             
             // 获取Markdown文件名
-            const mdFile = 'https://cdn.jsdelivr.net/gh/tokeiyo929/blog@main/post11.md';
+            const mdFile = 'post11.md';
             
             // 加载Markdown文件
             const response = await fetch(mdFile, {
@@ -778,6 +1051,11 @@
             
             // 将Markdown转换为HTML
             let html = marked.parse(content);
+
+            html = html.replace(/<(\/?)h([1-5])(\s[^>]*)?>/g, function(match, closingSlash, level, attributes) {
+                const nextLevel = Number(level) + 1;
+                return '<' + closingSlash + 'h' + nextLevel + (attributes || '') + '>';
+            });
             
             // 处理代码块，添加复制按钮
             html = html.replace(
@@ -787,7 +1065,7 @@
 <div class="code-block-wrapper">
   <div class="code-block-header">
     <span class="code-language">${lang}</span>
-    <button class="copy-button" onclick="copyCode(this)">
+    <button type="button" class="copy-button code-copy-button">
       <i class="fas fa-copy"></i> 复制代码
     </button>
   </div>
@@ -804,7 +1082,7 @@
 <div class="code-block-wrapper">
   <div class="code-block-header">
     <span class="code-language">Text</span>
-    <button class="copy-button" onclick="copyCode(this)">
+    <button type="button" class="copy-button code-copy-button">
       <i class="fas fa-copy"></i> 复制代码
     </button>
   </div>
@@ -813,6 +1091,8 @@
                 }
             );
             
+            html = DOMPurify.sanitize(html);
+
             // 插入到页面
             document.getElementById('markdown-content').innerHTML = html;
             
@@ -854,11 +1134,18 @@
             // 如果是库加载问题，提供解决方案
             if (error.message.includes('marked') || error.message.includes('库')) {
                 const errorMsg = document.getElementById('error-message');
-                errorMsg.innerHTML = error.message + '<br><br>' +
-                    '<strong>可能的解决方案：</strong><br>' +
-                    '1. 检查网络连接<br>' +
-                    '2. 刷新页面重试<br>' +
-                    '3. 确保JavaScript没有被浏览器阻止';
+                errorMsg.replaceChildren(
+                    document.createTextNode(error.message),
+                    document.createElement('br'),
+                    document.createElement('br'),
+                    document.createTextNode('可能的解决方案：'),
+                    document.createElement('br'),
+                    document.createTextNode('1. 检查网络连接'),
+                    document.createElement('br'),
+                    document.createTextNode('2. 刷新页面重试'),
+                    document.createElement('br'),
+                    document.createTextNode('3. 确保JavaScript没有被浏览器阻止')
+                );
             }
         }
     }
@@ -925,6 +1212,18 @@
         // 开始检查库加载状态
         checkMarkedLoaded();
         checkPrismLoaded();
+
+        const retryButton = document.getElementById('retry-load');
+        if (retryButton) {
+            retryButton.addEventListener('click', loadAndRenderMarkdown);
+        }
+
+        document.getElementById('markdown-content').addEventListener('click', function(e) {
+            const copyButton = e.target.closest('.code-copy-button');
+            if (copyButton) {
+                copyCode(copyButton);
+            }
+        });
         
         // 设置超时检查
         setTimeout(() => {
