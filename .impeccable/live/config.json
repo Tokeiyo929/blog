@@ -1,0 +1,7 @@
+{
+  "files": [
+    "*.html"
+  ],
+  "insertBefore": "</body>",
+  "commentSyntax": "html"
+}

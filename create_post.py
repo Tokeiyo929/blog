@@ -1365,6 +1365,7 @@ def create_post_html(post_data, post_filename):
             }}
         }}
     </style>
+    <link rel="stylesheet" href="art-theme.css">
 </head>
 <body>
     <header>
