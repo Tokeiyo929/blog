@@ -823,40 +823,29 @@
                 padding: 18px;
             }
         }
-        /* post-card 图文等高修复 */
+                /* post-card 统一高度 */
         .post-card {
-            align-items: stretch;
+            min-height: 150px;
         }
 
         .post-card > a {
-            aspect-ratio: auto;
-            height: 100%;
+            aspect-ratio: 3 / 2;
+            height: auto;
+            min-height: 150px;
         }
 
         .post-thumb {
             height: 100%;
-            min-height: 0;
+        }
+
+        .post-excerpt {
+            -webkit-line-clamp: 3;
         }
 
         .post-body {
-            align-content: start;
+            min-height: 150px;
             padding: 16px 18px;
-            gap: 8px;
-        }
-
-        @media (max-width: 640px) {
-            .post-card {
-                grid-template-columns: 1fr;
-            }
-
-            .post-card > a {
-                height: auto;
-                aspect-ratio: 16 / 9;
-            }
-
-            .post-thumb {
-                height: 100%;
-            }
+            align-content: start;
         }
     </style>
     <link rel="stylesheet" href="art-theme-2.css">
