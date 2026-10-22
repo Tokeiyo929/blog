@@ -70,40 +70,40 @@ https://rgalpha.ucimg.co/android/index.html?rand=0.7167453065439702​
 
 
 ## 电脑防火墙需要关闭才能登录​
-![飞书文档 - 图片](images/pimg_1765199997.jpg)
+![飞书文档 - 图片](images/img_007_001.jpg)
 
-![飞书文档 - 图片](images/i_postimg_cc_480X480.jpg)
+![飞书文档 - 图片](images/img_007_002.jpg)
 
 # 6.IFix更新手机包调试​
 
 IFIX更新​
 热更补丁本地调试 AOTdll和hotdll放到files目录下即可​
-![飞书文档 - 图片](images/pimg_1765200000.jpg)
+![飞书文档 - 图片](images/img_007_003.jpg)
 
-![飞书文档 - 图片](images/pimg_1765200002.jpg)
-![飞书文档 - 图片](images/i_postimg_cc_7d288b9f_e09d_44de_8317_105007cbe92e.jpg)
+![飞书文档 - 图片](images/img_007_004.jpg)
+![飞书文档 - 图片](images/img_007_005.jpg)
 
 
 # 7.手机包日志显示​
-![飞书文档 - 图片](images/pimg_1765200005.jpg)
+![飞书文档 - 图片](images/img_007_006.jpg)
 
 # 8.ui图集制作说明​
 
 
 
 
-![飞书文档 - 图片](images/i_postimg_cc_cf9a5d10_3556_4619_aa7d_7ce8650aac2c.jpg)
+![飞书文档 - 图片](images/img_007_007.jpg)
 
 # 9.游戏文件夹说明​
-![飞书文档 - 图片](images/pimg_1765200008.jpg)
+![飞书文档 - 图片](images/img_007_008.jpg)
 Category文件夹是所有预制体和UI  会打AB​
 Function 文件夹是美术文件夹 不打AB的​
 UIAtlas 大图 不打图集​
 
 # 10.AB分级下载的​
 
-![飞书文档 - 图片](images/i_postimg_cc_a6ee39a1_bf5f_44f3_88f9_612a906b0f6e.jpg)
-![飞书文档 - 图片](images/pimg_1765200010.jpg)
+![飞书文档 - 图片](images/img_007_009.jpg)
+![飞书文档 - 图片](images/img_007_010.jpg)
 
 
 优先级从后往下​
@@ -116,10 +116,10 @@ RG GM使用说明​
 
 
 ## 1.开始打AB  大概10分钟​
-![飞书文档 - 图片](images/pimg_1765200013.jpg)
+![飞书文档 - 图片](images/img_007_011.jpg)
 ## 2.打出来的AB是在这里：​
 
-![飞书文档 - 图片](images/pimg_1765200016.jpg)
+![飞书文档 - 图片](images/img_007_012.jpg)
 
 
 
@@ -127,12 +127,12 @@ RG GM使用说明​
 
 
 ## 3.把文件放在这个文件夹：​
-![飞书文档 - 图片](images/i_postimg_cc_deca92f7_6b71_4340_83c6_71015976df40.jpg)
+![飞书文档 - 图片](images/img_007_013.jpg)
 
 
 
 ## 4.勾选就可以走AB了​
-![飞书文档 - 图片](images/pimg_1765200022.jpg)
+![飞书文档 - 图片](images/img_007_014.jpg)
 
 # 13.任务需求单​
 
@@ -141,10 +141,10 @@ RG GM使用说明​
 
 
 
-![飞书文档 - 图片](images/pimg_1765200025.png)
+![飞书文档 - 图片](images/img_007_015.png)
 
 ## 2.做完之后请勾选​
-![飞书文档 - 图片](images/i_postimg_cc_1126a4e0_2977_48b6_abe5_1b1d89fafe48.png)
+![飞书文档 - 图片](images/img_007_016.png)
 
 # 14.代码规范​
 
@@ -181,13 +181,13 @@ NotificationCenter.Instance.RaiseEvent(NotificationType.PlayCommonSound, SoundEf
 # 15.协议文件说明​
 
 trunk\server\codeGen2\protobuf\csproto​
-![飞书文档 - 图片](images/pimg_1765200031.png)
+![飞书文档 - 图片](images/img_007_017.png)
 
 
 # 16.等待服务器反信时的动画效果​
 
 使用UILoadingView.ShowLoadingView()显示转圈效果，表示正在向服务器请求数据。在收到服务器反信后使用UILoadingView.ShowHideLoadingView()关闭转圈动画效果。​
-![飞书文档 - 图片](images/pimg_1765200033.png)
+![飞书文档 - 图片](images/img_007_018.png)
 
 
 # 17.协议事件生成​
@@ -195,7 +195,7 @@ trunk\server\codeGen2\protobuf\csproto​
 协助路径在这里http://qdsvn.topgamesinc.com:8090/svn_qd/lm/Src/trunk/server/codeGen2/protobuf/csproto可查看对应协议内容​
 如遇到协议事件在编辑器中报红的情况，可点击Custom-协议-事件生成功能生成代码。​
 新增协议也需要重新生成代码​
-![飞书文档 - 图片](images/pimg_1765200036.png)
+![飞书文档 - 图片](images/img_007_019.png)
 
 
 ### 
@@ -208,7 +208,7 @@ trunk\server\codeGen2\protobuf\csproto​
 3.类字段的名称需要严格按照字段命名规范命名，类字段名称不可和其他表中声明的字段重名​
 4.表有AB（整表替换）的情况下，需要使用ABTestManager.Instance.GetABTestConfigFileName("表名")获取正确的表名。并创建表名缓存，防止重复加载表。​
 5.在表中添加方法，获取表中的相关数据。在方法最前面记得先读取表，防止读到空表。​
-![飞书文档 - 图片](images/pimg_1765200039.png)
+![飞书文档 - 图片](images/img_007_020.png)
 # 19.RG查看AB工具​
 
 
@@ -231,7 +231,7 @@ https://os3tzyabw2.feishu.cn/drive/folder/GhhWfJQATl0QyOdIIrsctGjSnv0​
 
 👀新人必读​
 飞书单 策划会对应任务库开子单，提交SVN记录需要提交任务库编号对应功能，未严格按照记录提交记录SI​
-![飞书文档 - 图片](images/pimg_1765200044.png)
+![飞书文档 - 图片](images/img_007_021.png)
 完成请勾选对号 ，需要填预估WH，实际WH，排期，和新PP类型​
 
 ---

@@ -22,7 +22,7 @@ UI 开发流程​
 1. 注意事项：自动生成代码时需确保 Locator 上有继承 IView 的界面脚本，否则编译会报错。 ​
 
 # 架构模式 MVVM​
-![飞书文档 - 图片](images/pimg_1765246746.jpg)
+![飞书文档 - 图片](images/img_015_001.jpg)
 1. View  根据数据刷新显示界面​
    1. 使用 ComponentLocator  收集界面UI组件​
    1. 通过ViewModel获取数据，显示界面​
@@ -40,7 +40,7 @@ UI 开发流程​
       ​
 1. Service 定义网络通信​
    1. 与服务器交互，发送网络请求，处理服务器网络消息​
-![飞书文档 - 图片](images/i_postimg_cc_1280X1280.jpg)
+![飞书文档 - 图片](images/img_015_002.jpg)
 
 
 # UI面板制作​
@@ -50,7 +50,7 @@ UI 开发流程​
 
 `Assets/PackageRes/Raw/Category/Prefabs/UI​`
 各模块自建子目录：skil​
-![飞书文档 - 图片](images/pimg_1765246749.png)
+![飞书文档 - 图片](images/img_015_003.png)
 
 
 ## 添加组件 ComponentLocator  ​
@@ -60,18 +60,18 @@ ComponentLocator  ​
 - UI组件收集定位器，统一管理访问预制体Prefab上的UI组件​
 - 可以自动生成绑定代码（目前是枚举，后续可扩展更多预先代码）​
 - 自动搜索合规命名节点，一键自动注入，持有引用，运行时按索引访问​
-![飞书文档 - 图片](images/pimg_1765246752.png)
+![飞书文档 - 图片](images/img_015_004.png)
 默认无数据​
 
 
-![飞书文档 - 图片](images/pimg_1765246755.png)
+![飞书文档 - 图片](images/img_015_005.png)
 
 ## 规范化节点命名​
 
 注意 ref vfx 目前是不会搜索子节点，如果嵌套搜索，父节点不要用ref  vfx 前缀​
 使用tfm 更通用些，ref 用于自定义组件（ref通常自己本身也会挂locator）​
-![飞书文档 - 图片](images/i_postimg_cc_a278a373_9e5a_49cb_bd9a_357a5dfe68ec.png)
-![飞书文档 - 图片](images/pimg_1765245463.png)
+![飞书文档 - 图片](images/img_015_006.png)
+![飞书文档 - 图片](images/img_015_007.png)
 
 
 ## 自动绑定节点​
@@ -84,10 +84,10 @@ ComponentLocator  ​
 - 点确定后，会自动生成代码​
 注意：这里默认是认为Locator上有一个继承了 IView 的界面脚本的，这个界面名（也是类名）就是节点名​
 去掉_ 前缀的后留下的名字​
-![飞书文档 - 图片](images/pimg_1765246759.png)
-![飞书文档 - 图片](images/i_postimg_cc_0bcbb2b1_8b26_412e_ac24_86c271eb362b.png)
+![飞书文档 - 图片](images/img_015_008.png)
+![飞书文档 - 图片](images/img_015_009.png)
 如果仅有Locator，没有挂对应命名的View脚本，自动生成代码后，编译会报错，类似如下​
-![飞书文档 - 图片](images/pimg_1765246761.png)
+![飞书文档 - 图片](images/img_015_010.png)
 
 
 ### UI界面已存在（美术已经拼完）​
@@ -95,8 +95,8 @@ ComponentLocator  ​
 程序后置，界面已拼接完成​
 - 修改命名后，点自动注入​
 - 绑定的枚举值会自动生成代码，写入到固定路径下​
-![飞书文档 - 图片](images/pimg_1765246764.png)
-![飞书文档 - 图片](images/i_postimg_cc_91a8008e_ddb4_4c12_928b_fe8e96b58090.png)
+![飞书文档 - 图片](images/img_015_011.png)
+![飞书文档 - 图片](images/img_015_012.png)
 ## 代码使用​
 
 View 必须继承 IView  接口（它背后已经继承了 ILocatorOwner）​
@@ -108,7 +108,7 @@ View 必须继承 IView  接口（它背后已经继承了 ILocatorOwner）​
 
 并继承  PopupWindow 或者 Dialog​
 预制体挂载了脚本 ComponentLocator ​
-![飞书文档 - 图片](images/pimg_1765246767.png)
+![飞书文档 - 图片](images/img_015_013.png)
 #### 获取任意类型组件​
 
 `Locator._G<UITeamSkillSlotView_v2>((int)UI.ref_MainSkillSlot1)​`
@@ -121,12 +121,12 @@ View 必须继承 IView  接口（它背后已经继承了 ILocatorOwner）​
 Component_EXT2.cs  与 Component_EXT.cs  自行扩展常用接口​
 继承了​
 
-![飞书文档 - 图片](images/i_postimg_cc_18a142db_87e0_4ebf_ab24_18a3f942222f.png)
+![飞书文档 - 图片](images/img_015_014.png)
 - 设置显示隐藏​
-![飞书文档 - 图片](images/pimg_1765246770.png)
+![飞书文档 - 图片](images/img_015_015.png)
 
 - 设置文本内容​
-![飞书文档 - 图片](images/i_postimg_cc_08aabb32_724b_4f3e_b780_deb33d57119b.png)
+![飞书文档 - 图片](images/img_015_016.png)
 
 
 # UISystem 代码结构​
@@ -134,12 +134,12 @@ Component_EXT2.cs  与 Component_EXT.cs  自行扩展常用接口​
 新增界面代码路径​
 `Assets/Scripts/HOT/UISystems​`
 
-![飞书文档 - 图片](images/i_postimg_cc_199bd2c6_a5a3_46ef_bc0c_db5d1e37015f.jpg)
+![飞书文档 - 图片](images/img_015_017.jpg)
 
 
 
 ## Model 代码​
-![飞书文档 - 图片](images/pimg_1765246773.jpg)
+![飞书文档 - 图片](images/img_015_018.jpg)
 - Data  是自定义类型的数据封装​
 - Repository 是全局数据缓存管理​
 
@@ -147,20 +147,20 @@ Component_EXT2.cs  与 Component_EXT.cs  自行扩展常用接口​
 
 全局数据管理类需要​
 
-![飞书文档 - 图片](images/i_postimg_cc_b1c8570d_8d34_4d05_bc08_ccf419a275bf.png)
+![飞书文档 - 图片](images/img_015_019.png)
 
 
 
 ### 访问数据 DataRepository ​
 
 通过GetData<T> 泛型方法访问数据​
-![飞书文档 - 图片](images/pimg_1765246779.png)
+![飞书文档 - 图片](images/img_015_020.png)
 ## View 代码​
 
 是界面UGUI相关的处理，参考 UITeamSkillView_v2​
 - 继承  Dialog 或 PopupWindow ​
 - 继承 IView​
-![飞书文档 - 图片](images/i_postimg_cc_77869af6_648a_42f4_9c09_f50c77d96821.png)
+![飞书文档 - 图片](images/img_015_021.png)
 
 
 ## ViewModel 代码​
@@ -168,7 +168,7 @@ Component_EXT2.cs  与 Component_EXT.cs  自行扩展常用接口​
 是界面的业务逻辑代码，参考 UITeamSkillViewModel_v2​
 它主要将界面的业务逻辑，全部封装在一个ViewModel对象中，​
 - 继承 IViewModel 接口​
-![飞书文档 - 图片](images/pimg_1765246787.png)
+![飞书文档 - 图片](images/img_015_022.png)
 
 - 将业务逻辑集中在这个处理​
 
@@ -176,10 +176,10 @@ Component_EXT2.cs  与 Component_EXT.cs  自行扩展常用接口​
 
 
 ### 单例 继承IService​
-![飞书文档 - 图片](images/pimg_1765246790.png)
+![飞书文档 - 图片](images/img_015_023.png)
 
 
 ### 请求网络数据​
 
 主要用于与服务器的交互，请求网络数据，在数据修改时，触发事件​
-![飞书文档 - 图片](images/pimg_1765246792.png)
+![飞书文档 - 图片](images/img_015_024.png)

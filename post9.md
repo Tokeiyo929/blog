@@ -60,10 +60,10 @@ RG美术资源管理标准​
 ### 3.命名bundle名​
 
 1.单独设置名字 单独设置bundle名 ​
-![飞书文档 - 图片](images/pimg_1765202499.png)
+![飞书文档 - 图片](images/img_009_001.png)
 
 2.选中文件夹也可设置文件夹内bundle名 ,这个可具体看下设置的bundle名是否符合，也可程序手动修改下​
-![飞书文档 - 图片](images/pimg_1765202571.png)
+![飞书文档 - 图片](images/img_009_002.png)
 ### 4.BundleOrganizeManager ​
 
 新增的bundle name 需要程序添加到该代码中​

@@ -91,9 +91,9 @@ Absolute（绝对位置）特效以自身为中心进行缩放​
 Relative（相对位置）特效以UIParticle为中心进行缩放​
 区别直接看下面例子，按需选择​
 Absolute​
-![飞书文档 - 图片](images/pimg_1765238756.gif)
+![飞书文档 - 图片](images/img_010_001.gif)
 Relative​
-![飞书文档 - 图片](images/i_postimg_cc_20250614142013_rec_(1.png)
+![飞书文档 - 图片](images/img_010_002.png)
 
 
 AutoScalingMode ​
@@ -106,28 +106,28 @@ Transform 无论屏幕尺寸怎么变,特效本体都保持Scale = 1的状态(�
 
 预制件名称：UISpHeroTaskReward​
 需要修改的特效：​
-![飞书文档 - 图片](images/pimg_1765238760.gif)
+![飞书文档 - 图片](images/img_010_003.gif)
 ## 具体步骤​
 
 
-![飞书文档 - 图片](images/pimg_1765238763.png)
+![飞书文档 - 图片](images/img_010_004.png)
 
-![飞书文档 - 图片](images/i_postimg_cc_bb5188e2_dcab_4c20_9668_d53d32998c2a.png)
+![飞书文档 - 图片](images/img_010_005.png)
 
 
-![飞书文档 - 图片](images/pimg_1765238767.png)
+![飞书文档 - 图片](images/img_010_006.png)
 
-![飞书文档 - 图片](images/pimg_1765238770.png)
+![飞书文档 - 图片](images/img_010_007.png)
 
-![飞书文档 - 图片](images/i_postimg_cc_c1862194_1285_46a1_898a_3d7b96704acd.png)
+![飞书文档 - 图片](images/img_010_008.png)
 
-![飞书文档 - 图片](images/i_postimg_cc_0653de01_b71b_49d6_8624_9f7bd664ff2b.png)
+![飞书文档 - 图片](images/img_010_009.png)
 
-![飞书文档 - 图片](images/pimg_1765238774.png)
+![飞书文档 - 图片](images/img_010_010.png)
 
-![飞书文档 - 图片](images/i_postimg_cc_1d0c6310_880c_44f8_9c96_2d78e98e6cca.png)
+![飞书文档 - 图片](images/img_010_011.png)
 
-![飞书文档 - 图片](images/pimg_1765238776.gif)
+![飞书文档 - 图片](images/img_010_012.gif)
 大功告成​
 常见问题:
 1. 为什么SpriteMask的mask方式不生效了.​

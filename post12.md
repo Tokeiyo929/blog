@@ -29,6 +29,6 @@ tags: [美术, 程序]
 2.4.Eitor的代码可以直接HOT,,Runtime的代码绝对不可以直调用Hot，只能用使用​HybridCLR和AI的配合使用提到的反射方法​
 
 # 3.有宏定义代码报错，大家可以手动加一下引用：例子​
-![飞书文档 - 图片](images/i_postimg_cc_fei-shu-wen-dang-tu-pian-1765242163.png)
+![飞书文档 - 图片](images/img_012_001.png)
 例如这种，当切换到对应平台报错，可以手动加一下引用​
-​![飞书文档 - 图片](images/i_postimg_cc_850X850.png)
+​![飞书文档 - 图片](images/img_012_002.png)

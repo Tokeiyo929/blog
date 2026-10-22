@@ -54,25 +54,25 @@ tags: [美术, 程序]
 prefab:UIGeneralStarPanel28
 特效:fx_star_up
 说明: 当前文件只有节点引用,所有不用添加任何代码.
-![飞书文档 - 图片](images/pimg_1764824948.jpg)
+![飞书文档 - 图片](images/img_001_001.jpg)
 
 1. 选中fx_star_up.点select,定位到fx_star_up特效在项目中的位置.
-![飞书文档 - 图片](images/pimg_1764824953.jpg)
+![飞书文档 - 图片](images/img_001_002.jpg)
 1. 点击fx_star_up,右键->Prefab->unPack.​
 
-![飞书文档 - 图片](images/pimg_1764824955.png)
+![飞书文档 - 图片](images/img_001_003.png)
 1. 清理fx_star_up上的除了SortingGroup的其他脚本.并删除特效下节点.​
 
-![飞书文档 - 图片](images/pimg_1764824957.jpg)
+![飞书文档 - 图片](images/img_001_004.jpg)
 1. 添加Prefab节点.并将特效prefab拖入到PrefabHolder的prefab栏.
-![飞书文档 - 图片](images/pimg_1764824959.jpg)
+![飞书文档 - 图片](images/img_001_005.jpg)
 1. 预览特效.点击预览,可以查看特效在prefab中的表现. 这里主要只能调整包括SortingGroup,和节点的位置和缩放.​
 
 
-![飞书文档 - 图片](images/pimg_1764824960.jpg)
+![飞书文档 - 图片](images/img_001_006.jpg)
 1. 保存. 保存前,先清理下确保特效不在显示树上.​
 
-![飞书文档 - 图片](images/pimg_1764824962.jpg)
+![飞书文档 - 图片](images/img_001_007.jpg)
 
 1. 进入游戏检测.​
 ## 注意事项:

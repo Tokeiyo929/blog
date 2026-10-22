@@ -26,7 +26,7 @@ UI逻辑栈分多个渲染层级，每个层级又有多个子层级，所有显
 （4）SetTitle：设置最上方显示的Bar​
 （5）OnPause，OnResume，OnClosed：隐藏，恢复，销毁时的回调函数​
 （6）示意图，1：bar  2:Prefab显示内容​
-​​​![飞书文档 - 图片](images/i_postimg_cc_fei-shu-wen-dang-tu-pian-1764824949.png)
+​​​![飞书文档 - 图片](images/img_005_001.png)
 ​
 ### 4.PopupWindowManager中显示逻辑结构构架​
 （1）EM所有显示逻辑构架都在PopupWindowManager的中管理，所以该类非常重要。​

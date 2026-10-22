@@ -24,30 +24,30 @@ tags: [美术, 程序]
 
 
 ## 1.1.不要使用别的项目环境(平台不一样，需要的环境不一样)，从安装package包后开始一步一步构建。​
-![飞书文档 - 图片](images/pimg_1765244300.png)
+![飞书文档 - 图片](images/img_013_001.png)
 
 ## 1.2.生成为AOT泛型补充元数据的dll以及避免代码裁剪的link​
-![飞书文档 - 图片](images/pimg_1765244301.png)
+![飞书文档 - 图片](images/img_013_002.png)
 
 ## 1.3.生成热更代码并拷贝到 StreamingAssets目录下(同时拷贝的还有第2步中补充aot元数据的dll)，​
 
 
-![飞书文档 - 图片](images/i_postimg_cc_720X720.png)
+![飞书文档 - 图片](images/img_013_003.png)
 
 
 
 ## 1.4.打包登录场景(第一次必须打ab，后面可以有修改才打，重复打也没影响，有缓存增量打包所以也很快，测试场景和登录场景在一个ab里面后面可以去掉测试场景），打包测试资源(有修改就打包，没有就不用)​
 
 分别打包场景，预设，代码​
-​![飞书文档 - 图片](images/pimg_1765244305.png)
+​![飞书文档 - 图片](images/img_013_004.png)
 
 ## 1.5.生成资源列表和版本号(比对SHA256码，更新版本号)，复制热更代码到自动上传cdn的目录​
-![飞书文档 - 图片](images/i_postimg_cc_720X720.png)
+![飞书文档 - 图片](images/img_013_003.png)
 
 
 
 ## 1.6.打包：2，3，4，5，每次打包apk都做一次。(可以使用这里的菜单一键执行)​
-![飞书文档 - 图片](images/pimg_1765244308.png)
+![飞书文档 - 图片](images/img_013_005.png)
 
 
 
@@ -56,10 +56,10 @@ tags: [美术, 程序]
 
 
 ### 1.7.1 .热更代码设置​
-![飞书文档 - 图片](images/pimg_1765244310.png)
+![飞书文档 - 图片](images/img_013_006.png)
 
 ### 1.7.2.步骤1.2中用到的路径​
-![飞书文档 - 图片](images/i_postimg_cc_ddd160d0_d426_4596_98de_69663cdfafa6.png)
+![飞书文档 - 图片](images/img_013_007.png)
 
 
 
@@ -69,17 +69,17 @@ tags: [美术, 程序]
 官方文档:https://hybridclr.doc.code-philosophy.com/docs/beginner/generic#%E8%8E%B7%E5%BE%97%E8%A1%A5%E5%85%85%E5%85%83%E6%95%B0%E6%8D%AEdll​
 
 
-![飞书文档 - 图片](images/pimg_1765244313.png)
+![飞书文档 - 图片](images/img_013_008.png)
 ### 1.7.4.步骤1.1中的输出路径​
-![飞书文档 - 图片](images/pimg_1765244316.png)
+![飞书文档 - 图片](images/img_013_009.png)
 
 ### 1.7.5.步骤1.2的缓存路径​
-![飞书文档 - 图片](images/i_postimg_cc_fc607be0_712c_4925_83f2_815668f16c71.png)
+![飞书文档 - 图片](images/img_013_010.png)
 
-![飞书文档 - 图片](images/i_postimg_cc_cb795a3a_6d8c_4535_9696_9199c6dc6e83.png)
+![飞书文档 - 图片](images/img_013_011.png)
 
 # 2.更新流程​
-![飞书文档 - 图片](images/pimg_1765244320.png)
+![飞书文档 - 图片](images/img_013_012.png)
 
 ## 2.1.解压安装包资源​
 
@@ -140,4 +140,4 @@ mac机与window要的环境不一样，结论除了华佗插件和设置，其�
 
 官方文档:https://hybridclr.doc.code-philosophy.com/docs/basic/aotgeneric​
 例子：在非热更代码中，主动调用一次泛型，就可以不用补充元数据了​
-![飞书文档 - 图片](images/pimg_1765244325.png)
+![飞书文档 - 图片](images/img_013_013.png)

@@ -74,50 +74,50 @@ Vector2Int cellSize, int rowCount, int hSpacing, Action<int, Transform> updateVi
 案例制作一个横向列表​
 1. 添加ScrollRect,重命名为srv_bag.​
     1.1 删除不用的组件.​
-    ![飞书文档 - 图片](images/pimg_1765257647.png)
+    ![飞书文档 - 图片](images/img_018_001.png)
     删除后:
 
-  ![29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png](images/i_postimg_cc_29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png)
+  ![29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png](images/img_018_002.png)
 
   1.2 设置ScrollRect的容器.
 
-![9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png](images/i_postimg_cc_9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png)
+![9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png](images/img_018_003.png)
 
 1.3 设置Recttransform对齐.影响Item的对齐.​
-![飞书文档 - 图片](images/pimg_1765257650.png)
+![飞书文档 - 图片](images/img_018_004.png)
 
 2. 修改Viewport,方便预览列表效果.​
 2.1 确保Viewport最大​
 2.2 删除Viewport上脚本​
 2.3 为Viewport添加HorizontalLayoutgroup组件.修正好HorizentalLayougroup属性​
 
-![80361a93_c87d_4a0c_a48e_5f5932ae5a15.png](images/i_postimg_cc_80361a93_c87d_4a0c_a48e_5f5932ae5a15.png)
+![80361a93_c87d_4a0c_a48e_5f5932ae5a15.png](images/img_018_005.png)
 
-![872fdf63_5f53_4c87_a516_f677c7f2a8f5.png](images/i_postimg_cc_872fdf63_5f53_4c87_a516_f677c7f2a8f5.png)
+![872fdf63_5f53_4c87_a516_f677c7f2a8f5.png](images/img_018_006.png)
 
 
 
 3. 制作ItemRender,预览列表排布.​
 3.1 ​
-![飞书文档 - 图片](images/pimg_1765257653.png)
+![飞书文档 - 图片](images/img_018_007.png)
 3.2 排布​
 
-![0d9a6f7a_7142_4831_8673_235eec1e3b1d.png](images/i_postimg_cc_0d9a6f7a_7142_4831_8673_235eec1e3b1d.png)
+![0d9a6f7a_7142_4831_8673_235eec1e3b1d.png](images/img_018_008.png)
 
 3.3 修正排布出界. 为ScrollRect添加Mask​
 
-![33b28e6b_7fd6_480a_be49_2f59339a21bc.png](images/i_postimg_cc_33b28e6b_7fd6_480a_be49_2f59339a21bc.png)
+![33b28e6b_7fd6_480a_be49_2f59339a21bc.png](images/img_018_009.png)
 
 
 3.4 修正对齐问题.​
 
-![飞书文档 - 图片](images/pimg_1765257656.png)
-![飞书文档 - 图片](images/pimg_1765257658.png)
+![飞书文档 - 图片](images/img_018_010.png)
+![飞书文档 - 图片](images/img_018_011.png)
 3.5 将设置信息设置到EnhancedScroller上.Viewport是会在运行时候被删除的.​
 
 
 4. 保存ItemRender. 这里的做法是把ItemRender放入一个隐藏的节点下.并重命名为ref_BagRender​
-![飞书文档 - 图片](images/pimg_1765257661.png)
+![飞书文档 - 图片](images/img_018_012.png)
 5. 代码中显示对象.​
 
    ```csharp
@@ -149,7 +149,7 @@ Vector2Int cellSize, int rowCount, int hSpacing, Action<int, Transform> updateVi
    
 
 最终效果:
-![飞书文档 - 图片](images/pimg_1765257664.png)
+![飞书文档 - 图片](images/img_018_013.png)
 竖向的列表例子:
 UIOnlineGiftDialog_v2​
 问题集合:

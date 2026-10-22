@@ -91,7 +91,7 @@ Assets\PackageRes\Raw\Category\Prefabs\UI\Cell
 
 ### 10. Dropdown下滑时变多个内部组件颜色 
 
-![飞书文档 - 图片](images/pimg_1764828689.png)
+![飞书文档 - 图片](images/img_002_001.png)
 - 比如这种修改 文字+颜色 ，将Dropdown的Template下Item的toggle替换为ToggleRG组件，结合 ToggleColorChange组件，可在对应 进入/放开/选中状态下 修改多个UI组件颜色
 
 ### 11. CoroutineRunner的协程使用方法. 
@@ -172,7 +172,7 @@ private void InitQualityEffect(Transform effectTarget)
 
 1. PrefabHolder挂GameObject上.
 1. 将特效拖动到PrefabHolder,PrefabSource.
-![飞书文档 - 图片](images/pimg_1764828699.jpg)
+![飞书文档 - 图片](images/img_002_002.jpg)
 
 ### 14. UIParticle使用. 特效层级
 
@@ -200,15 +200,15 @@ rawImage.texture = catcher.texture;
 ### 17. 顶部标题、资源显示及返回按钮
 
 用到右下角返回按钮的界面都需要继承PopupWindow，根据需求设置当前界面显示的枚举
-![飞书文档 - 图片](images/pimg_1764828703.png)
+![飞书文档 - 图片](images/img_002_003.png)
 1. 只显示标题和返回按钮选择：Titile，并再下面填入标题多语言Key
-![飞书文档 - 图片](images/pimg_1764828705.png)
+![飞书文档 - 图片](images/img_002_004.png)
 1. 如果标题后需要跟着详情说明选择：ReportTitle，并在逻辑中调用
-![飞书文档 - 图片](images/pimg_1764828706.png)
+![飞书文档 - 图片](images/img_002_005.png)
 1. 如果只需显示返回按钮选择：OnlyReturn
 1. 如果顶部需要显示资源则需要在代码中设置相关资源显示
-![飞书文档 - 图片](images/pimg_1764828707.png)
-![飞书文档 - 图片](images/pimg_1764828708.png)
+![飞书文档 - 图片](images/img_002_006.png)
+![飞书文档 - 图片](images/img_002_007.png)
 
 ## 特权 (获取对应特权参数)
 
