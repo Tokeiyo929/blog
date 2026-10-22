@@ -231,25 +231,6 @@
             min-width: 0;
         }
 
-        .featured {
-            display: grid;
-            grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-            min-height: 320px;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: var(--surface);
-            box-shadow: var(--shadow);
-        }
-
-        .featured-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 28px;
-            padding: 32px;
-        }
-
         .eyebrow {
             display: inline-flex;
             align-items: center;
@@ -257,18 +238,6 @@
             color: var(--accent);
             font-size: 0.84rem;
             font-weight: 760;
-        }
-
-        .featured h2 {
-            margin-top: 14px;
-            color: var(--primary-dark);
-            font-size: clamp(1.65rem, 3vw, 2.45rem);
-            line-height: 1.18;
-        }
-
-        .featured p {
-            margin-top: 14px;
-            color: var(--muted);
         }
 
         .meta-row {
@@ -283,20 +252,6 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .featured-image {
-            display: block;
-            min-height: 100%;
-            aspect-ratio: 3 / 2;
-            background: var(--surface-muted);
-        }
-
-        .featured-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         .section-bar {
@@ -438,19 +393,8 @@
                 display: none;
             }
 
-            .hero,
-            .layout,
-            .featured {
-                grid-template-columns: 1fr;
-            }
-
             .hero {
                 padding-top: 34px;
-            }
-
-            .featured-image {
-                min-height: 260px;
-                order: -1;
             }
         }
 
@@ -461,10 +405,6 @@
 
             .hero-stats {
                 grid-template-columns: 1fr;
-            }
-
-            .featured-body {
-                padding: 22px;
             }
 
             .post-card {
@@ -627,39 +567,9 @@
             gap: 34px;
         }
 
-        .panel,
-        .featured,
-        .post-card,
-        .empty-state {
-            border: 2px solid var(--primary-dark);
-            border-radius: 0;
-            background: var(--surface);
-            box-shadow: 6px 6px 0 rgba(16, 24, 32, 0.1);
-        }
-
         .panel-header {
             border-bottom: 2px solid var(--primary-dark);
             background: var(--surface-muted);
-        }
-
-        .featured {
-            grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
-            background: var(--primary-dark);
-            color: #fffdf8;
-        }
-
-        .featured-body {
-            padding: 38px;
-        }
-
-        .featured h2,
-        .featured h2 a {
-            color: #fffdf8;
-        }
-
-        .featured p,
-        .featured .meta-row {
-            color: #d9d2c5;
         }
 
         .eyebrow,
@@ -670,16 +580,6 @@
         .read-link {
             min-height: 44px;
             padding: 0 2px;
-        }
-
-        .featured-image {
-            min-width: 0;
-            overflow: hidden;
-            border-left: 2px solid var(--primary-dark);
-        }
-
-        .featured-image img {
-            filter: saturate(0.85) contrast(1.08);
         }
 
         .post-list {
@@ -741,12 +641,6 @@
                 display: none;
             }
 
-            .hero,
-            .layout,
-            .featured {
-                grid-template-columns: 1fr;
-            }
-
             .hero-copy {
                 padding-left: 20px;
             }
@@ -762,12 +656,6 @@
 
             .stat:last-child {
                 border-right: 0;
-            }
-
-            .featured-image {
-                border-left: 0;
-                border-bottom: 2px solid var(--primary-dark);
-                width: 100%;
             }
         }
 
@@ -805,20 +693,6 @@
 
             .stat strong {
                 font-size: 2rem;
-            }
-
-            .featured,
-            .post-card {
-                grid-template-columns: 1fr;
-            }
-
-            .featured-body {
-                padding: 24px;
-            }
-
-            .featured-image {
-                min-height: 0;
-                aspect-ratio: 16 / 9;
             }
 
             .post-card > a {
@@ -996,56 +870,15 @@
             padding-bottom: 72px;
         }
 
-        .panel,
-        .featured,
-        .post-card,
-        .empty-state {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface), transparent 2%);
-            box-shadow: 0 16px 36px rgba(17, 24, 32, 0.07);
-        }
-
         .panel-header {
             border-bottom: 1px solid var(--line);
             background: transparent;
             color: var(--text);
         }
 
-        .featured {
-            min-height: 360px;
-            grid-template-columns: minmax(0, 0.95fr) minmax(300px, 1.05fr);
-            overflow: hidden;
-            background: var(--surface-strong);
-            color: var(--bg);
-        }
-
-        .featured-body {
-            padding: clamp(24px, 4vw, 42px);
-        }
-
-        .featured h2,
-        .featured h2 a {
-            color: var(--bg);
-        }
-
-        .featured p,
-        .featured .meta-row {
-            color: color-mix(in srgb, var(--bg), transparent 24%);
-        }
-
         .eyebrow,
         .read-link {
             color: var(--primary);
-        }
-
-        .featured-image {
-            border-left: 1px solid color-mix(in srgb, var(--bg), transparent 78%);
-        }
-
-        .featured-image img,
-        .post-thumb {
-            filter: saturate(0.78) contrast(1.08);
         }
 
         .section-bar h2 {
@@ -1092,20 +925,9 @@
         }
 
         @media (prefers-reduced-motion: no-preference) {
-            .hero-copy,
-            .hero-stats,
-            .featured,
-            .post-card,
-            .panel {
-                animation: archive-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-            }
 
             .hero-stats {
                 animation-delay: 0.08s;
-            }
-
-            .featured {
-                animation-delay: 0.14s;
             }
         }
 
@@ -1138,15 +960,6 @@
             .stat {
                 border-right: 1px solid var(--line);
             }
-
-            .featured {
-                grid-template-columns: 1fr;
-            }
-
-            .featured-image {
-                border-left: 0;
-                border-bottom: 1px solid color-mix(in srgb, var(--bg), transparent 78%);
-            }
         }
 
         @media (max-width: 640px) {
@@ -1164,11 +977,6 @@
 
             .hero-stats {
                 grid-template-columns: 1fr 1fr;
-            }
-
-            .featured,
-            .post-card {
-                grid-template-columns: 1fr;
             }
 
             .post-card > a {
@@ -1222,7 +1030,7 @@
         <div class="layout" id="blog">
 
             <section class="content">
-                <article class="featured" id="featured-post"></article>
+                
 
                 <div class="section-bar">
                     <h2>全部文章</h2>
@@ -1277,7 +1085,7 @@
         function render() {
             const filteredPosts = getFilteredPosts();
             renderStats();
-            renderFeatured(state.posts[0]);
+            
             renderPostList(filteredPosts);
         }
         function getFilteredPosts() {
@@ -1296,33 +1104,6 @@
             document.getElementById('header-count').textContent = `${state.posts.length} 篇`;
         }
 
-        function renderFeatured(post) {
-            const container = document.getElementById('featured-post');
-            if (!post) {
-                container.style.display = 'none';
-                return;
-            }
-
-            container.style.display = 'grid';
-            container.innerHTML = `
-                <div class="featured-body">
-                    <div>
-                        <span class="eyebrow"><i class="fas fa-bookmark"></i> 最新文章</span>
-                        <h2><a href="${escapeAttribute(post.link || '#')}">${escapeHtml(post.title || '无标题')}</a></h2>
-                        <p>${escapeHtml(post.excerpt || '暂无摘要')}</p>
-                    </div>
-                    <div>
-                        <div class="meta-row">
-                            <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
-                            <span><i class="fas fa-clock"></i>${escapeHtml(post.readTime || '')}</span>
-                        </div>
-                        <a class="read-link" href="${escapeAttribute(post.link || '#')}">阅读全文 <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <a class="featured-image" href="${escapeAttribute(post.link || '#')}">
-                    <img src="${escapeAttribute(post.image || fallbackImage)}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="eager" fetchpriority="high">
-                </a>
-            `;
         }
 
         function renderPostList(posts) {
