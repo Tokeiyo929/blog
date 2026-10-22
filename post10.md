@@ -1,8 +1,8 @@
----
+﻿---
 title: UIParticle使用
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -91,9 +91,9 @@ Absolute（绝对位置）特效以自身为中心进行缩放​
 Relative（相对位置）特效以UIParticle为中心进行缩放​
 区别直接看下面例子，按需选择​
 Absolute​
-![飞书文档 - 图片](https://i.postimg.cc/hGqcsVc9/飞书文档_图片_1765238756.gif)
+![飞书文档 - 图片](images/pimg_1765238756.gif)
 Relative​
-![飞书文档 - 图片](https://i.postimg.cc/xTbwZqsZ/20250614142013_rec_(1).gif)
+![飞书文档 - 图片](images/i_postimg_cc_20250614142013_rec_(1.png)
 
 
 AutoScalingMode ​
@@ -106,28 +106,28 @@ Transform 无论屏幕尺寸怎么变,特效本体都保持Scale = 1的状态(�
 
 预制件名称：UISpHeroTaskReward​
 需要修改的特效：​
-![飞书文档 - 图片](https://i.postimg.cc/vmLMNDZp/飞书文档_图片_1765238760.gif)
+![飞书文档 - 图片](images/pimg_1765238760.gif)
 ## 具体步骤​
 
 
-![飞书文档 - 图片](https://i.postimg.cc/SK7qvjxt/飞书文档_图片_1765238763.png)
+![飞书文档 - 图片](images/pimg_1765238763.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/gk6C7rMH/bb5188e2_dcab_4c20_9668_d53d32998c2a.png)
+![飞书文档 - 图片](images/i_postimg_cc_bb5188e2_dcab_4c20_9668_d53d32998c2a.png)
 
 
-![飞书文档 - 图片](https://i.postimg.cc/YSfksjCn/飞书文档_图片_1765238767.png)
+![飞书文档 - 图片](images/pimg_1765238767.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/hGbg5htC/飞书文档_图片_1765238770.png)
+![飞书文档 - 图片](images/pimg_1765238770.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/SNzBPjZd/c1862194_1285_46a1_898a_3d7b96704acd.png)
+![飞书文档 - 图片](images/i_postimg_cc_c1862194_1285_46a1_898a_3d7b96704acd.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/GhsWf9MQ/0653de01_b71b_49d6_8624_9f7bd664ff2b.png)
+![飞书文档 - 图片](images/i_postimg_cc_0653de01_b71b_49d6_8624_9f7bd664ff2b.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/KYrFH4YF/飞书文档_图片_1765238774.png)
+![飞书文档 - 图片](images/pimg_1765238774.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/wTsCr3WD/1d0c6310_880c_44f8_9c96_2d78e98e6cca.png)
+![飞书文档 - 图片](images/i_postimg_cc_1d0c6310_880c_44f8_9c96_2d78e98e6cca.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/vB0yGj9g/飞书文档_图片_1765238776.gif)
+![飞书文档 - 图片](images/pimg_1765238776.gif)
 大功告成​
 常见问题:
 1. 为什么SpriteMask的mask方式不生效了.​

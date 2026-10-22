@@ -1,8 +1,8 @@
----
+﻿---
 title: RG场景地编规范​
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -33,7 +33,7 @@ prafab：举例 ： 白天  ：Bog02_01   夜晚  Bog02_Night_01​
 ## 尺寸规范：​
 
 RG使用的是三个地块循环的方式，所以我们目前只需要做3块地块，每个地块的长30米，宽67米，（长度30米，宽度是左边草坪30米，中间马路7米，右边草坪30米）如下图：​
-![飞书文档 - 图片](https://i.postimg.cc/y8J5NCLm/飞书文档_图片_1765260496.png)
+![飞书文档 - 图片](images/pimg_1765260496.png)
 # 贴图合批篇​
 
 
@@ -42,13 +42,13 @@ RG使用的是三个地块循环的方式，所以我们目前只需要做3块�
 模型导入unity后，需要贴图合批，合批贴图大小为2048*2048，把所有贴图合并到一张2048*2048贴图中，地表可分为3张单独贴图​
 ​
 
-![飞书文档 - 图片](https://i.postimg.cc/52HGtWsm/飞书文档_图片_1765260499.png)
+![飞书文档 - 图片](images/pimg_1765260499.png)
 
 shader中有高光和自发光贴图，这里需要考虑下高光物件要放在同一张贴图中，这样调节一个shader，就基本完成最终效果，不够16张其余空间可留空，像上图一样右下角为空。​
 
 ## 2.合批3dmax工具​
 
-[![120X120.png](https://i.postimg.cc/L6QwR83z/120X120.png)](https://postimg.cc/HV5B9HKx)
+![120X120.png](images/i_postimg_cc_120X120.png)
 
 这是3Dmax UV合批工具，使用方法，直接把小工具拖入3dmax里面就可以了。非常简单。​
 
@@ -60,15 +60,15 @@ shader中有高光和自发光贴图，这里需要考虑下高光物件要放�
 
 上图是文件夹规范，按照上图来创建。​
 
-[![4e71a830_09cd_42f6_aea1_8a2de9769203.png](https://i.postimg.cc/kMzpDXp1/4e71a830_09cd_42f6_aea1_8a2de9769203.png)](https://postimg.cc/xqGR4YYM)
+![4e71a830_09cd_42f6_aea1_8a2de9769203.png](images/i_postimg_cc_4e71a830_09cd_42f6_aea1_8a2de9769203.png)
 
 ## 2.RG目前是三个地块循环调用，三个地块的prefab坐标为 -30  0  30 ​
 
 
 
-[![34a3d04b_e39f_4657_80b2_eb33bb0e8480.png](https://i.postimg.cc/59TRjNRP/34a3d04b_e39f_4657_80b2_eb33bb0e8480.png)](https://postimg.cc/8sdH0DDW)
+![34a3d04b_e39f_4657_80b2_eb33bb0e8480.png](images/i_postimg_cc_34a3d04b_e39f_4657_80b2_eb33bb0e8480.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/htJwGR29/飞书文档_图片_1765260503.png)
+![飞书文档 - 图片](images/pimg_1765260503.png)
 程序调用的就是这三个地块的prefab，保存路径为：Assets/PackageRes/Raw/Category/Prefabs/RunEscapePrefabs/​
 天空球prefab路径为：​
 Assets/PackageRes/Raw/Category/Prefabs/RunEscapePrefabs/SceneRoots/​
@@ -82,16 +82,16 @@ Assets/PackageRes/Raw/Category/Prefabs/RunEscapePrefabs/SceneRoots/​
 
 ### 1) . 跑酷摄像机数值​
 
-![飞书文档 - 图片](https://i.postimg.cc/wjtPBYwR/飞书文档_图片_1765260506.png)
+![飞书文档 - 图片](images/pimg_1765260506.png)
 ### 2）.战斗摄像机数值​
 
-[![c02be6a1_5aa6_4777_85b2_f328d9392883.png](https://i.postimg.cc/dQpxDtxn/c02be6a1_5aa6_4777_85b2_f328d9392883.png)](https://postimg.cc/gryDTdd6)
+![c02be6a1_5aa6_4777_85b2_f328d9392883.png](images/i_postimg_cc_c02be6a1_5aa6_4777_85b2_f328d9392883.png)
 
 
 ## 4.地块prefab结构​
-![飞书文档 - 图片](https://i.postimg.cc/rwdbp2fC/飞书文档_图片_1765260510.png)
+![飞书文档 - 图片](images/pimg_1765260510.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/QdBPMZfS/飞书文档_图片_1765260513.png)
+![飞书文档 - 图片](images/pimg_1765260513.png)
 上图为RG项目中所用的prefab结构，下图为解释。​
 
 
@@ -99,12 +99,12 @@ Assets/PackageRes/Raw/Category/Prefabs/RunEscapePrefabs/SceneRoots/​
 
 1）最上层prefab需要挂脚本，一个是烘焙贴图beke到prefab上的脚本​
 
-[![552794c0_bccd_461e_b3ae_338b7aa8d138.png](https://i.postimg.cc/WpCHtbHn/552794c0_bccd_461e_b3ae_338b7aa8d138.png)](https://postimg.cc/rzGJPcc0)
+![552794c0_bccd_461e_b3ae_338b7aa8d138.png](images/i_postimg_cc_552794c0_bccd_461e_b3ae_338b7aa8d138.png)
 
 2）lod功能已经弃用。忽略​
 3）static_batch这个物体里是存放了所有的资源，所以添加脚本static_batch进行批处理。​
 
-[![3101a851_af3b_4a5d_b086_f03ba7642fd3.png](https://i.postimg.cc/8k90sP0m/3101a851_af3b_4a5d_b086_f03ba7642fd3.png)](https://postimg.cc/Bt5gVssj)
+![3101a851_af3b_4a5d_b086_f03ba7642fd3.png](images/i_postimg_cc_3101a851_af3b_4a5d_b086_f03ba7642fd3.png)
 
 # shader材质篇​
 
@@ -139,8 +139,8 @@ Vegetation_Lightmap_RS​
 
 Water_EasyReflect​
 使用最多的为描边shader OpaqueOutline 如下图：​
-![飞书文档 - 图片](https://i.postimg.cc/fR3FbQ8g/飞书文档_图片_1765260517.png)
-![飞书文档 - 图片](https://i.postimg.cc/9Q4SfHLn/飞书文档_图片_1765260520.png)
+![飞书文档 - 图片](images/pimg_1765260517.png)
+![飞书文档 - 图片](images/pimg_1765260520.png)
 
 
 ### 烘焙草的方法​
@@ -148,11 +148,11 @@ Water_EasyReflect​
 材质需要给赋予urp/baked lit，烘焙完成后在替换我们自己的shader（Opaque）​
 烘焙前shader​
 
-[![9225f7d9_b50f_4ded_8bfa_f693e3dca482.png](https://i.postimg.cc/BZkVtQV2/9225f7d9_b50f_4ded_8bfa_f693e3dca482.png)](https://postimg.cc/LhkTbRRs)
+![9225f7d9_b50f_4ded_8bfa_f693e3dca482.png](images/i_postimg_cc_9225f7d9_b50f_4ded_8bfa_f693e3dca482.png)
 
 烘焙后shader​
 
-![飞书文档 - 图片](https://i.postimg.cc/wjtPBYwr/飞书文档_图片_1765260524.png)
+![飞书文档 - 图片](images/pimg_1765260524.png)
 
 # 实时光篇​
 
@@ -161,9 +161,9 @@ Water_EasyReflect​
 
 - 1盏 角色光 （CharacterLight）​
 
-  [![28990fb3_63ac_49bf_8362_0959a054db76.png](https://i.postimg.cc/66gmT5mL/28990fb3_63ac_49bf_8362_0959a054db76.png)](https://postimg.cc/8sdH0DDj)
+  ![28990fb3_63ac_49bf_8362_0959a054db76.png](images/i_postimg_cc_28990fb3_63ac_49bf_8362_0959a054db76.png)
 
-  [![54c34595_360f_4191_ba03_9f7588b53c53.png](https://i.postimg.cc/QNwyVxyg/54c34595_360f_4191_ba03_9f7588b53c53.png)](https://postimg.cc/bd0TB88d)
+  ![54c34595_360f_4191_ba03_9f7588b53c53.png](images/i_postimg_cc_54c34595_360f_4191_ba03_9f7588b53c53.png)
 
 # 灯光烘焙篇​
 
@@ -178,7 +178,7 @@ Water_EasyReflect​
 
 （举例：ground_1 为主mesh ，ground_1_mid为Lodmesh）​
 4）烘焙完成后需要bake下灯光贴图，好让贴图贴在prefab脚本上。选中菜单栏Assets/Bake prefab Lightmaps ，bake完成后需要测试是否成功，复制三个地块，然后看看是否变黑，如果变黑bake出错，如果没有任何变化bake成功。​
-![飞书文档 - 图片](https://i.postimg.cc/zGLMfYxM/飞书文档_图片_1765260527.png)
+![飞书文档 - 图片](images/pimg_1765260527.png)
 5）bake完成，复制出新的三个prefab，要拼接在一起看一下是否有接缝。每个地块Position的z轴为 60   90  120   ，然后查看地块与地块之间的接缝是否明显，如果有接缝可手动绘制灯光贴图解决接缝问题。​
 
 # 后期效果文件篇​
@@ -187,7 +187,7 @@ Water_EasyReflect​
 只需要挂在默认后期效果文件即可。如下图：​
 默认后期效果命名为：CameraProfileType_GJ  下面是默认数值，参数基本是不可动的，动了会影响特效。​
 
-[![1a32a6f9_1aca_4e6c_8fe5_471a51c691cd.png](https://i.postimg.cc/kMBHntfv/1a32a6f9_1aca_4e6c_8fe5_471a51c691cd.png)](https://postimg.cc/Hj1zzjGr)
+![1a32a6f9_1aca_4e6c_8fe5_471a51c691cd.png](images/i_postimg_cc_1a32a6f9_1aca_4e6c_8fe5_471a51c691cd.png)
 
 后续继续增加制作流程。。。。。​
 

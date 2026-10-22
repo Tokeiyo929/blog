@@ -1,8 +1,8 @@
----
+﻿---
 title: EnhancedScroller使用说明文档
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -74,50 +74,50 @@ Vector2Int cellSize, int rowCount, int hSpacing, Action<int, Transform> updateVi
 案例制作一个横向列表​
 1. 添加ScrollRect,重命名为srv_bag.​
     1.1 删除不用的组件.​
-    ![飞书文档 - 图片](https://i.postimg.cc/DZPhv3xn/飞书文档_图片_1765257647.png)
+    ![飞书文档 - 图片](images/pimg_1765257647.png)
     删除后:
 
-  [![29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png](https://i.postimg.cc/DZJfnMtc/29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png)](https://postimg.cc/DJh3cBfW)
+  ![29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png](images/i_postimg_cc_29fe0ea3_e023_4ee9_8e4c_58d61ffe280b.png)
 
   1.2 设置ScrollRect的容器.
 
-[![9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png](https://i.postimg.cc/Qt9NhyRb/9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png)](https://postimg.cc/CB0p4mMB)
+![9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png](images/i_postimg_cc_9ee161b6_c1ca_4aba_a0cb_3a87acd74911.png)
 
 1.3 设置Recttransform对齐.影响Item的对齐.​
-![飞书文档 - 图片](https://i.postimg.cc/1trSm1v6/飞书文档_图片_1765257650.png)
+![飞书文档 - 图片](images/pimg_1765257650.png)
 
 2. 修改Viewport,方便预览列表效果.​
 2.1 确保Viewport最大​
 2.2 删除Viewport上脚本​
 2.3 为Viewport添加HorizontalLayoutgroup组件.修正好HorizentalLayougroup属性​
 
-[![80361a93_c87d_4a0c_a48e_5f5932ae5a15.png](https://i.postimg.cc/LXY42brf/80361a93_c87d_4a0c_a48e_5f5932ae5a15.png)](https://postimg.cc/ftsQvBWT)
+![80361a93_c87d_4a0c_a48e_5f5932ae5a15.png](images/i_postimg_cc_80361a93_c87d_4a0c_a48e_5f5932ae5a15.png)
 
-[![872fdf63_5f53_4c87_a516_f677c7f2a8f5.png](https://i.postimg.cc/ydg6sbw0/872fdf63_5f53_4c87_a516_f677c7f2a8f5.png)](https://postimg.cc/WFVc7Xp4)
+![872fdf63_5f53_4c87_a516_f677c7f2a8f5.png](images/i_postimg_cc_872fdf63_5f53_4c87_a516_f677c7f2a8f5.png)
 
 
 
 3. 制作ItemRender,预览列表排布.​
 3.1 ​
-![飞书文档 - 图片](https://i.postimg.cc/sX4zjCTv/飞书文档_图片_1765257653.png)
+![飞书文档 - 图片](images/pimg_1765257653.png)
 3.2 排布​
 
-[![0d9a6f7a_7142_4831_8673_235eec1e3b1d.png](https://i.postimg.cc/TwL2f4Zb/0d9a6f7a_7142_4831_8673_235eec1e3b1d.png)](https://postimg.cc/sQzCJwff)
+![0d9a6f7a_7142_4831_8673_235eec1e3b1d.png](images/i_postimg_cc_0d9a6f7a_7142_4831_8673_235eec1e3b1d.png)
 
 3.3 修正排布出界. 为ScrollRect添加Mask​
 
-[![33b28e6b_7fd6_480a_be49_2f59339a21bc.png](https://i.postimg.cc/50Y9bRZC/33b28e6b_7fd6_480a_be49_2f59339a21bc.png)](https://postimg.cc/xJQVPtjf)
+![33b28e6b_7fd6_480a_be49_2f59339a21bc.png](images/i_postimg_cc_33b28e6b_7fd6_480a_be49_2f59339a21bc.png)
 
 
 3.4 修正对齐问题.​
 
-![飞书文档 - 图片](https://i.postimg.cc/nrVJMSWj/飞书文档_图片_1765257656.png)
-![飞书文档 - 图片](https://i.postimg.cc/sX4zjCTp/飞书文档_图片_1765257658.png)
+![飞书文档 - 图片](images/pimg_1765257656.png)
+![飞书文档 - 图片](images/pimg_1765257658.png)
 3.5 将设置信息设置到EnhancedScroller上.Viewport是会在运行时候被删除的.​
 
 
 4. 保存ItemRender. 这里的做法是把ItemRender放入一个隐藏的节点下.并重命名为ref_BagRender​
-![飞书文档 - 图片](https://i.postimg.cc/J07LtYFZ/飞书文档_图片_1765257661.png)
+![飞书文档 - 图片](images/pimg_1765257661.png)
 5. 代码中显示对象.​
 
    ```csharp
@@ -149,7 +149,7 @@ Vector2Int cellSize, int rowCount, int hSpacing, Action<int, Transform> updateVi
    
 
 最终效果:
-![飞书文档 - 图片](https://i.postimg.cc/sxfr1HL4/飞书文档_图片_1765257664.png)
+![飞书文档 - 图片](images/pimg_1765257664.png)
 竖向的列表例子:
 UIOnlineGiftDialog_v2​
 问题集合:

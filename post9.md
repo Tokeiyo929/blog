@@ -1,8 +1,8 @@
----
+﻿---
 title: RG美术资源管理标准
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -60,10 +60,10 @@ RG美术资源管理标准​
 ### 3.命名bundle名​
 
 1.单独设置名字 单独设置bundle名 ​
-![飞书文档 - 图片](https://i.postimg.cc/pL3mhXr4/飞书文档_图片_1765202499.png)
+![飞书文档 - 图片](images/pimg_1765202499.png)
 
 2.选中文件夹也可设置文件夹内bundle名 ,这个可具体看下设置的bundle名是否符合，也可程序手动修改下​
-![飞书文档 - 图片](https://i.postimg.cc/PqZPmsv3/飞书文档_图片_1765202571.png)
+![飞书文档 - 图片](images/pimg_1765202571.png)
 ### 4.BundleOrganizeManager ​
 
 新增的bundle name 需要程序添加到该代码中​

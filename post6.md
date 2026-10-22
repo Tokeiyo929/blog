@@ -1,8 +1,8 @@
----
+﻿---
 title: 美术资源制作规范
 category: [代码解析]
 date: 2025-12-08
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 为了能够快速复用组件，请大伙尽量写的能够复用
 tags: [美术, 程序]
 ---
@@ -268,29 +268,29 @@ Linear = centimeter
 
 3. **导入设置**
 
-![img](https://i.postimg.cc/Pf0bbK0c/image_1.png)
+![img](images/i_postimg_cc_image_1.png)
 
  
 
-![img](https://i.postimg.cc/sfbPPKbt/image_2.png)
+![img](images/i_postimg_cc_image_2.png)
 
-![img](https://i.postimg.cc/c1P77TVq/image_3.png)
+![img](images/i_postimg_cc_image_3.png)
 
  
 
 每次导入一个新模型要注意以上设置，如果没有动画记得要吧Rig跟Animation部分勾选去掉
 
-![img](https://i.postimg.cc/SQHLLVwF/image_4.png)
+![img](images/i_postimg_cc_image_4.png)
 
  
 
 导入后的Inspector最后都需要以prefab的形式在场景中调用，所以需要为每个物件设置自己的prefab，首先创建一个新的prefab命名需要跟物件名统一，把该物件丢入场景中，坐标Reset为（0，0，0），直接丢入到新建的prefab即可
 
-![img](https://i.postimg.cc/Vs299436/image_5.png)
+![img](images/i_postimg_cc_image_5.png)
 
  
 
-![img](https://i.postimg.cc/59D55pZM/image_6.png)
+![img](images/i_postimg_cc_image_6.png)
 
  
 
@@ -339,7 +339,7 @@ Linear = centimeter
 
 合并纹理：合并纹理可突破上述限制，最大可使用1024 x 1024。
 
-![img](https://i.postimg.cc/L4GkkvrY/image_7.png)
+![img](images/i_postimg_cc_image_7.png)
 
  
 
@@ -438,7 +438,7 @@ Illumin贴图。使用A(Alpha)通道，可不设置或与Base贴图相同。当�
 
  
 
-![img](https://i.postimg.cc/7Pj11XpY/image_8.png)
+![img](images/i_postimg_cc_image_8.png)
 
  
 
@@ -452,7 +452,7 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
  
 
-![img](https://i.postimg.cc/tR8ddDL1/image_9.png)
+![img](images/i_postimg_cc_image_9.png)
 
  
 
@@ -462,7 +462,7 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 -  **普通战斗场景256\*256大小**
 - **要保证填满整张贴图**
 
-![img](https://i.postimg.cc/MZg00thQ/image_10.png)
+![img](images/i_postimg_cc_image_10.png)
 
  
 
@@ -478,11 +478,11 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 - **每个物件需要设置物体的lightmap scale,硬边缘的物体还需要更改Max Angle，默认设置为65**
 
-![img](https://i.postimg.cc/zD4wwp9R/image_11.png)
+![img](images/i_postimg_cc_image_11.png)
 
 
 
- ![img](https://i.postimg.cc/FscyT34f/image_12.png)
+ ![img](images/i_postimg_cc_image_12.png)
 
 - **把水面下的河床以及远景的地面分离出独立模型（这部分由于面积很大并且非常次要，在烘培lightmap的时候需要把他们缩小烘培，烘培好再等比例还原回来。这样游戏主要区域的lightmap是精度最高**
 
@@ -490,18 +490,18 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 
 
-![img](https://i.postimg.cc/Qx5Qf13M/image_13.png)
-![img](https://i.postimg.cc/Yqg6dYHL/image_14.png)
+![img](images/i_postimg_cc_image_13.png)
+![img](images/i_postimg_cc_image_14.png)
  
 
 动态光要放在LightGroup组并且设置Layer在Player层，保持跟角色所在层一致，一个关卡中动态光不能超过2个
 
 
 
-![img](https://i.postimg.cc/RVf7gKBQ/image_15.png)
+![img](images/i_postimg_cc_image_15.png)
 
 烘培时候注意要关闭动态光
-![img](https://i.postimg.cc/xTHv6M2L/image_16.png)
+![img](images/i_postimg_cc_image_16.png)
 
 
  
@@ -523,7 +523,7 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 - **关卡中同一高度的模型要注意精度的统一，不要出现明显的贴图精度差**
 -  **如下图出现的这种**
 
- ![img](https://i.postimg.cc/nc743BJC/image_12.jpg)
+ ![img](images/i_postimg_cc_image_12.jpg)
 
  
 
@@ -533,12 +533,12 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
 
 
-![img](https://i.postimg.cc/bNbxmkh9/image_18.png)
+![img](images/i_postimg_cc_image_18.png)
 
 **实际在软件中顶点法线，就会发现，折痕处每个顶点其实包含了两个不同的法线。因此，对于GPU来说，它同样无法理解这样的事情，因此会把顶点一分为二。** 
 
  
-![img](https://i.postimg.cc/dtd25rYB/image_19.png)
+![img](images/i_postimg_cc_image_19.png)
 
 
  
@@ -551,9 +551,9 @@ MAX里面的物体命名，材质球名字，贴图名字，fbx名字保持统�
 
  
 
-![img](https://i.postimg.cc/KvLP0B2Q/image_20.png)
+![img](images/i_postimg_cc_image_20.png)
 
-![img](https://i.postimg.cc/RVf7gKBD/image-21.png)
+![img](images/i_postimg_cc_image-21.png)
 
 **移除不必要的Hard Edge以及纹理衔接，即避免Smoothing splits和UV splits**
 
@@ -1073,27 +1073,27 @@ HitPoint为攻击帧事件，定义一些攻击行为发生的时刻，并用来
 11.**优化**
 
 **LEVEL提交前的检查**
-![img](https://i.postimg.cc/zXWCxKrC/image_17.png)
+![img](images/i_postimg_cc_image_17.png)
 
  
 
 Mipmaps其中红色表示这个物体可以使用更小的纹理，蓝色表示应该使用更大的纹理。
 
-![img](https://i.postimg.cc/x12Kh8fx/image_23.png)
+![img](images/i_postimg_cc_image_23.png)
 
  
 
-![img](https://i.postimg.cc/FH4j8zrx/image_24.png)
+![img](images/i_postimg_cc_image_24.png)
 
  
 
 Render Paths（渲染路径，蓝色所用资源最多，黄色其次，红色最少）距离摄像机近的区域为黄色远处为红色，避免出现蓝色区域
 
-![img](https://i.postimg.cc/9QhGK0mL/image_25.png)
+![img](images/i_postimg_cc_image_25.png)
 
  
 
-![img](https://i.postimg.cc/L8pzw59Q/image_26.png)
+![img](images/i_postimg_cc_image_26.png)
 
  
 
@@ -1101,7 +1101,7 @@ Render Paths（渲染路径，蓝色所用资源最多，黄色其次，红色�
 
  
 
-![img](https://i.postimg.cc/13Qp2XmT/image_27.png)
+![img](images/i_postimg_cc_image_27.png)
 
  
 

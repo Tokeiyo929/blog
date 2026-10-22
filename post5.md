@@ -1,8 +1,8 @@
----
+﻿---
 title: EM UI结构
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -26,7 +26,7 @@ UI逻辑栈分多个渲染层级，每个层级又有多个子层级，所有显
 （4）SetTitle：设置最上方显示的Bar​
 （5）OnPause，OnResume，OnClosed：隐藏，恢复，销毁时的回调函数​
 （6）示意图，1：bar  2:Prefab显示内容​
-​​​![飞书文档 - 图片](https://i.postimg.cc/XvDwBkM9/fei-shu-wen-dang-tu-pian-1764824949.png)
+​​​![飞书文档 - 图片](images/i_postimg_cc_fei-shu-wen-dang-tu-pian-1764824949.png)
 ​
 ### 4.PopupWindowManager中显示逻辑结构构架​
 （1）EM所有显示逻辑构架都在PopupWindowManager的中管理，所以该类非常重要。​

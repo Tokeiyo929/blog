@@ -1,8 +1,8 @@
----
+﻿---
 title: PrefabHolder
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -54,25 +54,25 @@ tags: [美术, 程序]
 prefab:UIGeneralStarPanel28
 特效:fx_star_up
 说明: 当前文件只有节点引用,所有不用添加任何代码.
-![飞书文档 - 图片](https://i.postimg.cc/9McVMgMw/飞书文档_图片_1764824948.jpg)
+![飞书文档 - 图片](images/pimg_1764824948.jpg)
 
 1. 选中fx_star_up.点select,定位到fx_star_up特效在项目中的位置.
-![飞书文档 - 图片](https://i.postimg.cc/pTkvnQhY/飞书文档_图片_1764824953.jpg)
+![飞书文档 - 图片](images/pimg_1764824953.jpg)
 1. 点击fx_star_up,右键->Prefab->unPack.​
 
-![飞书文档 - 图片](https://i.postimg.cc/rmgTtG0N/飞书文档_图片_1764824955.png)
+![飞书文档 - 图片](images/pimg_1764824955.png)
 1. 清理fx_star_up上的除了SortingGroup的其他脚本.并删除特效下节点.​
 
-![飞书文档 - 图片](https://i.postimg.cc/0QZvJGMS/飞书文档_图片_1764824957.jpg)
+![飞书文档 - 图片](images/pimg_1764824957.jpg)
 1. 添加Prefab节点.并将特效prefab拖入到PrefabHolder的prefab栏.
-![飞书文档 - 图片](https://i.postimg.cc/C1J0fCBD/飞书文档_图片_1764824959.jpg)
+![飞书文档 - 图片](images/pimg_1764824959.jpg)
 1. 预览特效.点击预览,可以查看特效在prefab中的表现. 这里主要只能调整包括SortingGroup,和节点的位置和缩放.​
 
 
-![飞书文档 - 图片](https://i.postimg.cc/JnK8B3D6/飞书文档_图片_1764824960.jpg)
+![飞书文档 - 图片](images/pimg_1764824960.jpg)
 1. 保存. 保存前,先清理下确保特效不在显示树上.​
 
-![飞书文档 - 图片](https://i.postimg.cc/V64wb9r4/飞书文档_图片_1764824962.jpg)
+![飞书文档 - 图片](images/pimg_1764824962.jpg)
 
 1. 进入游戏检测.​
 ## 注意事项:

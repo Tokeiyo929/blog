@@ -1,8 +1,8 @@
----
+﻿---
 title: 华佗热更项目总结
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -24,30 +24,30 @@ tags: [美术, 程序]
 
 
 ## 1.1.不要使用别的项目环境(平台不一样，需要的环境不一样)，从安装package包后开始一步一步构建。​
-![飞书文档 - 图片](https://i.postimg.cc/W33P9vY7/飞书文档_图片_1765244300.png)
+![飞书文档 - 图片](images/pimg_1765244300.png)
 
 ## 1.2.生成为AOT泛型补充元数据的dll以及避免代码裁剪的link​
-![飞书文档 - 图片](https://i.postimg.cc/266fHD9T/飞书文档_图片_1765244301.png)
+![飞书文档 - 图片](images/pimg_1765244301.png)
 
 ## 1.3.生成热更代码并拷贝到 StreamingAssets目录下(同时拷贝的还有第2步中补充aot元数据的dll)，​
 
 
-![飞书文档 - 图片](https://i.postimg.cc/L824zrSC/720X720.png)
+![飞书文档 - 图片](images/i_postimg_cc_720X720.png)
 
 
 
 ## 1.4.打包登录场景(第一次必须打ab，后面可以有修改才打，重复打也没影响，有缓存增量打包所以也很快，测试场景和登录场景在一个ab里面后面可以去掉测试场景），打包测试资源(有修改就打包，没有就不用)​
 
 分别打包场景，预设，代码​
-​![飞书文档 - 图片](https://i.postimg.cc/gJJPMWtg/飞书文档_图片_1765244305.png)
+​![飞书文档 - 图片](images/pimg_1765244305.png)
 
 ## 1.5.生成资源列表和版本号(比对SHA256码，更新版本号)，复制热更代码到自动上传cdn的目录​
-![飞书文档 - 图片](https://i.postimg.cc/L824zrSC/720X720.png)
+![飞书文档 - 图片](images/i_postimg_cc_720X720.png)
 
 
 
 ## 1.6.打包：2，3，4，5，每次打包apk都做一次。(可以使用这里的菜单一键执行)​
-![飞书文档 - 图片](https://i.postimg.cc/1ttZWQ7W/飞书文档_图片_1765244308.png)
+![飞书文档 - 图片](images/pimg_1765244308.png)
 
 
 
@@ -56,10 +56,10 @@ tags: [美术, 程序]
 
 
 ### 1.7.1 .热更代码设置​
-![飞书文档 - 图片](https://i.postimg.cc/yddzfHpQ/飞书文档_图片_1765244310.png)
+![飞书文档 - 图片](images/pimg_1765244310.png)
 
 ### 1.7.2.步骤1.2中用到的路径​
-![飞书文档 - 图片](https://i.postimg.cc/htc49HnY/ddd160d0_d426_4596_98de_69663cdfafa6.png)
+![飞书文档 - 图片](images/i_postimg_cc_ddd160d0_d426_4596_98de_69663cdfafa6.png)
 
 
 
@@ -69,17 +69,17 @@ tags: [美术, 程序]
 官方文档:https://hybridclr.doc.code-philosophy.com/docs/beginner/generic#%E8%8E%B7%E5%BE%97%E8%A1%A5%E5%85%85%E5%85%83%E6%95%B0%E6%8D%AEdll​
 
 
-![飞书文档 - 图片](https://i.postimg.cc/k44djmYL/飞书文档_图片_1765244313.png)
+![飞书文档 - 图片](images/pimg_1765244313.png)
 ### 1.7.4.步骤1.1中的输出路径​
-![飞书文档 - 图片](https://i.postimg.cc/gJJPMWB9/飞书文档_图片_1765244316.png)
+![飞书文档 - 图片](images/pimg_1765244316.png)
 
 ### 1.7.5.步骤1.2的缓存路径​
-![飞书文档 - 图片](https://i.postimg.cc/L824zrSb/fc607be0_712c_4925_83f2_815668f16c71.png)
+![飞书文档 - 图片](images/i_postimg_cc_fc607be0_712c_4925_83f2_815668f16c71.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/gkvkLGCQ/cb795a3a_6d8c_4535_9696_9199c6dc6e83.png)
+![飞书文档 - 图片](images/i_postimg_cc_cb795a3a_6d8c_4535_9696_9199c6dc6e83.png)
 
 # 2.更新流程​
-![飞书文档 - 图片](https://i.postimg.cc/0QQqtsHR/飞书文档_图片_1765244320.png)
+![飞书文档 - 图片](images/pimg_1765244320.png)
 
 ## 2.1.解压安装包资源​
 
@@ -140,4 +140,4 @@ mac机与window要的环境不一样，结论除了华佗插件和设置，其�
 
 官方文档:https://hybridclr.doc.code-philosophy.com/docs/basic/aotgeneric​
 例子：在非热更代码中，主动调用一次泛型，就可以不用补充元数据了​
-![飞书文档 - 图片](https://i.postimg.cc/Pxxk6jVc/飞书文档_图片_1765244325.png)
+![飞书文档 - 图片](images/pimg_1765244325.png)

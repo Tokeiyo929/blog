@@ -1,8 +1,8 @@
----
+﻿---
 title: RG项目热更规范
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -29,6 +29,6 @@ tags: [美术, 程序]
 2.4.Eitor的代码可以直接HOT,,Runtime的代码绝对不可以直调用Hot，只能用使用​HybridCLR和AI的配合使用提到的反射方法​
 
 # 3.有宏定义代码报错，大家可以手动加一下引用：例子​
-![飞书文档 - 图片](https://i.postimg.cc/htFPhkzn/fei-shu-wen-dang-tu-pian-1765242163.png)
+![飞书文档 - 图片](images/i_postimg_cc_fei-shu-wen-dang-tu-pian-1765242163.png)
 例如这种，当切换到对应平台报错，可以手动加一下引用​
-​![飞书文档 - 图片](https://i.postimg.cc/sxvDZy4G/850X850.png)
+​![飞书文档 - 图片](images/i_postimg_cc_850X850.png)

@@ -1,8 +1,8 @@
----
+﻿---
 title: RG2.0版UI搭建流程及规范
 category: [代码解析]
 date: 2025-12-03
-cover_image: https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80
+cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---
@@ -49,7 +49,7 @@ grayhead✔ huitouxiang✔ graytouxiang❌​
 备注：​
 - 拼接时如果部分图片资源是临时使用的（如活动顶部插图）或仅用于Prefab模板效果展示的，命名加上xx_Temporary后缀，该后缀资源不合入beta且定期清理​
 - 切图时装饰性元素和功能性元素分开切图，可减少高相似度的大图资源（如下图）​
-![飞书文档 - 图片](https://i.postimg.cc/br1gjGZq/飞书文档_图片_1765245430.png)
+![飞书文档 - 图片](images/pimg_1765245430.png)
 
 
 #### 切图规范​
@@ -67,10 +67,10 @@ grayhead✔ huitouxiang✔ graytouxiang❌​
 - 按照命名规范切图输出​
 - 使用图片对比工具（无需安装，解压后直接使用）对比此次切图和项目资源中是否有重复，如有重复则不要再上传​
 - 小图对比Assets\PackageRes\Raw\Function\UIAtlas目录​
-![飞书文档 - 图片](https://i.postimg.cc/Y2FbFPbm/飞书文档_图片_1765245437.png)
+![飞书文档 - 图片](images/pimg_1765245437.png)
 
 - 大图对比Assets\PackageRes\Raw\Category\UISprite目录​
-![飞书文档 - 图片](https://i.postimg.cc/qBKjKFj3/飞书文档_图片_1765245439.png)
+![飞书文档 - 图片](images/pimg_1765245439.png)
 小图资源对比出重复相同图片时：​
 - 当项目中资源是在通用资源目录则直接使用Assets\PackageRes\Raw\Function\UIAtlas\Common​
 - 当项目中资源不是通用资源，且和此次要搭建的UI不是同一系统功能时，则复制一个该资源到此次系统并修改命名（加序号或加系统名）功能对应的资源目录（以避免一个系统界面预制体依赖的图集太多）​
@@ -117,7 +117,7 @@ root（节点类型Empty）为功能最上层父节点，其他节点都放在Ro
 | Bar_     | Bar              | sld_Bar_Health<br>img_Bar_Exp | 条状物。血条、经验条等。 |
 | Count_ / Num_ | Count/Number | txt_Count_Item<br>txt_Num_Gold | 数量/数字。用于显示数量的文本。 |
 结构示例：​
-![飞书文档 - 图片](https://i.postimg.cc/jqfZf1ZW/飞书文档_图片_1765245463.png)
+![飞书文档 - 图片](images/pimg_1765245463.png)
 #### 自测阶段（图集依赖数量检查）​
 
 优化要求：​
@@ -126,11 +126,11 @@ root（节点类型Empty）为功能最上层父节点，其他节点都放在Ro
 ​RG2.0版UI搭建流程及规范​
 ​
 
-![飞书文档 - 图片](https://i.postimg.cc/66ZYZPY2/飞书文档_图片_1765245471.png)
+![飞书文档 - 图片](images/pimg_1765245471.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/y88mLpyC/f5e86cb7-61e5-4159-8c21-7e7aafe3aa81.png)
+![飞书文档 - 图片](images/i_postimg_cc_f5e86cb7-61e5-4159-8c21-7e7aafe3aa81.png)
 
-![飞书文档 - 图片](https://i.postimg.cc/ZYNVNQVw/飞书文档_图片_1765245477.png)
+![飞书文档 - 图片](images/pimg_1765245477.png)
 
 # 三. UI通用控件搭建和使用​
 
@@ -163,10 +163,10 @@ root（节点类型Empty）为功能最上层父节点，其他节点都放在Ro
 - 优势：如果之后原始预制体的图标大小改了，变体也会自动更新（边框依然保持不存在）。​
 示例：​
 基础控件CommonBtn3​
-![飞书文档 - 图片](https://i.postimg.cc/jqfZf1Zv/飞书文档_图片_1765245482.png)
+![飞书文档 - 图片](images/pimg_1765245482.png)
 
 CommonBtn3变体→CommonBtn3_w300​
 一些特殊界面搭配，修改宽度为300​
-![飞书文档 - 图片](https://i.postimg.cc/mZ989n88/飞书文档_图片_1765245485.png)
+![飞书文档 - 图片](images/pimg_1765245485.png)
 备注：搭建RG2.0版界面时，相同功能界面创建预制体变体或复制为新预制体时，命名统一加“_v2”后缀（图片同理）​
 
