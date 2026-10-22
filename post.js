@@ -13,7 +13,7 @@
 
     function wrapCodeBlocks(html) {
         return html
-            .replace(/<pre><code class="language-(.*?)">([\\s\\S]*?)<\\/code><\\/pre>/g, (_, lang, code) => `
+            .replace(/<pre><code class="language-(.*?)">([\s\S]*?)<\/code><\/pre>/g, (_, lang, code) => `
 <div class="code-block-wrapper">
   <div class="code-block-header">
     <span class="code-language">${lang}</span>
@@ -23,7 +23,7 @@
   </div>
   <pre class="line-numbers language-${lang}"><code class="language-${lang}">${code}</code></pre>
 </div>`)
-            .replace(/<pre><code>([\\s\\S]*?)<\\/code><\\/pre>/g, (_, code) => `
+            .replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/g, (_, code) => `
 <div class="code-block-wrapper">
   <div class="code-block-header">
     <span class="code-language">Text</span>
@@ -60,11 +60,11 @@
                 throw new Error('Markdown文件为空');
             }
 
-            const content = markdownText.replace(/^---\\s*\\n([\\s\\S]*?)\\n---\\s*\\n/, '');
+            const content = markdownText.replace(/^---\s*\n([\s\S]*?)\n---\s*\n/, '');
             marked.setOptions({ breaks: true, gfm: true, smartypants: true });
 
             let html = marked.parse(content);
-            html = html.replace(/<(\\/?)h([1-5])(\\s[^>]*)?>/g, (_, closing, level, attrs = '') =>
+            html = html.replace(/<(\/?)h([1-5])(\s[^>]*)?>/g, (_, closing, level, attrs = '') =>
                 `<${closing}h${Number(level) + 1}${attrs}>`
             );
 
