@@ -1205,6 +1205,35 @@
         .tag-list {
             max-width: min(94%, 1080px);
             margin-bottom: 40px;
+        }        /* 侧边悬浮返回按钮 */
+        .side-back {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            min-height: 44px;
+            border: 1px solid var(--border-color, #ccc);
+            border-radius: 999px;
+            background: var(--card-bg, #fff);
+            color: var(--text-color, #333);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .side-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+        @media (max-width: 1400px) {
+            .side-back { left: 12px; bottom: 12px; }
+        }
+        @media (max-width: 768px) {
+            .side-back { left: 10px; bottom: 10px; padding: 0 12px; min-height: 40px; }
         }
     </style>
 </head>
@@ -1212,7 +1241,6 @@
     <header>
         <div class="header-inner">
             <div class="logo"><span>博客</span>世界</div>
-            <a href="index.html#blog" class="back-link"><i class="fas fa-arrow-left"></i>返回博客列表</a>
         </div>
     </header>
 
@@ -1621,5 +1649,6 @@
         loadAndRenderMarkdown();
     };
     </script>
+    <a href="index.html#blog" class="side-back" aria-label="返回博客列表"><i class="fas fa-arrow-left"></i>返回列表</a>
 </body>
 </html>
