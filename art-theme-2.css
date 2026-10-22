@@ -395,9 +395,12 @@ body > footer {
     color: var(--art-muted);
 }
 
-body > header .header-inner,
 .container {
-    max-width: 980px;
+    max-width: 1180px;
+}
+
+body > header .header-inner {
+    max-width: 1180px;
 }
 
 .container {
