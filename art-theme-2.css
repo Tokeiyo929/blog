@@ -197,8 +197,7 @@ body > header {
 .markdown-content,
 .article-cover,
 .loading-indicator,
-.error-container,
-.tag-list {
+.error-container {
     border: 1px solid var(--art-line);
     border-radius: var(--art-radius);
     background: var(--art-paper);
@@ -306,7 +305,6 @@ body > header {
 }
 
 .read-link,
-.back-link,
 .copy-button {
     border: 1px solid var(--art-ink);
     border-radius: 999px;
@@ -317,7 +315,6 @@ body > header {
 }
 
 .read-link:hover,
-.back-link:hover,
 .copy-button:hover {
     background: var(--art-rust);
     color: var(--art-ink);
@@ -482,22 +479,6 @@ body > header .header-inner {
     background: oklch(16% 0.045 318);
 }
 
-.tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    max-width: 74ch;
-    margin: 0 auto clamp(54px, 8vw, 96px);
-    padding: 16px;
-}
-
-.tag-list span {
-    border: 1px solid var(--art-plum);
-    border-radius: 999px;
-    background: transparent;
-    color: var(--art-plum);
-}
-
 .loading-indicator,
 .error-container,
 .empty-state {
@@ -518,7 +499,6 @@ body > header .header-inner {
 
     .markdown-content,
     .article-header,
-    .tag-list,
     .loading-indicator,
     .error-container {
         background: var(--art-paper);

@@ -1,0 +1,122 @@
+/* Article-page overrides shared by every generated post. */
+.article-header {
+    margin-top: 26px;
+    padding: 20px 22px;
+}
+
+.article-title {
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    line-height: 1.2;
+}
+
+.article-meta {
+    margin-top: 14px;
+    padding-top: 12px;
+}
+
+.article-cover {
+    margin-top: 16px;
+}
+
+.article-cover img {
+    height: clamp(160px, 24vw, 280px);
+}
+
+.markdown-content {
+    max-width: min(94%, 1080px);
+    margin: 32px auto;
+}
+
+.code-block-wrapper {
+    margin: 2em 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.code-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0.75em 1.25em;
+    background: #1a1a1a;
+    color: #e2e8f0;
+    font: 0.85rem 'SFMono-Regular', Consolas, monospace;
+}
+
+.copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4em 1em;
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 4px;
+    background: rgb(255 255 255 / 10%);
+    color: #fff;
+    cursor: pointer;
+}
+
+.copy-button:hover,
+.copy-button.copied {
+    background: var(--art-rust);
+}
+
+pre[class*='language-'] {
+    margin: 0 !important;
+}
+
+.loading-indicator,
+.error-container {
+    text-align: center;
+}
+
+.error-container[hidden],
+.markdown-content[hidden] {
+    display: none;
+}
+
+.side-back {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    z-index: 500;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    border: 1px solid var(--art-line);
+    border-left: 0;
+    border-radius: 0 10px 10px 0;
+    background: var(--art-paper);
+    color: var(--art-ink);
+    box-shadow: 2px 4px 14px oklch(10% 0.04 318 / 0.2);
+    font-size: 0.8rem;
+    line-height: 1.2;
+    text-decoration: none;
+    transform: translateY(-50%);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.side-back:hover {
+    transform: translateY(-50%) translateX(3px);
+    box-shadow: 4px 6px 18px oklch(10% 0.04 318 / 0.28);
+}
+
+.side-back:focus-visible {
+    outline: 3px solid var(--art-rust);
+    outline-offset: 2px;
+}
+
+.copy-button:focus-visible {
+    outline: 3px solid var(--art-rust);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .side-back {
+        padding: 10px 6px;
+        font-size: 0.72rem;
+    }
+}
+
