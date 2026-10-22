@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -1180,7 +1180,36 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="art-theme.css">
+    <link rel="stylesheet" href="art-theme-2.css">
+    <style>
+        /* 紧凑头部 + 宽正文 */
+        .article-header {
+            margin-top: 26px;
+            padding: 20px 22px;
+        }
+        .article-title {
+            font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+            line-height: 1.2;
+        }
+        .article-meta {
+            margin-top: 14px;
+            padding-top: 12px;
+        }
+        .article-cover {
+            margin-top: 16px;
+        }
+        .article-cover img {
+            height: clamp(160px, 24vw, 280px);
+        }
+        .markdown-content {
+            max-width: min(94%, 1080px);
+            margin: 32px auto;
+        }
+        .tag-list {
+            max-width: min(94%, 1080px);
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
     <header>
