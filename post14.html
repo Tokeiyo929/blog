@@ -1205,35 +1205,38 @@
         .tag-list {
             max-width: min(94%, 1080px);
             margin-bottom: 40px;
-        }        /* 侧边悬浮返回按钮 */
+        }                /* 侧边竖排返回按钮 */
         .side-back {
             position: fixed;
-            left: 18px;
-            bottom: 18px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 500;
             display: inline-flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            padding: 0 16px;
-            min-height: 44px;
+            gap: 6px;
+            padding: 14px 8px;
             border: 1px solid var(--border-color, #ccc);
-            border-radius: 999px;
+            border-left: 0;
+            border-radius: 0 10px 10px 0;
             background: var(--card-bg, #fff);
             color: var(--text-color, #333);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
-            font-size: 0.92rem;
+            box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.12);
+            font-size: 0.8rem;
+            line-height: 1.2;
             text-decoration: none;
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
-        .side-back:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        .side-back i {
+            font-size: 1rem;
         }
-        @media (max-width: 1400px) {
-            .side-back { left: 12px; bottom: 12px; }
+        .side-back:hover {
+            transform: translateY(-50%) translateX(3px);
+            box-shadow: 4px 6px 18px rgba(0, 0, 0, 0.16);
         }
         @media (max-width: 768px) {
-            .side-back { left: 10px; bottom: 10px; padding: 0 12px; min-height: 40px; }
+            .side-back { padding: 10px 6px; font-size: 0.72rem; }
         }
     </style>
 </head>
