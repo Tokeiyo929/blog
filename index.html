@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -206,17 +206,9 @@
 
         .layout {
             display: grid;
-            grid-template-columns: 260px minmax(0, 1fr);
             gap: 30px;
             align-items: start;
             padding: 12px 0 56px;
-        }
-
-        .sidebar {
-            position: sticky;
-            top: 94px;
-            display: grid;
-            gap: 18px;
         }
 
         .panel {
@@ -233,77 +225,6 @@
             padding: 16px 16px 12px;
             color: var(--primary-dark);
             font-weight: 750;
-        }
-
-        .category-list {
-            display: grid;
-            gap: 4px;
-            padding: 0 8px 10px;
-        }
-
-        .category-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 38px;
-            border: 0;
-            border-radius: 6px;
-            background: transparent;
-            color: var(--muted);
-            cursor: pointer;
-            padding: 0 10px;
-            text-align: left;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--surface-muted);
-            color: var(--primary-dark);
-        }
-
-        .category-btn.active {
-            box-shadow: inset 3px 0 0 var(--accent);
-        }
-
-        .category-name {
-            min-width: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .category-count {
-            color: var(--muted);
-            font-size: 0.82rem;
-        }
-
-        .recent-list {
-            display: grid;
-            gap: 12px;
-            padding: 0 16px 16px;
-        }
-
-        .recent-link {
-            display: grid;
-            gap: 4px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .recent-link:last-child {
-            border-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .recent-link strong {
-            color: var(--text);
-            font-size: 0.94rem;
-            line-height: 1.4;
-        }
-
-        .recent-link span {
-            color: var(--muted);
-            font-size: 0.82rem;
         }
 
         .content {
@@ -529,11 +450,6 @@
                 padding-top: 34px;
             }
 
-            .sidebar {
-                position: static;
-                grid-template-columns: 1fr;
-            }
-
             .featured-image {
                 min-height: 260px;
                 order: -1;
@@ -709,7 +625,7 @@
         }
 
         .layout {
-            grid-template-columns: 290px minmax(0, 1fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: 34px;
         }
 
@@ -726,30 +642,6 @@
         .panel-header {
             border-bottom: 2px solid var(--primary-dark);
             background: var(--surface-muted);
-        }
-
-        .category-btn {
-            min-height: 44px;
-            border-radius: 0;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--primary-dark);
-            color: #fffdf8;
-        }
-
-        .category-btn.active {
-            box-shadow: inset 5px 0 0 var(--accent);
-        }
-
-        .category-btn.active .category-count,
-        .category-btn:hover .category-count {
-            color: #fffdf8;
-        }
-
-        .recent-link {
-            padding: 10px 0 14px;
         }
 
         .featured {
@@ -1101,7 +993,7 @@
         }
 
         .layout {
-            grid-template-columns: 280px minmax(0, 1fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: 32px;
             padding-bottom: 72px;
         }
@@ -1120,23 +1012,6 @@
             border-bottom: 1px solid var(--line);
             background: transparent;
             color: var(--text);
-        }
-
-        .category-btn {
-            border-radius: var(--radius-small);
-            color: var(--muted);
-            transition: background-color 0.18s, color 0.18s, transform 0.18s;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--surface-muted);
-            color: var(--text);
-            transform: translateX(2px);
-        }
-
-        .category-btn.active {
-            box-shadow: inset 4px 0 0 var(--primary);
         }
 
         .featured {
@@ -1270,11 +1145,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .sidebar {
-                position: static;
-                grid-template-columns: 1fr;
-            }
-
             .featured-image {
                 border-left: 0;
                 border-bottom: 1px solid color-mix(in srgb, var(--bg), transparent 78%);
@@ -1326,7 +1196,7 @@
             <label class="search" for="search-input">
                 <i class="fas fa-magnifying-glass"></i>
                 <span class="visually-hidden">搜索文章</span>
-                <input id="search-input" type="search" placeholder="搜索文章标题、摘要、分类">
+                <input id="search-input" type="search" placeholder="搜索文章标题、摘要">
             </label>
 
             <div class="header-count">
@@ -1348,31 +1218,10 @@
                     <strong id="stat-posts">0</strong>
                     <span>文章</span>
                 </div>
-                <div class="stat">
-                    <strong id="stat-categories">0</strong>
-                    <span>分类</span>
-                </div>
             </div>
         </section>
 
         <div class="layout" id="blog">
-            <aside class="sidebar">
-                <section class="panel">
-                    <div class="panel-header">
-                        <span>分类</span>
-                        <i class="fas fa-folder-open"></i>
-                    </div>
-                    <div class="category-list" id="category-list"></div>
-                </section>
-
-                <section class="panel">
-                    <div class="panel-header">
-                        <span>最近更新</span>
-                        <i class="fas fa-clock-rotate-left"></i>
-                    </div>
-                    <div class="recent-list" id="recent-list"></div>
-                </section>
-            </aside>
 
             <section class="content">
                 <article class="featured" id="featured-post"></article>
@@ -1395,7 +1244,6 @@
     <script>
         const state = {
             posts: [],
-            activeCategory: '全部',
             query: ''
         };
 
@@ -1429,78 +1277,25 @@
         }
 
         function render() {
-            const categories = getCategories(state.posts);
             const filteredPosts = getFilteredPosts();
-
-            renderStats(categories);
-            renderCategories(categories);
-            renderRecentPosts(state.posts);
+            renderStats();
             renderFeatured(state.posts[0]);
             renderPostList(filteredPosts);
         }
-
-        function getCategories(posts) {
-            const counts = posts.reduce((map, post) => {
-                const category = normalizeCategory(post.category);
-                map.set(category, (map.get(category) || 0) + 1);
-                return map;
-            }, new Map());
-
-            return [
-                { name: '全部', count: posts.length },
-                ...Array.from(counts, ([name, count]) => ({ name, count }))
-                    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh-CN'))
-            ];
-        }
-
         function getFilteredPosts() {
             return state.posts.filter(post => {
-                const category = normalizeCategory(post.category);
-                const matchesCategory = state.activeCategory === '全部' || category === state.activeCategory;
                 const haystack = [
                     post.title,
                     post.excerpt,
-                    post.category,
                     post.date
                 ].join(' ').toLowerCase();
-                return matchesCategory && haystack.includes(state.query);
+                return haystack.includes(state.query);
             });
         }
 
-        function renderStats(categories) {
+        function renderStats() {
             document.getElementById('stat-posts').textContent = state.posts.length;
-            document.getElementById('stat-categories').textContent = Math.max(categories.length - 1, 0);
             document.getElementById('header-count').textContent = `${state.posts.length} 篇`;
-        }
-
-        function renderCategories(categories) {
-            const container = document.getElementById('category-list');
-            container.innerHTML = '';
-
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = `category-btn${category.name === state.activeCategory ? ' active' : ''}`;
-                button.type = 'button';
-                button.innerHTML = `
-                    <span class="category-name">${escapeHtml(category.name)}</span>
-                    <span class="category-count">${category.count}</span>
-                `;
-                button.addEventListener('click', () => {
-                    state.activeCategory = category.name;
-                    render();
-                });
-                container.appendChild(button);
-            });
-        }
-
-        function renderRecentPosts(posts) {
-            const container = document.getElementById('recent-list');
-            container.innerHTML = posts.slice(0, 5).map(post => `
-                <a class="recent-link" href="${escapeAttribute(post.link || '#')}">
-                    <strong>${escapeHtml(post.title || '无标题')}</strong>
-                    <span>${escapeHtml(post.date || '')}</span>
-                </a>
-            `).join('');
         }
 
         function renderFeatured(post) {
@@ -1522,7 +1317,6 @@
                         <div class="meta-row">
                             <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
                             <span><i class="fas fa-clock"></i>${escapeHtml(post.readTime || '')}</span>
-                            <span><i class="fas fa-folder"></i>${escapeHtml(normalizeCategory(post.category))}</span>
                         </div>
                         <a class="read-link" href="${escapeAttribute(post.link || '#')}">阅读全文 <i class="fas fa-arrow-right"></i></a>
                     </div>
@@ -1546,7 +1340,6 @@
                         <img class="post-thumb" src="${escapeAttribute(post.image || fallbackImage)}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
                     </a>
                     <div class="post-body">
-                        <span class="tag">${escapeHtml(normalizeCategory(post.category))}</span>
                         <h3 class="post-title">
                             <a href="${escapeAttribute(post.link || '#')}">${escapeHtml(post.title || '无标题')}</a>
                         </h3>
@@ -1558,10 +1351,6 @@
                     </div>
                 </article>
             `).join('');
-        }
-
-        function normalizeCategory(category) {
-            return String(category || '未分类').replace(/^\[|\]$/g, '') || '未分类';
         }
 
         function escapeHtml(value) {
