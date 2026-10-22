@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --art-ink: oklch(18% 0.055 318);
     --art-ink-2: oklch(24% 0.072 346);
     --art-plum: oklch(33% 0.09 334);
@@ -224,53 +224,10 @@ body > header {
     margin-left: 8px;
     color: var(--art-muted);
 }
-
 .layout {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(24px, 4vw, 48px);
     padding-bottom: clamp(70px, 10vw, 130px);
-}
-
-.sidebar {
-    top: 106px;
-}
-
-.panel {
-    overflow: hidden;
-}
-
-.panel-header {
-    border-bottom: 1px solid var(--art-line);
-    color: var(--art-ink);
-    font-family: "STKaiti", "KaiTi", "Songti SC", Georgia, serif;
-    font-size: 1.22rem;
-}
-
-.category-btn,
-.recent-link {
-    color: var(--muted);
-}
-
-.category-btn {
-    border-radius: 8px;
-}
-
-.category-btn:hover,
-.category-btn.active {
-    background: oklch(83% 0.075 38 / 0.32);
-    color: var(--art-ink);
-}
-
-.category-count {
-    color: var(--art-plum);
-}
-
-.recent-link {
-    border-top-color: var(--art-line);
-}
-
-.recent-link:hover {
-    color: var(--art-plum);
 }
 
 .featured {
@@ -586,10 +543,6 @@ body > header .header-inner,
 
     .hero {
         min-height: auto;
-    }
-
-    .sidebar {
-        position: static;
     }
 
     .section-bar {
