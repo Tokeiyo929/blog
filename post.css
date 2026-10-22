@@ -14,14 +14,6 @@
     padding-top: 12px;
 }
 
-.article-cover {
-    margin-top: 16px;
-}
-
-.article-cover img {
-    height: clamp(160px, 24vw, 280px);
-}
-
 .markdown-content {
     max-width: min(94%, 1080px);
     margin: 32px auto;

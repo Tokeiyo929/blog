@@ -15,7 +15,18 @@ import sys
 
 POST_FILE_PATTERN = re.compile(r'^post(\d+)\.html$')
 CONFIG_PATH = 'posts-config.json'
-DEFAULT_COVER_IMAGE = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1170&q=80"
+BLOG_CONFIG_PATH = 'blog_config.json'
+
+with open(BLOG_CONFIG_PATH, 'r', encoding='utf-8') as config_file:
+    BLOG_CONFIG = json.load(config_file)
+
+DEFAULT_CATEGORY = BLOG_CONFIG['default_category']
+DEFAULT_COVER_IMAGE = BLOG_CONFIG['default_cover_image']
+EXCERPT_LENGTH = BLOG_CONFIG['excerpt_length']
+MAX_EXCERPT_LINES = BLOG_CONFIG['max_excerpt_lines']
+CHINESE_READING_SPEED = BLOG_CONFIG['reading_speed_chinese']
+ENGLISH_READING_SPEED = BLOG_CONFIG['reading_speed_english']
+SUPPORTED_LANGUAGES = BLOG_CONFIG['supported_languages']
 
 def configure_stdio():
     """让 Windows 控制台也能稳定输出中文和图标"""
@@ -40,12 +51,7 @@ def get_all_post_files():
 
 def get_next_post_number():
     """获取下一个文章编号"""
-    post_files = get_all_post_files()
-    if not post_files:
-        return 1
-
-    numbers = [extract_post_number(f) for f in post_files]
-    return max(numbers) + 1 if numbers else 1
+    return max((extract_post_number(f) for f in get_all_post_files()), default=0) + 1
 
 def load_posts_config(config_path=CONFIG_PATH, warn=True):
     """读取 posts-config.json，缺失或损坏时返回默认结构"""
@@ -54,20 +60,15 @@ def load_posts_config(config_path=CONFIG_PATH, warn=True):
             print(f"未找到 {config_path}，将创建新配置文件")
         return new_posts_config()
 
-    try:
-        with open(config_path, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-    except json.JSONDecodeError:
-        if warn:
-            print(f"警告: {config_path} 格式错误，将创建新配置")
-        return new_posts_config()
+    with open(config_path, 'r', encoding='utf-8') as f:
+        config = json.load(f)
 
     if not isinstance(config, dict):
-        return new_posts_config()
+        raise ValueError(f'{config_path} must contain an object')
 
     posts = config.get('posts')
     if not isinstance(posts, list):
-        config['posts'] = []
+        raise ValueError(f'{config_path}.posts must be a list')
     return config
 
 def save_posts_config(config, config_path=CONFIG_PATH):
@@ -85,7 +86,7 @@ def build_post_config(post_data, post_filename):
         "readTime": f"{post_data.get('reading_time', 5)}分钟",
         "category": post_data.get('category', '未分类'),
         "mode": "🔄",
-        "image": post_data.get('cover_image', DEFAULT_COVER_IMAGE),
+        "image": post_data.get('cover_image') or DEFAULT_COVER_IMAGE,
         "link": post_filename
     }
 
@@ -93,17 +94,13 @@ def calculate_reading_time(content):
     """根据内容估算阅读时间"""
     chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', content))
     english_words = len(re.findall(r'[a-zA-Z]+', content))
-    minutes = (chinese_chars / 300) + (english_words / 200)
+    minutes = (chinese_chars / CHINESE_READING_SPEED) + (english_words / ENGLISH_READING_SPEED)
     return max(1, int(minutes))
 
 def parse_markdown_file(md_file_path):
     """解析 Markdown 文件，提取元数据和内容"""
-    if not os.path.exists(md_file_path):
-        print(f"错误: 找不到文件 {md_file_path}")
-        return None
-    
     with open(md_file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+        content = f.read().lstrip('\ufeff')
     
     post_data = {}
     
@@ -148,7 +145,7 @@ def parse_markdown_file(md_file_path):
         post_data['title'] = base_name
     
     if 'category' not in post_data:
-        post_data['category'] = '其他'
+        post_data['category'] = DEFAULT_CATEGORY
     
     if 'date' not in post_data:
         post_data['date'] = datetime.now().strftime("%Y年%m月%d日")
@@ -160,10 +157,10 @@ def parse_markdown_file(md_file_path):
         # 从内容前几行提取摘要
         content_lines = post_data['content'].split('\n')
         excerpt = ''
-        for line in content_lines[:3]:
+        for line in content_lines[:MAX_EXCERPT_LINES]:
             line = line.strip()
             if line and not line.startswith('#'):
-                excerpt = line[:100]  # 取前100个字符
+                excerpt = line[:EXCERPT_LENGTH]
                 break
         post_data['excerpt'] = excerpt if excerpt else "点击阅读全文..."
     
@@ -183,7 +180,10 @@ def create_post_html(post_data, post_filename):
     md_filename = post_filename.replace('.html', '.md')
     title = escape(str(post_data.get('title', '无标题')), quote=True)
     date = escape(str(post_data.get('date', '')), quote=True)
-    cover_image = escape(str(post_data.get('cover_image', DEFAULT_COVER_IMAGE)), quote=True)
+    prism_languages = '\n'.join(
+        f'    <script defer src="vendor/prism/components/prism-{language}.min.js"></script>'
+        for language in SUPPORTED_LANGUAGES
+    )
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -191,27 +191,17 @@ def create_post_html(post_data, post_filename):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' https: data:; connect-src 'self' https://cdn.jsdelivr.net; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' https: data:; connect-src 'self'; upgrade-insecure-requests">
     <title>{title}</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/marked@18.0.5/lib/marked.umd.js" integrity="sha384-ZD0fTOwPMHi7zM6WTVIWJR21I07lq0ccnqz3J6WMvQKG9thh4y7TA1QE6PJu0Af8" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.4.10/dist/purify.min.js" integrity="sha384-eguRoJERj8ghOpzO//Rl7+ScQsQIR1cH+ajll7+fG+IpbNPlkZsQn9h8ccr+wPXx" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" integrity="sha384-wFjoQjtV1y5jVHbt0p35Ui8aV8GVpEZkyF99OXWqP/eNJDU93D3Ugxkoyh6Y2I4A" crossorigin="anonymous">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha384-06z5D//U/xpvxZHuUz92xBvq3DqBBFi7Up53HRrbV7Jlv7Yvh/MZ7oenfUe9iCEt" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha384-WJdEkJKrbsqw0evQ4GB6mlsKe5cGTxBOw4KAEIa52ZLB7DDpliGkwdme/HMa5n1m" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" integrity="sha384-D44bgYYKvaiDh4cOGlj1dbSDpSctn2FSUj118HZGmZEShZcO2v//Q5vvhNy206pp" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" integrity="sha384-0mV13Neu0xhJFyl+HV43C+XiR13bGSeL7D0/7e6hK7sJgvyvK6HVjeQwmvXTstY" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" integrity="sha384-9WmlN8ABpoFSSHvBGGjhvB3E/D8UkNB9HpLJjBQFC2VSQsM1odiQDv4NbEo+7l15" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js" integrity="sha384-RhrmFFMb0ZCHImjFMpR/UE3VEtIVTCtNrtKqXQCzqXZNJala02N3UbVhi+qzw3CY" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js" integrity="sha384-s888ApkYHxfPsp8n81g77Unl/0XYnYltLvWbwqKHcheRE8/dZPlT4IjW3mRGv/Hd" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js" integrity="sha384-AKAiycghK0jDCjD+aavMHzDkLzRR7Yzcwh3+xL/295cvyVMe+cxQfyQC8xxGGcI8" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js" integrity="sha384-nMKYzg6yfy0qgpaRpVhHvZp0gT5sgvmZYlFC0XAKZSp+zFUB9rE6zsdmIEiou4bV" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha384-6QJu8apxMmB9TiPVWzYKF5pRgKcz7snO0/QU+MrWmgBLECQjoa6erxX2VQ5t41Jd" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha384-nUkTNLI8COlMCRJ0FHIdX76If83145OTCLUx4gQyfnO0gGeO/sD9czGEUBxtkcUv" crossorigin="anonymous">
+    <link rel="stylesheet" href="vendor/fontawesome/all.min.css">
+    <script defer src="vendor/marked.umd.js"></script>
+    <script defer src="vendor/purify.min.js"></script>
+    <link rel="stylesheet" href="vendor/prism/themes/prism-tomorrow.min.css">
+    <script defer src="vendor/prism/prism.min.js"></script>
+{prism_languages}
+    <script defer src="vendor/prism/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="vendor/prism/plugins/line-numbers/prism-line-numbers.min.css">
     <link rel="stylesheet" href="art-theme-2.css">
     <link rel="stylesheet" href="post.css">
     <script defer src="post.js"></script>
@@ -228,9 +218,6 @@ def create_post_html(post_data, post_filename):
                     </div>
                 </div>
             </header>
-            <div class="article-cover">
-                <img src="{cover_image}" alt="{title}" width="1170" height="780" loading="eager" fetchpriority="high">
-            </div>
             <div class="loading-indicator" id="loading">
                 <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
                 <p>正在加载文章内容...</p>
@@ -278,27 +265,10 @@ def parse_existing_post(post_filename):
     if title_match:
         post_data['title'] = unescape(title_match.group(1))
     
-    # 提取分类
-    category_match = re.search(r'<i class="fas fa-folder"></i>\s*<span>(.*?)</span>', content)
-    if category_match:
-        post_data['category'] = unescape(category_match.group(1))
-    
     # 提取日期
     date_match = re.search(r'<i class="fas fa-calendar-alt"></i>\s*<span>(.*?)</span>', content)
     if date_match:
         post_data['date'] = unescape(date_match.group(1))
-    
-    # 提取封面图片
-    img_match = re.search(r'<img src="(.*?)" alt=', content)
-    if img_match:
-        post_data['cover_image'] = unescape(img_match.group(1))
-    
-    # 提取标签
-    tags_match = re.search(r'<div class="tag-list">(.*?)</div>', content, re.DOTALL)
-    if tags_match:
-        tags_html = tags_match.group(1)
-        tags = re.findall(r'<span>(.*?)</span>', tags_html)
-        post_data['tags'] = [unescape(tag) for tag in tags]
     
     # 从 posts-config.json 提取摘要
     post_data['excerpt'] = get_excerpt_from_config(post_filename)
@@ -374,20 +344,14 @@ def delete_post(post_filename):
         print(f"错误: 找不到文件 {post_filename}")
         return False
     
-    try:
-        existing_data = parse_existing_post(post_filename)
-        title = existing_data.get('title', '未知标题') if existing_data else '未知标题'
-        print(f"\n将要删除文章: {post_filename}")
-        print(f"标题: {title}")
-        confirm = input("确认删除? (y/n，默认: n): ").strip().lower()
-        if confirm != 'y':
-            print("操作已取消")
-            return False
-    except Exception:
-        confirm = input(f"\n确认删除 {post_filename}? (y/n，默认: n): ").strip().lower()
-        if confirm != 'y':
-            print("操作已取消")
-            return False
+    existing_data = parse_existing_post(post_filename)
+    title = existing_data.get('title', '未知标题')
+    print(f"\n将要删除文章: {post_filename}")
+    print(f"标题: {title}")
+    confirm = input("确认删除? (y/n，默认: n): ").strip().lower()
+    if confirm != 'y':
+        print("操作已取消")
+        return False
     
     # 从 posts-config.json 中删除
     print("正在从 posts-config.json 中删除...")
@@ -493,13 +457,7 @@ def sync_all_posts():
             
             md_file = post_file.replace('.html', '.md')
             if os.path.exists(md_file):
-                md_data = parse_markdown_file(md_file)
-                if md_data:
-                    post_data.update({
-                        'excerpt': md_data.get('excerpt', post_data.get('excerpt')),
-                        'reading_time': md_data.get('reading_time', 5),
-                    })
-            post_data.setdefault('reading_time', 5)
+                post_data.update(parse_markdown_file(md_file))
             post_config = build_post_config(post_data, post_file)
             
             config['posts'].append(post_config)

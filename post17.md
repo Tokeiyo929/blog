@@ -2,7 +2,6 @@
 title: SXXM - Spine动画导出&引擎/FGUI配置
 category: [代码解析]
 date: 2025-12-03
-cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
 tags: [美术, 程序]
 ---

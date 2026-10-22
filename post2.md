@@ -2,7 +2,6 @@
 title: 通用UI组件文档与备注
 category: [代码解析]
 date: 2025-12-03
-cover_image: images/images_unsplash_com_photo-1555066931-4365d14bab8c.png
 excerpt: 为了能够快速复用组件，请大伙尽量写的能够复用
 tags: [美术, 程序]
 ---
