@@ -140,29 +140,6 @@
             white-space: nowrap;
         }
 
-        .hero {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 320px;
-            gap: 30px;
-            align-items: end;
-            padding: 48px 0 28px;
-        }
-
-        .hero-copy h1 {
-            max-width: 720px;
-            font-size: clamp(2.05rem, 5vw, 4.2rem);
-            line-height: 1.05;
-            color: var(--primary-dark);
-            letter-spacing: 0;
-        }
-
-        .hero-copy p {
-            max-width: 680px;
-            margin-top: 18px;
-            color: var(--muted);
-            font-size: 1.04rem;
-        }
-
         .layout {
             display: grid;
             gap: 30px;
@@ -331,13 +308,6 @@
             text-align: center;
         }
 
-        .site-footer {
-            border-top: 1px solid var(--line);
-            color: var(--muted);
-            padding: 26px 0;
-            font-size: 0.9rem;
-        }
-
         @media (max-width: 960px) {
             .header-inner {
                 grid-template-columns: 1fr;
@@ -348,10 +318,6 @@
             .search {
                 justify-self: stretch;
                 width: 100%;
-            }
-
-            .hero {
-                padding-top: 34px;
             }
         }
 
@@ -450,31 +416,6 @@
             box-shadow: 5px 5px 0 rgba(184, 76, 39, 0.22);
         }
 
-        .hero {
-            grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
-            align-items: stretch;
-            padding: 72px 0 42px;
-        }
-
-        .hero-copy {
-            border-left: 8px solid var(--accent);
-            padding-left: 28px;
-        }
-
-        .hero-copy h1 {
-            max-width: 780px;
-            color: var(--primary-dark);
-            font-size: clamp(2.8rem, 7vw, 5.8rem);
-            line-height: 0.96;
-        }
-
-        .hero-copy p {
-            max-width: 620px;
-            margin-top: 24px;
-            color: var(--text);
-            font-size: 1.15rem;
-        }
-
         .layout {
             grid-template-columns: minmax(0, 1fr);
             gap: 34px;
@@ -549,10 +490,6 @@
                 justify-self: stretch;
                 width: 100%;
             }
-
-            .hero-copy {
-                padding-left: 20px;
-            }
         }
 
         @media (max-width: 640px) {
@@ -568,14 +505,6 @@
                 width: 40px;
                 height: 40px;
                 box-shadow: 4px 4px 0 var(--primary-dark);
-            }
-
-            .hero {
-                padding: 38px 0 28px;
-            }
-
-            .hero-copy h1 {
-                font-size: clamp(2.25rem, 15vw, 3.35rem);
             }
 
             .post-card > a {
@@ -689,32 +618,6 @@
             box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary), transparent 82%);
         }
 
-        .hero {
-            min-height: clamp(360px, 48dvh, 520px);
-            grid-template-columns: minmax(0, 1fr) minmax(240px, 310px);
-            align-items: center;
-            padding: 62px 0 44px;
-        }
-
-        .hero-copy {
-            max-width: 820px;
-            border-left: 0;
-            padding-left: 0;
-        }
-
-        .hero-copy h1 {
-            color: var(--text);
-            font-size: clamp(2.55rem, 7vw, 5.2rem);
-            line-height: 1;
-            text-wrap: balance;
-        }
-
-        .hero-copy p {
-            max-width: 600px;
-            color: var(--muted);
-            font-size: clamp(1rem, 1.6vw, 1.18rem);
-        }
-
         .layout {
             grid-template-columns: minmax(0, 1fr);
             gap: 32px;
@@ -770,11 +673,6 @@
             color: var(--text);
         }
 
-        .site-footer {
-            border-top: 1px solid var(--line);
-            background: color-mix(in srgb, var(--surface), transparent 35%);
-        }
-
         @media (prefers-reduced-motion: no-preference) {
         }
 
@@ -790,28 +688,11 @@
         }
 
         @media (max-width: 960px) {
-            .hero,
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                min-height: auto;
-                padding-top: 40px;
-            }
         }
 
         @media (max-width: 640px) {
             .shell {
                 width: min(100% - 28px, 1220px);
-            }
-
-            .hero-copy h1 {
-                font-size: clamp(2.25rem, 13vw, 3.25rem);
-            }
-
-            .hero-copy p {
-                max-width: 34ch;
             }
 
             .post-card > a {
@@ -867,12 +748,6 @@
     </header>
 
     <main class="shell">
-        <section class="hero">
-            <div class="hero-copy">
-                <h1>记录项目、代码与工程经验</h1>
-                <p>把实践中的问题、方案和复盘整理成文章，方便回看，也方便继续迭代。</p>
-            </div>
-        </section>
 
         <div class="layout" id="blog">
 
@@ -890,10 +765,6 @@
         </div>
     </main>
 
-    <footer class="site-footer">
-        <div class="shell">© <span id="year"></span> 技术博客</div>
-    </footer>
-
     <script>
         const state = {
             posts: [],
@@ -903,7 +774,6 @@
         const fallbackImage = 'images/img_001_001.jpg';
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('year').textContent = new Date().getFullYear();
             document.getElementById('search-input').addEventListener('input', event => {
                 state.query = event.target.value.trim().toLowerCase();
                 render();
