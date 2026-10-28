@@ -181,24 +181,6 @@
             gap: 6px;
         }
 
-        .section-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            padding-top: 2px;
-        }
-
-        .section-bar h2 {
-            color: var(--primary-dark);
-            font-size: 1.35rem;
-        }
-
-        .result-count {
-            color: var(--muted);
-            font-size: 0.92rem;
-        }
-
         .post-list {
             display: grid;
             gap: 14px;
@@ -325,11 +307,6 @@
 
             .post-body {
                 padding: 0 18px 18px;
-            }
-
-            .section-bar {
-                align-items: flex-start;
-                flex-direction: column;
             }
         }
 
@@ -599,11 +576,6 @@
             color: var(--primary);
         }
 
-        .section-bar h2 {
-            color: var(--text);
-            font-size: clamp(1.28rem, 2vw, 1.65rem);
-        }
-
         .post-list {
             gap: 18px;
         }
@@ -725,12 +697,6 @@
         <div class="layout" id="blog">
 
             <section class="content">
-                
-
-                <div class="section-bar">
-                    <h2>全部文章</h2>
-                    <span class="result-count" id="result-count">正在加载...</span>
-                </div>
 
                 <div class="post-list" id="post-list"></div>
                 <div class="empty-state" id="empty-state">没有找到匹配的文章</div>
@@ -766,7 +732,6 @@
                 render();
             } catch (error) {
                 console.error(error);
-                document.getElementById('result-count').textContent = '加载失败';
                 document.getElementById('empty-state').style.display = 'block';
                 document.getElementById('empty-state').textContent = '文章配置加载失败';
             }
@@ -792,7 +757,6 @@
             const container = document.getElementById('post-list');
             const emptyState = document.getElementById('empty-state');
 
-            document.getElementById('result-count').textContent = `${posts.length} 篇文章`;
             emptyState.style.display = posts.length ? 'none' : 'block';
 
             container.innerHTML = posts.map(post => `
