@@ -710,8 +710,6 @@
             query: ''
         };
 
-        const fallbackImage = 'images/img_001_001.jpg';
-
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('search-input').addEventListener('input', event => {
                 state.query = event.target.value.trim().toLowerCase();
@@ -807,7 +805,7 @@
             container.innerHTML = posts.map(post => `
                 <article class="post-card">
                     <a href="${escapeAttribute(post.link || '#')}" aria-label="${escapeAttribute(post.title || '阅读全文')}">
-                        <img class="post-thumb" src="${escapeAttribute(post.imageCandidates[0] || fallbackImage)}" data-candidates="${escapeAttribute(JSON.stringify((post.imageCandidates || []).slice(1)))}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
+                        <img class="post-thumb" src="${escapeAttribute(post.imageCandidates[0])}" data-candidates="${escapeAttribute(JSON.stringify((post.imageCandidates || []).slice(1)))}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
                     </a>
                     <div class="post-body">
                         <h3 class="post-title">
@@ -828,9 +826,10 @@
                     if (candidates.length) {
                         img.dataset.candidates = JSON.stringify(candidates.slice(1));
                         img.src = candidates[0];
-                    } else if (!img.dataset.fallbackDone) {
-                        img.dataset.fallbackDone = '1';
-                        img.src = fallbackImage;
+                    } else {
+                        // 三种扩展名都不存在：这篇文章没有封面，整卡变纯文本
+                        const card = img.closest('.post-card');
+                        if (card) card.classList.add('no-cover');
                     }
                 });
             });

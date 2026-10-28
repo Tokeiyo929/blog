@@ -330,6 +330,15 @@ body > header {
     inset: 0;
 }
 
+/* 没有封面的文章：隐藏图片列，卡片变纯文本单列 */
+.post-card.no-cover {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.post-card.no-cover > a {
+    display: none;
+}
+
 .post-card:hover {
     border-color: var(--art-rust);
     transform: translateY(-5px);
