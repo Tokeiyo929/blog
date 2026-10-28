@@ -317,9 +317,17 @@ body > header {
 }
 
 .post-card {
+    position: relative;
     overflow: hidden;
     transform: translateY(0);
     transition: transform 0.35s var(--art-ease), border-color 0.35s var(--art-ease);
+}
+
+/* 整卡可点：标题链接的伪元素铺满卡片 */
+.post-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
 }
 
 .post-card:hover {
