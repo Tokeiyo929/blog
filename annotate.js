@@ -93,12 +93,10 @@
     function closePop() {
         if (pop) { pop.remove(); pop = null; }
     }
-    function openPop(rect, build) {
-        closePop();
-        pop = document.createElement('div');
-        pop.className = 'anno-pop';
-        build(pop);
-        document.body.append(pop);
+    // getRect() 返回锚点的当前视口坐标；返回 null 时保持原位
+    function placePop(getRect) {
+        const rect = getRect();
+        if (!rect || (!rect.top && !rect.left && !rect.width && !rect.height)) return;
         const pad = 8;
         let x = rect.left;
         let y = rect.bottom + pad;
@@ -109,15 +107,25 @@
         pop.style.left = `${x}px`;
         pop.style.top = `${y}px`;
     }
-    // 用 mousedown 关闭：拖选结束的尾部 click 不会误关气泡，弹层内点击（如切编辑框）也不会关
+    function openPop(getRect, build) {
+        closePop();
+        pop = document.createElement('div');
+        pop.className = 'anno-pop';
+        build(pop);
+        document.body.append(pop);
+        pop._getRect = getRect;
+        placePop(getRect);
+    }
+    // 弹层外按下才关闭；正文内的按下（含重新选字）不关，避免误闪
     document.addEventListener('mousedown', e => {
-        if (pop && !pop.contains(e.target)) closePop();
+        if (pop && !pop.contains(e.target) && !content.contains(e.target)) closePop();
     });
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closePop();
     });
+    // 滚动跟随重新定位而不是关闭：触控板惯性滚动不会让弹窗闪消
     window.addEventListener('scroll', () => {
-        if (pop) closePop();
+        if (pop && pop._getRect) placePop(pop._getRect);
     }, { passive: true });
 
     // ---------- 选字 → 添加批注 ----------
@@ -138,8 +146,8 @@
             const start = startRaw + lead;
             const end = endRaw - trail;
             if (end <= start) return;
-            stash = { map, start, end, rect: range.getBoundingClientRect() };
-            openPop(stash.rect, el => {
+            stash = { map, start, end, range: range.cloneRange() };
+            openPop(() => (stash && stash.range ? stash.range.getBoundingClientRect() : null), el => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'anno-bubble';
@@ -152,7 +160,7 @@
 
     function showEditor() {
         if (!stash) return;
-        openPop(stash.rect, el => {
+        openPop(() => (stash && stash.range ? stash.range.getBoundingClientRect() : null), el => {
             const ta = document.createElement('textarea');
             ta.className = 'anno-input';
             ta.placeholder = '输入批注内容…';
@@ -176,7 +184,7 @@
             });
             row.append(save, cancel);
             el.append(ta, row);
-            ta.focus();
+            ta.focus({ preventScroll: true });
         });
     }
 
@@ -210,7 +218,7 @@
         if (!mark) return;
         const a = loadMine().find(x => x.id === mark.dataset.annoId);
         if (!a) return;
-        openPop(mark.getBoundingClientRect(), el => {
+        openPop(() => (mark.isConnected ? mark.getBoundingClientRect() : null), el => {
             const note = document.createElement('div');
             note.className = 'anno-note';
             note.textContent = a.note;
