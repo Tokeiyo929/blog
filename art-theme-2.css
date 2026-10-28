@@ -42,24 +42,10 @@ body {
     position: relative;
     overflow-x: hidden;
     min-height: 100vh;
-    background:
-        linear-gradient(126deg, oklch(18% 0.055 318) 0 34%, oklch(28% 0.09 340) 34% 44%, oklch(20% 0.06 300) 44% 100%),
-        var(--art-ink);
+    background: var(--art-ink);
     color: var(--art-paper);
     font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     line-height: 1.72;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-        linear-gradient(112deg, transparent 0 52%, oklch(62% 0.16 38 / 0.22) 52% 62%, transparent 62%),
-        linear-gradient(28deg, oklch(74% 0.1 216 / 0.16), transparent 38%),
-        linear-gradient(165deg, transparent 0 68%, oklch(55% 0.09 155 / 0.2) 68% 78%, transparent 78%);
 }
 
 a {
@@ -491,12 +477,6 @@ body > header .header-inner {
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background:
-            linear-gradient(126deg, oklch(18% 0.055 318) 0 34%, oklch(28% 0.09 340) 34% 44%, oklch(20% 0.06 300) 44% 100%),
-            var(--art-ink);
-    }
-
     .markdown-content,
     .article-header,
     .loading-indicator,
