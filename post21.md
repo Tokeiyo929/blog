@@ -10,8 +10,6 @@ tags: [程序, UI]
 
 物品栏、武器列表、奖励弹窗这类 UI，图标都是摆在一个固定大小的底框（格子）里。但美术给出的图标资源尺寸并不统一：有 101×90 的炮塔图，也有几十像素的小图标，还有接近方形的大图。如果直接摆进格子里，大图就会溢出底框，UI 直接穿帮。
 
-![游戏内效果：不同尺寸图标都限制在格子内](images/img_021_001.png)
-
 解决思路就一句话：**图片超过限制尺寸时，等比缩放到限制以内**。
 
 ## 二、原理：长边压到固定值
@@ -78,8 +76,6 @@ export default class ImgFixedSize extends cc.Component {
 1. **监听 SIZE_CHANGED，而不是只在 onLoad 算一次**。图标经常是运行时动态换的（换皮肤、换品质、奖励弹窗按奖励类型换图）。`setSpriteFrame` 之后节点尺寸变化，SIZE_CHANGED 触发，自动重新缩放，调用方完全不用关心适配这件事。
 2. **property 的 setter 里也调了一次 onSizeChanged**。在编辑器里调 `fixedSize` 参数时立刻能看到缩放效果，不用进游戏验证。
 
-![WeaponItemCommon 的 icon 节点挂 ImgFixedSize，固定尺寸 = 100](images/img_021_002.png)
-
 项目里的使用位置：
 
 | 预制体 | 节点 | fixedSize | 场景 |
@@ -94,8 +90,6 @@ export default class ImgFixedSize extends cc.Component {
 缩放按节点的 width/height 计算，而节点尺寸来自图片的**完整尺寸**——包括四周的透明像素。如果图标内容很小、周围一圈透明，量出来的尺寸会比肉眼看到的大，缩放后图标显得偏小。
 
 解决办法：Sprite 的 SizeMode 设为 TRIMMED 并勾选 Trim，让节点尺寸取"裁掉透明像素后"的有效大小。项目里的图标纹理导入设置 `trimType` 默认就是 auto，配合 TRIMMED 使用即可。
-
-![Sprite 的 SizeMode / Trim 设置](images/img_021_003.png)
 
 ## 五、小结
 
