@@ -1,6 +1,16 @@
 {
     "posts":  [
                   {
+                      "id":  21,
+                      "title":  "图片尺寸适配组件使用文档",
+                      "excerpt":  "物品栏、奖励弹窗里的图标尺寸不一，超出底框就会穿帮。结合项目实际用例，讲清楚 ImgFixedSize、InsetByScale、FullByScale 三个缩放适配组件的原理与区别。",
+                      "date":  "2026-10-28",
+                      "category":  "[代码解析]",
+                      "mode":  "🔄",
+                      "image":  "images/img_001_001.jpg",
+                      "link":  "post21.html"
+                  },
+                  {
                       "id":  20,
                       "title":  "RG场景地编规范​",
                       "excerpt":  "本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。",
