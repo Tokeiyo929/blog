@@ -342,9 +342,9 @@ body > header {
 
 .tag,
 .mode-badge {
-    border: 1px solid oklch(45% 0.09 334 / 0.42);
+    border: 1px solid oklch(45% 0.09 255 / 0.42);
     border-radius: 999px;
-    background: oklch(88% 0.08 38 / 0.34);
+    background: oklch(88% 0.06 255 / 0.34);
     color: var(--art-plum);
 }
 
@@ -363,7 +363,7 @@ body > header {
 .site-footer,
 body > footer {
     border-top: 1px solid oklch(96% 0.014 86 / 0.16);
-    background: oklch(11% 0.035 318);
+    background: oklch(11% 0.012 260);
     color: var(--art-muted);
 }
 
