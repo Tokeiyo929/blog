@@ -21,11 +21,7 @@ with open(BLOG_CONFIG_PATH, 'r', encoding='utf-8') as config_file:
     BLOG_CONFIG = json.load(config_file)
 
 DEFAULT_CATEGORY = BLOG_CONFIG['default_category']
-DEFAULT_COVER_IMAGE = BLOG_CONFIG['default_cover_image']
 EXCERPT_LENGTH = BLOG_CONFIG['excerpt_length']
-MAX_EXCERPT_LINES = BLOG_CONFIG['max_excerpt_lines']
-CHINESE_READING_SPEED = BLOG_CONFIG['reading_speed_chinese']
-ENGLISH_READING_SPEED = BLOG_CONFIG['reading_speed_english']
 SUPPORTED_LANGUAGES = BLOG_CONFIG['supported_languages']
 
 def configure_stdio():
@@ -76,36 +72,59 @@ def save_posts_config(config, config_path=CONFIG_PATH):
     with open(config_path, 'w', encoding='utf-8') as f:
         json.dump(config, f, ensure_ascii=False, indent=2)
 
+def get_config_post(post_number):
+    if post_number is None:
+        return None
+    return next(
+        (post for post in load_posts_config(warn=False).get('posts', [])
+         if post.get('id') == post_number),
+        None,
+    )
+
 def build_post_config(post_data, post_filename):
     """构建首页使用的文章配置对象"""
-    return {
+    post_config = {
         "id": post_data.get('post_number', 0),
         "title": post_data.get('title', '无标题'),
-        "excerpt": post_data.get('excerpt') or '暂无摘要',
+        "excerpt": post_data.get('excerpt') or extract_excerpt(post_data.get('content', '')),
         "date": post_data.get('date', datetime.now().strftime("%Y年%m月%d日")),
-        "readTime": f"{post_data.get('reading_time', 5)}分钟",
-        "category": post_data.get('category', '未分类'),
-        "mode": "🔄",
-        "image": post_data.get('cover_image') or DEFAULT_COVER_IMAGE,
+        "category": post_data.get('category', DEFAULT_CATEGORY),
+        "project": post_data.get('project', ''),
         "link": post_filename
     }
+    if post_data.get('image'):
+        post_config['image'] = post_data['image']
+    return post_config
 
-def calculate_reading_time(content):
-    """根据内容估算阅读时间"""
-    chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', content))
-    english_words = len(re.findall(r'[a-zA-Z]+', content))
-    minutes = (chinese_chars / CHINESE_READING_SPEED) + (english_words / ENGLISH_READING_SPEED)
-    return max(1, int(minutes))
+def extract_excerpt(content):
+    for line in content.splitlines():
+        text = line.strip()
+        if not text or text.startswith(('#', '```', '![', '-', '>', '|')):
+            continue
+        text = re.sub(r'!\[[^]]*\]\([^)]*\)', '', text)
+        text = re.sub(r'\[([^]]*)\]\([^)]*\)', r'\1', text)
+        text = re.sub(r'[*`~]', '', text).strip()
+        if text:
+            return text[:EXCERPT_LENGTH] + ('…' if len(text) > EXCERPT_LENGTH else '')
+    return ''
+
+def extract_first_image(content):
+    match = re.search(r'!\[[^]]*\]\(([^)\s]+)', content)
+    return match.group(1) if match else None
 
 def parse_markdown_file(md_file_path):
     """解析 Markdown 文件，提取元数据和内容"""
     with open(md_file_path, 'r', encoding='utf-8') as f:
         content = f.read().lstrip('\ufeff')
     
-    post_data = {}
+    post_data = {'content': content.strip()}
     
     # 检查是否有 YAML front matter
-    front_matter_match = re.match(r'^---\s*\n(.*?)\n---\s*\n(.*)$', content, re.DOTALL)
+    front_matter_match = re.match(
+        r'^---\s*\n((?:[A-Za-z_][\w-]*\s*:[^\r\n]*\r?\n)+)---\s*\n(.*)$',
+        content,
+        re.DOTALL,
+    )
     if front_matter_match:
         # 有 front matter，解析元数据
         front_matter = front_matter_match.group(1)
@@ -126,15 +145,11 @@ def parse_markdown_file(md_file_path):
                 elif key == 'date':
                     post_data['date'] = value
                 elif key == 'cover_image':
-                    post_data['cover_image'] = value
-                elif key == 'excerpt':
-                    post_data['excerpt'] = value
-                elif key == 'tags':
-                    post_data['tags'] = [tag.strip() for tag in value.split(',') if tag.strip()]
+                    post_data['image'] = value
+                elif key == 'project':
+                    post_data['project'] = value
     else:
         # 没有 front matter，使用文件名和默认值
-        post_data['content'] = content.strip()
-        
         # 从文件名提取标题（去掉扩展名）
         base_name = os.path.splitext(os.path.basename(md_file_path))[0]
         post_data['title'] = base_name
@@ -150,28 +165,16 @@ def parse_markdown_file(md_file_path):
     if 'date' not in post_data:
         post_data['date'] = datetime.now().strftime("%Y年%m月%d日")
     
-    if 'cover_image' not in post_data:
-        post_data['cover_image'] = DEFAULT_COVER_IMAGE
-    
-    if 'excerpt' not in post_data:
-        # 从内容前几行提取摘要
-        content_lines = post_data['content'].split('\n')
-        excerpt = ''
-        for line in content_lines[:MAX_EXCERPT_LINES]:
-            line = line.strip()
-            if line and not line.startswith('#'):
-                excerpt = line[:EXCERPT_LENGTH]
-                break
-        post_data['excerpt'] = excerpt if excerpt else "点击阅读全文..."
-    
-    if 'tags' not in post_data:
-        post_data['tags'] = []
-    
-    # 计算阅读时间
-    post_data['reading_time'] = calculate_reading_time(post_data['content'])
-    
-    # 动态模式标记
-    post_data['mode'] = 'dynamic'
+    post_number = extract_post_number(os.path.basename(md_file_path).replace('.md', '.html'))
+    post_data['post_number'] = post_number
+    config_post = get_config_post(post_number)
+    if config_post:
+        for key in ('title', 'date', 'category', 'project'):
+            if not front_matter_match or key not in post_data:
+                post_data[key] = config_post.get(key, '')
+
+    post_data.setdefault('project', '')
+    post_data['image'] = post_data.get('image') or extract_first_image(post_data['content'])
     
     return post_data
 
@@ -241,14 +244,6 @@ def create_post_html(post_data, post_filename):
 </html>
 '''
 
-def get_excerpt_from_config(post_filename):
-    """从 posts-config.json 中提取文章摘要"""
-    config = load_posts_config(warn=False)
-    for post in config.get('posts', []):
-        if post.get('link') == post_filename:
-            return post.get('excerpt')
-    return None
-
 def parse_existing_post(post_filename):
     """解析现有文章，提取信息"""
     if not os.path.exists(post_filename):
@@ -258,7 +253,7 @@ def parse_existing_post(post_filename):
     with open(post_filename, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    post_data = {'mode': 'dynamic'}  # 所有文章都是动态模式
+    post_data = {}
     
     # 提取标题
     title_match = re.search(r'<h1 class="article-title">(.*?)</h1>', content)
@@ -269,9 +264,6 @@ def parse_existing_post(post_filename):
     date_match = re.search(r'<i class="fas fa-calendar-alt"></i>\s*<span>(.*?)</span>', content)
     if date_match:
         post_data['date'] = unescape(date_match.group(1))
-    
-    # 从 posts-config.json 提取摘要
-    post_data['excerpt'] = get_excerpt_from_config(post_filename)
     
     # 提取文章编号
     post_number = extract_post_number(post_filename)
@@ -390,8 +382,9 @@ def list_all_posts():
         for i, post in enumerate(config_posts, 1):
             print(f"{i}. [{post.get('id', '?')}] {post.get('title', '无标题')}")
             print(f"   文件: {post.get('link', '未知')}")
-            print(f"   分类: {post.get('category', '未分类')} | 日期: {post.get('date', '未知')}")
-            print(f"   阅读时间: {post.get('readTime', '未知')} | 模式: {post.get('mode', '🔄')}")
+            print(f"   分类: {post.get('category', DEFAULT_CATEGORY)} | 日期: {post.get('date', '未知')}")
+            if post.get('project'):
+                print(f"   项目: {post['project']}")
             
             # 检查文件是否存在
             link = post.get('link', '')
@@ -524,8 +517,7 @@ def main():
                 try:
                     data = parse_existing_post(f)
                     title = data.get('title', '未知标题') if data else '未知标题'
-                    mode_text = '🔄动态模式'
-                    print(f"  {i}. {f} - {title} [{mode_text}]")
+                    print(f"  {i}. {f} - {title}")
                 except Exception:
                     print(f"  {i}. {f}")
             

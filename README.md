@@ -94,30 +94,13 @@ python create_post.py
 
 ## 📝 Markdown 格式
 
-### 带元数据（推荐）
-
-```markdown
----
-title: 文章标题
-category: 分类
-date: 2025年12月08日
-cover_image: https://images.unsplash.com/photo-xxx
-excerpt: 文章摘要
-tags: 标签1, 标签2, 标签3
----
-
-# 正文标题
-
-文章内容...
-```
-
-### 简化格式
-
 ```markdown
 # 文章标题
 
 文章内容...
 ```
+
+文章标题、日期、分类、项目等元数据统一维护在 `posts-config.json`。图片摘要由同步工具从 Markdown 正文派生；旧 front matter 仍可读取，但新文章不需要填写。
 
 ## 🎯 使用场景
 
@@ -199,7 +182,7 @@ tags: 标签1, 标签2, 标签3
 **A:** 检查 `posts-config.json` 格式，运行同步工具（选项4）
 
 ### Q: 代码高亮不工作？
-**A:** 确保网络连接正常，CDN 资源能够加载
+**A:** 确保 `vendor/` 下的本地库文件完整，并通过 HTTP 服务访问页面
 
 ### Q: 如何修改文章顺序？
 **A:** 编辑 `posts-config.json`，调整数组顺序

@@ -136,35 +136,10 @@
             padding: 12px 0 56px;
         }
 
-        .panel {
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.86);
-            box-shadow: 0 8px 24px rgba(31, 42, 55, 0.04);
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 16px 12px;
-            color: var(--primary-dark);
-            font-weight: 750;
-        }
-
         .content {
             display: grid;
             gap: 24px;
             min-width: 0;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            font-size: 0.84rem;
-            font-weight: 760;
         }
 
         .meta-row {
@@ -187,10 +162,6 @@
         }
 
         .post-card {
-            display: grid;
-            grid-template-columns: 176px minmax(0, 1fr);
-            gap: 18px;
-            min-height: 148px;
             overflow: hidden;
             border: 1px solid var(--line);
             border-radius: 8px;
@@ -202,20 +173,6 @@
             border-color: rgba(36, 91, 123, 0.38);
             box-shadow: 0 12px 28px rgba(31, 42, 55, 0.1);
             transform: translateY(-2px);
-        }
-
-        .post-card > a {
-            display: block;
-            aspect-ratio: 3 / 2;
-            background: var(--surface-muted);
-        }
-
-        .post-thumb {
-            width: 100%;
-            height: 100%;
-            min-height: 148px;
-            object-fit: cover;
-            background: var(--surface-muted);
         }
 
         .post-body {
@@ -245,30 +202,6 @@
             -webkit-box-orient: vertical;
         }
 
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            width: max-content;
-            max-width: 100%;
-            min-height: 26px;
-            padding: 0 9px;
-            border-radius: 6px;
-            background: rgba(36, 91, 123, 0.1);
-            color: var(--primary-dark);
-            font-size: 0.78rem;
-            font-weight: 700;
-        }
-
-        .read-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            width: max-content;
-            color: var(--primary);
-            font-weight: 760;
-            font-size: 0.92rem;
-        }
-
         .empty-state {
             display: none;
             border: 1px dashed var(--line);
@@ -289,24 +222,6 @@
             .search {
                 justify-self: stretch;
                 width: 100%;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .shell {
-                width: min(100% - 24px, 1180px);
-            }
-
-            .post-card {
-                grid-template-columns: 1fr;
-            }
-
-            .post-thumb {
-                height: 190px;
-            }
-
-            .post-body {
-                padding: 0 18px 18px;
             }
         }
 
@@ -378,29 +293,8 @@
             gap: 34px;
         }
 
-        .panel-header {
-            border-bottom: 2px solid var(--primary-dark);
-            background: var(--surface-muted);
-        }
-
-        .eyebrow,
-        .read-link {
-            color: #ffb18d;
-        }
-
-        .read-link {
-            min-height: 44px;
-            padding: 0 2px;
-        }
-
         .post-list {
             gap: 16px;
-        }
-
-        .post-card {
-            grid-template-columns: 144px minmax(0, 1fr);
-            min-height: 132px;
-            transition: transform 0.18s, box-shadow 0.18s, background-color 0.18s;
         }
 
         .post-card:hover {
@@ -410,30 +304,12 @@
             transform: translate(-2px, -2px);
         }
 
-        .post-card > a {
-            border-right: 2px solid var(--primary-dark);
-        }
-
-        .post-thumb {
-            min-height: 132px;
-            filter: saturate(0.78);
-        }
-
         .post-body {
             padding: 20px 22px 20px 0;
         }
 
         .post-title {
             font-size: 1.22rem;
-        }
-
-        .tag {
-            min-height: 30px;
-            border: 1px solid var(--primary-dark);
-            border-radius: 0;
-            background: #f1dfc8;
-            color: var(--primary-dark);
-            letter-spacing: 0.02em;
         }
 
         @media (max-width: 960px) {
@@ -456,16 +332,6 @@
 
             .header-inner {
                 min-height: 0;
-            }
-
-            .post-card > a {
-                border-right: 0;
-                border-bottom: 2px solid var(--primary-dark);
-            }
-
-            .post-thumb {
-                height: 176px;
-                min-height: 176px;
             }
 
             .post-body {
@@ -565,25 +431,8 @@
             padding-bottom: 72px;
         }
 
-        .panel-header {
-            border-bottom: 1px solid var(--line);
-            background: transparent;
-            color: var(--text);
-        }
-
-        .eyebrow,
-        .read-link {
-            color: var(--primary);
-        }
-
         .post-list {
             gap: 18px;
-        }
-
-        .post-card {
-            grid-template-columns: 168px minmax(0, 1fr);
-            min-height: 150px;
-            transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s, background-color 0.18s;
         }
 
         .post-card:hover {
@@ -593,19 +442,7 @@
             transform: translateY(-3px);
         }
 
-        .post-card > a {
-            border-right: 1px solid var(--line);
-        }
-
         .post-title {
-            color: var(--text);
-        }
-
-        .tag {
-            min-height: 30px;
-            border: 1px solid color-mix(in srgb, var(--primary), transparent 42%);
-            border-radius: var(--radius-pill);
-            background: color-mix(in srgb, var(--primary), transparent 90%);
             color: var(--text);
         }
 
@@ -631,47 +468,8 @@
                 width: min(100% - 28px, 1220px);
             }
 
-            .post-card > a {
-                border-right: 0;
-                border-bottom: 1px solid var(--line);
-            }
-
             .post-body {
                 padding: 18px;
-            }
-        }
-        /* post-card: fixed-size image viewport, text never overlapped */
-        .post-card {
-            align-items: start;
-        }
-
-        .post-card > a {
-            width: 176px;
-            height: 117px;
-            aspect-ratio: auto;
-            overflow: hidden;
-        }
-
-        .post-thumb {
-            width: 176px;
-            height: 117px;
-            min-height: 0;
-            object-fit: cover;
-            display: block;
-        }
-
-        .post-body {
-            min-width: 0;
-            min-height: 0;
-            padding: 16px 18px;
-            align-content: start;
-        }
-
-        @media (max-width: 960px) {
-            .post-card > a,
-            .post-thumb {
-                width: 144px;
-                height: 96px;
             }
         }
 </style>
@@ -727,56 +525,12 @@
 
                 const config = await response.json();
                 state.posts = Array.isArray(config.posts) ? config.posts : [];
-                state.posts.forEach(post => {
-                    post.imageCandidates = thumbCandidates(post.id);
-                });
                 render();
-                hydrateExcerpts();
             } catch (error) {
                 console.error(error);
                 document.getElementById('empty-state').style.display = 'block';
                 document.getElementById('empty-state').textContent = '文章配置加载失败';
             }
-        }
-
-        // 封面按命名约定推导：images/img_文章号_001.{png|jpg|gif}，都不存在时回退默认图
-        function thumbCandidates(id) {
-            const base = `images/img_${String(id).padStart(3, '0')}_001`;
-            return [`${base}.png`, `${base}.jpg`, `${base}.gif`];
-        }
-
-        function extractExcerpt(md) {
-            // 容错：跳过可能存在的 YAML 头部（含 BOM）后再取正文首段
-            md = md.replace(/^\uFEFF?---\s*\n[\s\S]*?\n---\s*\n/, '');
-            const lines = md.split('\n');
-            for (const line of lines) {
-                const t = line.trim();
-                if (!t || t.startsWith('#') || t.startsWith('```') || /^!\[/.test(t) || /^[-*>|]/.test(t)) {
-                    continue;
-                }
-                const text = t
-                    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-                    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-                    .replace(/[*`~]/g, '')
-                    .trim();
-                if (!text) continue;
-                return text.length > 70 ? text.slice(0, 70) + '…' : text;
-            }
-            return '';
-        }
-
-        // 摘要不进表：从各篇文章 md 正文动态提取第一段
-        async function hydrateExcerpts() {
-            await Promise.all(state.posts.map(async post => {
-                try {
-                    const res = await fetch(post.link.replace('.html', '.md'));
-                    if (!res.ok) return;
-                    post.excerpt = extractExcerpt(await res.text());
-                } catch (error) {
-                    console.error('摘要提取失败', post.link, error);
-                }
-            }));
-            render();
         }
 
         function render() {
@@ -789,6 +543,7 @@
                 const haystack = [
                     post.title,
                     post.excerpt,
+                    post.category,
                     post.date,
                     post.project
                 ].join(' ').toLowerCase();
@@ -803,36 +558,20 @@
             emptyState.style.display = posts.length ? 'none' : 'block';
 
             container.innerHTML = posts.map(post => `
-                <article class="post-card">
-                    <a href="${escapeAttribute(post.link || '#')}" aria-label="${escapeAttribute(post.title || '阅读全文')}">
-                        <img class="post-thumb" src="${escapeAttribute(post.imageCandidates[0])}" data-candidates="${escapeAttribute(JSON.stringify((post.imageCandidates || []).slice(1)))}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
-                    </a>
-                    <div class="post-body">
-                        <h3 class="post-title">
-                            <a href="${escapeAttribute(post.link || '#')}">${escapeHtml(post.title || '无标题')}</a>
-                        </h3>
-                        <p class="post-excerpt">${escapeHtml(post.excerpt || '')}</p>
-                        <div class="meta-row">
-                            ${post.project ? `<span class="project-tag"><i class="fas fa-diagram-project"></i>${escapeHtml(post.project)}</span>` : ''}
-                            <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
+                <article class="post-card${post.image ? '' : ' no-cover'}">
+                    <a class="post-card-link" href="${escapeAttribute(post.link || '#')}" aria-label="${escapeAttribute(post.title || '阅读全文')}">
+                        ${post.image ? `<img class="post-thumb" src="${escapeAttribute(post.image)}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">` : ''}
+                        <div class="post-body">
+                            <h3 class="post-title">${escapeHtml(post.title || '无标题')}</h3>
+                            <p class="post-excerpt">${escapeHtml(post.excerpt || '')}</p>
+                            <div class="meta-row">
+                                ${post.project ? `<span class="project-tag"><i class="fas fa-diagram-project"></i>${escapeHtml(post.project)}</span>` : ''}
+                                <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </article>
             `).join('');
-
-            container.querySelectorAll('img.post-thumb').forEach(img => {
-                img.addEventListener('error', () => {
-                    const candidates = JSON.parse(img.dataset.candidates || '[]');
-                    if (candidates.length) {
-                        img.dataset.candidates = JSON.stringify(candidates.slice(1));
-                        img.src = candidates[0];
-                    } else {
-                        // 三种扩展名都不存在：这篇文章没有封面，整卡变纯文本
-                        const card = img.closest('.post-card');
-                        if (card) card.classList.add('no-cover');
-                    }
-                });
-            });
         }
 
         function escapeHtml(value) {
