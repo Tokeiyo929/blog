@@ -437,6 +437,33 @@ body > header .header-inner {
     color: oklch(40% 0.12 255);
 }
 
+.markdown-content table {
+    display: block;
+    width: 100%;
+    margin: 1.5em 0;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.markdown-content th,
+.markdown-content td {
+    border: 1px solid var(--art-line);
+    padding: 0.55em 0.9em;
+    text-align: left;
+    vertical-align: top;
+}
+
+.markdown-content th {
+    background: oklch(93.5% 0.012 84);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.markdown-content tr:nth-child(even) td {
+    background: oklch(96.5% 0.008 86);
+}
+
 .markdown-content pre,
 .markdown-content pre[class*="language-"] {
     border: 1px solid oklch(35% 0.02 80 / 0.4);
