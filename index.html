@@ -791,7 +791,8 @@
                 const haystack = [
                     post.title,
                     post.excerpt,
-                    post.date
+                    post.date,
+                    post.project
                 ].join(' ').toLowerCase();
                 return haystack.includes(state.query);
             });
@@ -814,6 +815,7 @@
                         </h3>
                         <p class="post-excerpt">${escapeHtml(post.excerpt || '')}</p>
                         <div class="meta-row">
+                            ${post.project ? `<span class="project-tag"><i class="fas fa-diagram-project"></i>${escapeHtml(post.project)}</span>` : ''}
                             <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
                         </div>
                     </div>

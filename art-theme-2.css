@@ -292,6 +292,24 @@ body > header {
     color: var(--muted);
 }
 
+.project-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px;
+    border: 1px solid var(--art-line);
+    border-radius: 999px;
+    background: oklch(96.5% 0.008 86);
+    color: var(--art-ink);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.project-tag i {
+    font-size: 0.72rem;
+    color: var(--art-plum);
+}
+
 .post-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
