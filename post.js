@@ -1,4 +1,10 @@
 (() => {
+    // 所有文章页启用选字批注（样式在 post.css）
+    const annoScript = document.createElement('script');
+    annoScript.src = 'annotate.js';
+    annoScript.defer = true;
+    document.head.append(annoScript);
+
     const loading = document.getElementById('loading');
     const errorContainer = document.getElementById('error-container');
     const errorMessage = document.getElementById('error-message');
@@ -71,6 +77,7 @@
             contentContainer.innerHTML = DOMPurify.sanitize(wrapCodeBlocks(html));
             contentContainer.hidden = false;
             loading.hidden = true;
+            document.dispatchEvent(new CustomEvent('content:rendered'));
 
             if (typeof Prism !== 'undefined') {
                 Prism.highlightAllUnder(contentContainer);
