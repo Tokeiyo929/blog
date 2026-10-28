@@ -2,7 +2,7 @@
 title: 图片尺寸适配组件使用文档
 category: [代码解析]
 date: 2026-10-28
-excerpt: 物品栏、奖励弹窗里的图标尺寸不一，超出底框就会穿帮。结合项目实际用例，讲清楚 ImgFixedSize、InsetByScale、FullByScale 三个缩放适配组件的原理与区别。
+excerpt: 物品栏、奖励弹窗里的图标尺寸不一，超出底框就会穿帮。结合项目实际用例，讲清楚 ImgFixedSize 组件的原理与用法。
 tags: [程序, UI]
 ---
 
@@ -97,56 +97,7 @@ export default class ImgFixedSize extends cc.Component {
 
 ![Sprite 的 SizeMode / Trim 设置](images/img_021_003.png)
 
-## 五、延伸：相对目标节点适配
-
-ImgFixedSize 是"绝对尺寸"思路：不管别的东西，长边压到写死的 fixedSize。但有一类需求它覆盖不了——**弹窗要适配各种屏幕比例**（小游戏平台机型五花八门），内容该缩多少取决于目标容器的大小，而不是一个固定数字。
-
-项目里对应的两个组件，位于 `assets/Root/Script/Core/Component/`：
-
-**InsetByScale 缩放嵌入**——保证整个节点都在目标范围内（等比 contain）：
-
-```javascript
-private scaleNode() {
-    this.node.scale = MathUtil.min(
-        this.target.width * this.target.scaleX / this.node.width,
-        this.target.height * this.target.scaleY / this.node.height
-    );
-}
-```
-
-取宽、高两个方向缩放比的**较小值**，两个方向都不会超出 target。RewardFrame 等十余个全屏弹窗的 container 节点都挂了它，target 指向弹窗根节点——屏幕比例再怎么怪，弹窗内容都完整地嵌在背景里。
-
-**FullByScale 缩放填充**——保证铺满目标，允许超出（等比 cover）：
-
-```javascript
-private scaleNode() {
-    if(this.isWidth){
-        this.node.scale = this.target.width * this.target.scaleX / this.node.width;
-    }else{
-        this.node.scale = MathUtil.max(
-            this.target.width * this.target.scaleX / this.node.width,
-            this.target.height * this.target.scaleY / this.node.height
-        );
-    }
-}
-```
-
-取**较大值**，至少一个方向铺满 target。MainFrame 的 Center 节点挂了 FullByScale 且 `isWidth = true`，按屏幕宽度撑满，高度自然延伸。
-
-三个组件放在一起对比：
-
-| 组件 | 缩放依据 | 行为 | 项目用例 |
-|---|---|---|---|
-| ImgFixedSize | 固定数值 fixedSize | 长边压到固定值 | 武器 / 奖励 / 品质图标 |
-| InsetByScale | 目标节点 | 完整嵌入（contain） | 弹窗 container 适配屏幕 |
-| FullByScale | 目标节点 | 铺满填充（cover） | 主界面 Center 按宽铺满 |
-
-还有个容易忽略的区别：InsetByScale / FullByScale 监听的是 **target** 的 SIZE_CHANGED（容器变了，内容跟着重算），而 ImgFixedSize 监听的是**自己**（图变了，缩放跟着重算）。监听谁，取决于"谁变了需要重算"。
-
-![弹窗在不同分辨率下的适配效果](images/img_021_004.png)
-
-## 六、小结
+## 五、小结
 
 - 图标进格子：ImgFixedSize，一个 fixedSize 搞定，注意 TRIMMED + Trim 去掉透明边干扰。
-- 内容进容器：InsetByScale 保证不超出，FullByScale 保证必铺满。
-- 三个组件都由 SIZE_CHANGED 事件驱动，运行时换图、换布局都不需要手动刷新。
+- 组件由 SIZE_CHANGED 事件驱动，运行时换图、换布局都不需要手动刷新。
