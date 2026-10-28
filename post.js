@@ -60,7 +60,7 @@
                 throw new Error('Markdown文件为空');
             }
 
-            const content = markdownText.replace(/^---\s*\n([\s\S]*?)\n---\s*\n/, '');
+            const content = markdownText.replace(/^\uFEFF?---\s*\n([\s\S]*?)\n---\s*\n/, '');
             marked.setOptions({ breaks: true, gfm: true, smartypants: true });
 
             let html = marked.parse(content);

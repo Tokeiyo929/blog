@@ -1,11 +1,3 @@
-﻿---
-title: SXXM - Spine动画导出&引擎/FGUI配置
-category: [代码解析]
-date: 2025-12-03
-excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
-tags: [美术, 程序]
----
-
 *当前游戏版本采用的Spine版本为4.0.43，Unity运行库如下：​
 ​spine-unity-4.0-2021-09-17.unitypackage6.54MB​​
 *对Spine版本的更新或运行库的更新，都会导致项目内所有的Spine动画重导，甚至重做（部分文件无法在新版本导出）​

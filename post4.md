@@ -1,11 +1,3 @@
-﻿---
-title: LocalCache&LRUCache
-category: [代码解析]
-date: 2025-12-08
-excerpt: LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。
-tags: [美术, 程序]
----
-
 LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。
 
 ---

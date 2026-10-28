@@ -1,12 +1,3 @@
-﻿---
-title: UIParticle使用
-category: [代码解析]
-date: 2025-12-03
-excerpt: 本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。
-tags: [美术, 程序]
----
-
-
 UIParticle使用​
 本文讨论了 UIParticle 的使用情况，包括其优缺点、当前 UI 特效处理方案、替换方案、属性说明、具体使用案例和常见问题。关键要点包括：​
 1. UIParticle 优点：减少 Canvas 使用，降低性能开销；支持 Mask 裁切；简化层级理解成本；避免异步加载带来的 Layer 错乱问题。​

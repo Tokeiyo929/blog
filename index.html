@@ -729,12 +729,56 @@
 
                 const config = await response.json();
                 state.posts = Array.isArray(config.posts) ? config.posts : [];
+                state.posts.forEach(post => {
+                    post.imageCandidates = thumbCandidates(post.id);
+                });
                 render();
+                hydrateExcerpts();
             } catch (error) {
                 console.error(error);
                 document.getElementById('empty-state').style.display = 'block';
                 document.getElementById('empty-state').textContent = '文章配置加载失败';
             }
+        }
+
+        // 封面按命名约定推导：images/img_文章号_001.{png|jpg|gif}，都不存在时回退默认图
+        function thumbCandidates(id) {
+            const base = `images/img_${String(id).padStart(3, '0')}_001`;
+            return [`${base}.png`, `${base}.jpg`, `${base}.gif`];
+        }
+
+        function extractExcerpt(md) {
+            // 容错：跳过可能存在的 YAML 头部（含 BOM）后再取正文首段
+            md = md.replace(/^\uFEFF?---\s*\n[\s\S]*?\n---\s*\n/, '');
+            const lines = md.split('\n');
+            for (const line of lines) {
+                const t = line.trim();
+                if (!t || t.startsWith('#') || t.startsWith('```') || /^!\[/.test(t) || /^[-*>|]/.test(t)) {
+                    continue;
+                }
+                const text = t
+                    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+                    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+                    .replace(/[*`~]/g, '')
+                    .trim();
+                if (!text) continue;
+                return text.length > 70 ? text.slice(0, 70) + '…' : text;
+            }
+            return '';
+        }
+
+        // 摘要不进表：从各篇文章 md 正文动态提取第一段
+        async function hydrateExcerpts() {
+            await Promise.all(state.posts.map(async post => {
+                try {
+                    const res = await fetch(post.link.replace('.html', '.md'));
+                    if (!res.ok) return;
+                    post.excerpt = extractExcerpt(await res.text());
+                } catch (error) {
+                    console.error('摘要提取失败', post.link, error);
+                }
+            }));
+            render();
         }
 
         function render() {
@@ -762,19 +806,32 @@
             container.innerHTML = posts.map(post => `
                 <article class="post-card">
                     <a href="${escapeAttribute(post.link || '#')}" aria-label="${escapeAttribute(post.title || '阅读全文')}">
-                        <img class="post-thumb" src="${escapeAttribute(post.image || fallbackImage)}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
+                        <img class="post-thumb" src="${escapeAttribute(post.imageCandidates[0] || fallbackImage)}" data-candidates="${escapeAttribute(JSON.stringify((post.imageCandidates || []).slice(1)))}" alt="${escapeAttribute(post.title || '文章封面')}" width="1170" height="780" loading="lazy">
                     </a>
                     <div class="post-body">
                         <h3 class="post-title">
                             <a href="${escapeAttribute(post.link || '#')}">${escapeHtml(post.title || '无标题')}</a>
                         </h3>
-                        <p class="post-excerpt">${escapeHtml(post.excerpt || '暂无摘要')}</p>
+                        <p class="post-excerpt">${escapeHtml(post.excerpt || '')}</p>
                         <div class="meta-row">
                             <span><i class="fas fa-calendar"></i>${escapeHtml(post.date || '')}</span>
                         </div>
                     </div>
                 </article>
             `).join('');
+
+            container.querySelectorAll('img.post-thumb').forEach(img => {
+                img.addEventListener('error', () => {
+                    const candidates = JSON.parse(img.dataset.candidates || '[]');
+                    if (candidates.length) {
+                        img.dataset.candidates = JSON.stringify(candidates.slice(1));
+                        img.src = candidates[0];
+                    } else if (!img.dataset.fallbackDone) {
+                        img.dataset.fallbackDone = '1';
+                        img.src = fallbackImage;
+                    }
+                });
+            });
         }
 
         function escapeHtml(value) {

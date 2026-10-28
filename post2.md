@@ -1,11 +1,3 @@
-﻿---
-title: 通用UI组件文档与备注
-category: [代码解析]
-date: 2025-12-03
-excerpt: 为了能够快速复用组件，请大伙尽量写的能够复用
-tags: [美术, 程序]
----
-
 为了能够快速复用组件，请大伙尽量写的能够复用  
 
 PackageRes/LocalResource下面尽量不要修改，里面的prefab也不要引用子的prefab,最好全break掉（子的prefab容易被动修改后导致local里面的资源引用到外部资源），一定要用到本地的prefab修改的或者新建的，一定要注意里面所有的图片资源引用都必须引用local下的资源
