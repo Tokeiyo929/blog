@@ -1,15 +1,15 @@
 ﻿:root {
-    --art-ink: oklch(18% 0.055 318);
-    --art-ink-2: oklch(24% 0.072 346);
-    --art-plum: oklch(33% 0.09 334);
-    --art-rust: oklch(61% 0.16 38);
+    --art-ink: oklch(20% 0.012 260);
+    --art-ink-2: oklch(26% 0.012 260);
+    --art-plum: oklch(42% 0.12 255);
+    --art-rust: oklch(58% 0.13 255);
     --art-moss: oklch(55% 0.09 155);
     --art-sky: oklch(76% 0.095 216);
     --art-paper: oklch(96% 0.014 86);
     --art-paper-soft: oklch(91% 0.018 83);
     --art-line: oklch(79% 0.027 68 / 0.52);
     --art-muted: oklch(76% 0.024 82);
-    --art-shadow: 0 8px 0 oklch(10% 0.04 318 / 0.38);
+    --art-shadow: 0 8px 0 oklch(10% 0.01 260 / 0.38);
     --art-radius: 12px;
     --art-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -68,7 +68,7 @@ input:focus-visible {
 .site-header,
 body > header {
     border-bottom: 1px solid oklch(93% 0.012 85 / 0.18);
-    background: oklch(15% 0.048 318 / 0.9);
+    background: oklch(17% 0.012 260 / 0.9);
     color: var(--art-paper);
     box-shadow: none;
     backdrop-filter: blur(18px);
@@ -265,17 +265,6 @@ body > header {
     background: var(--art-ink);
 }
 
-.featured-image::after,
-.post-card > a::after,
-.article-cover::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(135deg, oklch(18% 0.055 318 / 0.28), oklch(61% 0.16 38 / 0.22));
-    mix-blend-mode: multiply;
-}
-
 .featured-image img,
 .post-thumb,
 .article-cover img {
@@ -442,27 +431,27 @@ body > header .header-inner {
 }
 
 .markdown-content a {
-    color: oklch(36% 0.11 334);
+    color: oklch(42% 0.12 255);
     text-decoration-thickness: 0.08em;
 }
 
 .markdown-content blockquote {
-    border: 1px solid oklch(61% 0.16 38 / 0.36);
+    border: 1px solid var(--art-line);
     border-radius: 10px;
-    background: oklch(88% 0.08 38 / 0.2);
+    background: oklch(93% 0.008 80);
     color: var(--art-ink);
 }
 
 .markdown-content code:not(pre code) {
     background: oklch(89% 0.035 66);
-    color: oklch(28% 0.09 334);
+    color: oklch(38% 0.11 255);
 }
 
 .markdown-content pre,
 .markdown-content pre[class*="language-"] {
-    border: 1px solid oklch(55% 0.08 318 / 0.54);
+    border: 1px solid oklch(55% 0.02 260 / 0.54);
     border-radius: 10px;
-    background: oklch(16% 0.045 318);
+    background: oklch(16% 0.012 260);
 }
 
 .loading-indicator,
