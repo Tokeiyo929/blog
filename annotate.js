@@ -1,21 +1,41 @@
 // 文章页选字批注：选中正文文字 → 添加批注 → 高亮标记，点击标记查看/删除。
-// 批注存 localStorage（按文章路径区分），仅本机浏览器可见；依赖 post.js 在内容渲染后派发 content:rendered 事件。
+// 批注存 localStorage（按文章文件名区分）；配置 GIST_ID/GIST_TOKEN 后经 GitHub Gist 跨设备同步。
+// GIST_TOKEN 必须是只勾选 gist 权限的 classic token（https://github.com/settings/tokens），
+// 它会出现在公开页面源码里：只能访问本账号 Gist，动不了仓库，批注内容视为公开。
+// 依赖 post.js 在内容渲染后派发 content:rendered 事件。
 (() => {
     const STORE_KEY = 'blog-annotations';
     const CONTEXT = 24; // 定位用的前后文长度
+    const GIST_ID = ''; // Gist id（私密 Gist 页面 URL 末段）
+    const GIST_TOKEN = ''; // 仅 gist 权限的 token
+    const GIST_FILE = 'annotations.json';
     const content = document.getElementById('markdown-content');
     if (!content) return;
 
     // ---------- 存储 ----------
-    const articleKey = () => location.pathname;
+    // 按文件名而非完整路径做键：本地(127.0.0.1)与线上(/blog/)路径不同，文件名一致才能互通
+    const articleKey = () => location.pathname.split('/').pop();
     const loadAll = () => {
         try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
     };
-    const loadMine = () => loadAll()[articleKey()] || [];
+    // 旧版按完整路径存，读取时迁移为按文件名
+    const migrate = all => {
+        const legacy = Object.keys(all).filter(k => k !== articleKey() && k.endsWith('/' + articleKey()));
+        if (!legacy.length) return;
+        all[articleKey()] = mergeLists([all[articleKey()], ...legacy.map(k => all[k])]);
+        legacy.forEach(k => delete all[k]);
+        localStorage.setItem(STORE_KEY, JSON.stringify(all));
+    };
+    const loadMine = () => {
+        const all = loadAll();
+        migrate(all);
+        return all[articleKey()] || [];
+    };
     const persistMine = list => {
         const all = loadAll();
         all[articleKey()] = list;
         localStorage.setItem(STORE_KEY, JSON.stringify(all));
+        syncUp();
     };
 
     // ---------- 正文文本映射（DOM 文本节点 ⇄ 纯文本偏移） ----------
@@ -248,6 +268,55 @@
         }, 'view');
     });
 
+    // ---------- Gist 云同步 ----------
+    const mergeLists = lists => {
+        const byId = new Map();
+        for (const list of lists) for (const a of list || []) {
+            const cur = byId.get(a.id);
+            if (!cur || (a.createdAt || 0) > (cur.createdAt || 0)) byId.set(a.id, a);
+        }
+        return [...byId.values()].sort((x, y) => (x.createdAt || 0) - (y.createdAt || 0));
+    };
+    const cloudReady = () => !!(GIST_ID && GIST_TOKEN);
+    const gistHeaders = () => ({ Authorization: `Bearer ${GIST_TOKEN}`, Accept: 'application/vnd.github+json' });
+    const gistGet = () => fetch(`https://api.github.com/gists/${GIST_ID}`, { headers: gistHeaders() })
+        .then(r => { if (!r.ok) throw new Error('gist get ' + r.status); return r.json(); })
+        .then(g => JSON.parse((g.files && g.files[GIST_FILE] && g.files[GIST_FILE].content) || '{}'));
+    const gistPut = data => fetch(`https://api.github.com/gists/${GIST_ID}`, {
+        method: 'PATCH',
+        headers: { ...gistHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ files: { [GIST_FILE]: { content: JSON.stringify(data, null, 2) } } })
+    }).then(r => { if (!r.ok) throw new Error('gist put ' + r.status); });
+    // 本地各文章的批注并入远端，远端没有的文章键原样保留
+    const mergedWith = remote => {
+        const local = loadAll();
+        const merged = { ...remote };
+        for (const k of Object.keys(local)) merged[k] = mergeLists([remote[k], local[k]]);
+        return { merged, changed: JSON.stringify(merged) !== JSON.stringify(remote) };
+    };
+    let pushTimer = null;
+    function syncUp() { // 增删改后合并写回 Gist，防抖避免连续操作狂刷 PATCH
+        if (!cloudReady()) return;
+        clearTimeout(pushTimer);
+        pushTimer = setTimeout(() => {
+            gistGet()
+                .then(remote => { const { merged, changed } = mergedWith(remote); if (changed) return gistPut(merged); })
+                .catch(err => console.warn('批注云同步失败，数据仍在本地', err));
+        }, 800);
+    }
+    function syncDown() { // 打开页面：拉取 Gist 合并进 localStorage，远端批注才能渲染出高亮
+        if (!cloudReady()) return;
+        gistGet()
+            .then(remote => {
+                const { merged, changed } = mergedWith(remote);
+                localStorage.setItem(STORE_KEY, JSON.stringify(merged));
+                applyAll();
+                if (changed) return gistPut(merged); // 本机多出的批注补传上去
+            })
+            .catch(err => console.warn('批注云拉取失败，先用本地数据', err));
+    }
+
     // post.js 渲染完成（含重试）后恢复已有批注
     document.addEventListener('content:rendered', applyAll);
+    syncDown();
 })();
