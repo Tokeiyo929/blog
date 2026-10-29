@@ -107,13 +107,14 @@
         pop.style.left = `${x}px`;
         pop.style.top = `${y}px`;
     }
-    function openPop(getRect, build) {
+    function openPop(getRect, build, mode) {
         closePop();
         pop = document.createElement('div');
         pop.className = 'anno-pop';
         build(pop);
         document.body.append(pop);
         pop._getRect = getRect;
+        pop._mode = mode;
         placePop(getRect);
     }
     // 弹层外按下才关闭；正文内的按下（含重新选字）不关，避免误闪
@@ -132,8 +133,14 @@
     let stash = null; // { map, start, end, rect }
     document.addEventListener('mouseup', () => {
         setTimeout(() => {
+            // 真实点击“添加批注”时：click 先建好编辑器，本延迟回调随后执行且选区仍在，
+            // 若不拦截会把编辑器抢换回气泡——即“弹窗一闪就消失”
+            if (pop && pop._mode === 'editor') return;
             const sel = getSelection();
-            if (!sel.rangeCount || sel.isCollapsed) return;
+            if (!sel.rangeCount || sel.isCollapsed) {
+                if (pop && pop._mode === 'bubble') closePop();
+                return;
+            }
             const range = sel.getRangeAt(0);
             if (!content.contains(range.commonAncestorContainer)) return;
             const map = buildTextMap();
@@ -154,7 +161,7 @@
                 btn.textContent = '添加批注';
                 btn.addEventListener('click', showEditor);
                 el.append(btn);
-            });
+            }, 'bubble');
         }, 0);
     });
 
@@ -185,7 +192,7 @@
             row.append(save, cancel);
             el.append(ta, row);
             ta.focus({ preventScroll: true });
-        });
+        }, 'editor');
     }
 
     function saveAnno() {
@@ -238,7 +245,7 @@
             });
             row.append(del);
             el.append(note, when, row);
-        });
+        }, 'view');
     });
 
     // post.js 渲染完成（含重试）后恢复已有批注
