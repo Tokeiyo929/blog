@@ -1,14 +1,15 @@
 // 文章页选字批注：选中正文文字 → 添加批注 → 高亮标记，点击标记查看/删除。
-// 批注存 localStorage（按文章文件名区分）；配置 GIST_ID/GIST_TOKEN 后经 GitHub Gist 跨设备同步。
-// GIST_TOKEN 必须是只勾选 gist 权限的 classic token（https://github.com/settings/tokens），
-// 它会出现在公开页面源码里：只能访问本账号 Gist，动不了仓库，批注内容视为公开。
+// 批注数据存 GitHub 私密 Gist（GIST_ID），跨浏览器/设备共享；localStorage 作本机缓存。
+// token 不进仓库（GitHub 推送保护拦截，公开也会被自动吊销）：每台设备在文章页控制台执行一次
+//   setAnnoCloud('ghp_你的gist权限token')
+// token 只存该浏览器 localStorage，不配置则退回纯本机模式。
 // 依赖 post.js 在内容渲染后派发 content:rendered 事件。
 (() => {
     const STORE_KEY = 'blog-annotations';
     const CONTEXT = 24; // 定位用的前后文长度
-    const GIST_ID = ''; // Gist id（私密 Gist 页面 URL 末段）
-    const GIST_TOKEN = ''; // 仅 gist 权限的 token
+    const GIST_ID = '70cd2d22d55555601e34ac21b157b05c'; // 私密 Gist，存 annotations.json
     const GIST_FILE = 'annotations.json';
+    const CLOUD_KEY = 'blog-anno-cloud'; // 本机保存 { token }，不进仓库
     const content = document.getElementById('markdown-content');
     if (!content) return;
 
@@ -21,16 +22,15 @@
     // 旧版按完整路径存，读取时迁移为按文件名
     const migrate = all => {
         const legacy = Object.keys(all).filter(k => k !== articleKey() && k.endsWith('/' + articleKey()));
-        if (!legacy.length) return;
-        all[articleKey()] = mergeLists([all[articleKey()], ...legacy.map(k => all[k])]);
-        legacy.forEach(k => delete all[k]);
-        localStorage.setItem(STORE_KEY, JSON.stringify(all));
+        if (legacy.length) {
+            all[articleKey()] = mergeLists([all[articleKey()], ...legacy.map(k => all[k])]);
+            legacy.forEach(k => delete all[k]);
+            localStorage.setItem(STORE_KEY, JSON.stringify(all));
+        }
+        return all;
     };
-    const loadMine = () => {
-        const all = loadAll();
-        migrate(all);
-        return all[articleKey()] || [];
-    };
+    const loadRaw = () => migrate(loadAll())[articleKey()] || []; // 含已删条目（墓碑），同步需携带
+    const loadMine = () => loadRaw().filter(a => !a.deletedAt); // 界面只见未删除的
     const persistMine = list => {
         const all = loadAll();
         all[articleKey()] = list;
@@ -81,7 +81,8 @@
             if (e <= start || s >= end) continue;
             let target = node;
             if (start > s) target = target.splitText(start - s);
-            if (end - s < target.nodeValue.length) target.splitText(end - s);
+            // 头部截断后 target 已从 start 起，尾部切分须用相对 start 的偏移
+            if (end - start < target.nodeValue.length) target.splitText(end - start);
             if (!target.nodeValue) continue;
             const mark = document.createElement('mark');
             mark.className = 'text-anno';
@@ -259,7 +260,8 @@
             del.className = 'anno-del';
             del.textContent = '删除';
             del.addEventListener('click', () => {
-                persistMine(loadMine().filter(x => x.id !== a.id));
+                // 就地打删除标记而非移除：墓碑随云同步传给其他设备，避免“删了又复活”
+                persistMine(loadRaw().map(x => (x.id === a.id ? { ...x, deletedAt: Date.now() } : x)));
                 content.querySelectorAll(`mark.text-anno[data-anno-id="${a.id}"]`).forEach(unwrap);
                 closePop();
             });
@@ -271,14 +273,18 @@
     // ---------- Gist 云同步 ----------
     const mergeLists = lists => {
         const byId = new Map();
+        const ver = a => a.deletedAt || a.createdAt || 0; // 删除也是一次版本更新，新版本胜
         for (const list of lists) for (const a of list || []) {
             const cur = byId.get(a.id);
-            if (!cur || (a.createdAt || 0) > (cur.createdAt || 0)) byId.set(a.id, a);
+            if (!cur || ver(a) > ver(cur)) byId.set(a.id, a);
         }
         return [...byId.values()].sort((x, y) => (x.createdAt || 0) - (y.createdAt || 0));
     };
-    const cloudReady = () => !!(GIST_ID && GIST_TOKEN);
-    const gistHeaders = () => ({ Authorization: `Bearer ${GIST_TOKEN}`, Accept: 'application/vnd.github+json' });
+    const cloudReady = () => !!(GIST_ID && cloudConfig().token);
+    const cloudConfig = () => {
+        try { return JSON.parse(localStorage.getItem(CLOUD_KEY)) || {}; } catch { return {}; }
+    };
+    const gistHeaders = () => ({ Authorization: `Bearer ${cloudConfig().token}`, Accept: 'application/vnd.github+json' });
     const gistGet = () => fetch(`https://api.github.com/gists/${GIST_ID}`, { headers: gistHeaders() })
         .then(r => { if (!r.ok) throw new Error('gist get ' + r.status); return r.json(); })
         .then(g => JSON.parse((g.files && g.files[GIST_FILE] && g.files[GIST_FILE].content) || '{}'));
@@ -319,4 +325,14 @@
     // post.js 渲染完成（含重试）后恢复已有批注
     document.addEventListener('content:rendered', applyAll);
     syncDown();
+
+    // 每台设备一次性配置（控制台执行，token 只存本机 localStorage）
+    window.setAnnoCloud = token => {
+        localStorage.setItem(CLOUD_KEY, JSON.stringify({ token }));
+        location.reload();
+    };
+    window.clearAnnoCloud = () => {
+        localStorage.removeItem(CLOUD_KEY);
+        location.reload();
+    };
 })();
