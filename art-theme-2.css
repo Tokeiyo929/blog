@@ -252,6 +252,7 @@ body > header {
 
 .post-body {
     padding: 20px;
+    overflow-wrap: anywhere;
 }
 
 .post-card-link:focus-visible {
@@ -466,5 +467,21 @@ body > header .header-inner {
         height: auto;
         min-height: 0;
         aspect-ratio: 16 / 9;
+    }
+}
+
+/* 卡片行间等高：所有行取最高一行的高度，链接撑满卡片使图片列随之填满；
+   缩略图声明固定固有比例，避免竖图按文件宽高比参与行高计算 */
+@media (min-width: 641px) {
+    .post-list {
+        grid-auto-rows: 1fr;
+    }
+
+    .post-card > a.post-card-link {
+        height: 100%;
+    }
+
+    .post-card-link .post-thumb {
+        aspect-ratio: 176 / 150;
     }
 }
