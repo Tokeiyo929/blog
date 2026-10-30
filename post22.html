@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self'; style-src 'self'; font-src 'self' data:; img-src 'self' https: data:; connect-src 'self' https://api.github.com; upgrade-insecure-requests">
+    <title>抖音小游戏iOS高性能模式接入</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="vendor/fontawesome/all.min.css">
+    <script defer src="vendor/marked.umd.js"></script>
+    <script defer src="vendor/purify.min.js"></script>
+    <link rel="stylesheet" href="vendor/prism/themes/prism-tomorrow.min.css">
+    <script defer src="vendor/prism/prism.min.js"></script>
+    <script defer src="vendor/prism/components/prism-python.min.js"></script>
+    <script defer src="vendor/prism/components/prism-javascript.min.js"></script>
+    <script defer src="vendor/prism/components/prism-css.min.js"></script>
+    <script defer src="vendor/prism/components/prism-bash.min.js"></script>
+    <script defer src="vendor/prism/components/prism-json.min.js"></script>
+    <script defer src="vendor/prism/components/prism-markdown.min.js"></script>
+    <script defer src="vendor/prism/components/prism-yaml.min.js"></script>
+    <script defer src="vendor/prism/components/prism-csharp.min.js"></script>
+    <script defer src="vendor/prism/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="vendor/prism/plugins/line-numbers/prism-line-numbers.min.css">
+    <link rel="stylesheet" href="art-theme-2.css">
+    <link rel="stylesheet" href="post.css">
+    <script defer src="post.js"></script>
+</head>
+<body data-markdown="post22.md">
+    <main class="container">
+        <article>
+            <header class="article-header">
+                <h1 class="article-title">抖音小游戏iOS高性能模式接入</h1>
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                        <span>2026-10-30</span>
+                    </div>
+                </div>
+            </header>
+            <div class="loading-indicator" id="loading">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <p>正在加载文章内容...</p>
+            </div>
+            <div class="error-container" id="error-container" hidden>
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <h3>内容加载失败</h3>
+                <p id="error-message">未知错误</p>
+                <button type="button" id="retry-load" class="copy-button">
+                    <i class="fas fa-redo" aria-hidden="true"></i> 重试加载
+                </button>
+            </div>
+            <div class="markdown-content" id="markdown-content" hidden></div>
+        </article>
+    </main>
+    <a href="index.html#blog" class="side-back" aria-label="返回博客列表">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        <span>返回列表</span>
+    </a>
+</body>
+</html>
