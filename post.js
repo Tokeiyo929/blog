@@ -56,7 +56,11 @@
             errorContainer.hidden = true;
             contentContainer.hidden = true;
 
-            const response = await fetch(mdFile, { cache: 'no-store' });
+            // GitHub Pages 的 404 也会被 CDN 缓存 10 分钟；带时间戳避免读到旧 404 或旧正文。
+            const mdUrl = new URL(mdFile, document.baseURI);
+            mdUrl.searchParams.set('v', Date.now());
+
+            const response = await fetch(mdUrl, { cache: 'no-store' });
             if (!response.ok) {
                 throw new Error(`Markdown文件加载失败（HTTP ${response.status}）`);
             }
