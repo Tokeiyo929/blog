@@ -24,6 +24,10 @@ private void EnterBattle()
 
 `MainPage`（`Frames/Game/MainPage.cs`，1030 行）是唯一的调度中枢：每个弹窗对应一个可空字段（`ShopPage`、`Activity`、`VipPage`、`DailyGift`……），页面类全部是 `sealed MonoBehaviour`，约定三件套——`Open(...)`、`Cancel()/Close()`、完成回调。Frames 目录下 140 个 .cs 里，`*Page` 后缀 66 个。没有基类意味着没有统一的生命周期钩子可依赖，契约全靠约定和检查，这是这个方案的底色。
 
+游戏里的主城画面就是这个 pages 宿主下的一个全屏 Page（GameScene）——资源栏、装备坞背包、底部 tab 全部在它自己的层级里排版，弹窗则统一实例化到 dialogs 宿主：
+
+![猫骑士主城主页面：pages 宿主下的全屏 Page，含资源栏、装备背包与底部标签](images/post5-main-page.png)
+
 ## 二、"暂停态"是字段聚合，不是栈查询
 
 常见框架回答"现在是否暂停"会去查 UI 栈是否非空。我们把它写成了字段聚合——`MainPage` 顶部两个属性：

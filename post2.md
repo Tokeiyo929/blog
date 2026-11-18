@@ -32,6 +32,10 @@ public void OnPointerClick(PointerEventData data)
 
 CloseSelf 的语义是**复用页面自己的关闭入口**：有关闭按钮就 `Invoke()` 它（走页面的取消回调和交互门槛），没有才 `PopupMotion.Hide(owner)` 只关自己。这保证了"点遮罩关闭"和"点取消按钮"走同一条业务路径，不会出现遮罩关了但回调没执行的分裂状态。
 
+游戏里的「在线奖励」弹窗就是标准的 CloseSelf：遮罩把主城背景压暗，底部提示「点击空白处关闭」，点遮罩只关弹窗自己、不碰背后的主城页面：
+
+![在线奖励弹窗：遮罩压暗背景，点击空白处按 CloseSelf 只关弹窗自己](images/post2-dialog-mask.png)
+
 ## 二、什么时候允许 BlockOnly：必须二选一的确认框
 
 BlockOnly 只吞输入、不做任何关闭动作。典型场景是必须做决策的确认框——点遮罩等于替用户选了"取消"，这是产品事故。`Frames/Common/ConfirmationPage.cs` 把这条规则编码成了参数：
