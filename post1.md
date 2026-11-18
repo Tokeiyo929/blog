@@ -62,6 +62,10 @@ private recycle(view: EffectView): void {
 
 `Prefab/Game/Effect/` 下就 9 个 `HitEffect_0X.prefab`，三种逻辑事件复用两个 prefab——特效的种类远少于事件的种类，靠映射表而不是给每种伤害做一个特效。
 
+下面是游戏内战斗的一帧：英雄开火的枪口焰、敌方头顶的命中飘字，都属于这条命令链的产物：
+
+![英雄开火枪口焰，敌方士兵头顶飘命中伤害数字](images/post1-combat-hit.png)
+
 实体持续型是去重续期设计（`Render/Core/EntityEffectManager.ts`）：同一个实体挂同一个特效，重复命令不重建实例，只重设位置并重置回收定时：
 
 ```ts
@@ -90,6 +94,9 @@ private stopBulletTrail(bulletId: number): void {
 }
 ```
 
+游戏里飞行的橙色曳光弹就是这套粒子拖尾——弹头飞到哪，残粒甩到哪，回收晚 `life + lifeVar` 秒就是为了这一段不凭空断掉：
+
+![炮塔车开火后多枚子弹拖尾在战场上飞行](images/post1-combat-trails.png)
 碎片飞溅干脆不用粒子系统：`SplashParticleManager` 自己做 sprite 物理模拟（重力、弹跳、摩擦），节点走自管数组池，`maxActiveCount = 160`，超限回收最旧的一颗——碎片数量失控时先保证帧率。
 
 ## 三、ViewPool：一个池子，键即约定
