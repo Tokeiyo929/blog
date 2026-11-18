@@ -1,137 +1,143 @@
 ---
-title: 特效实现：全工程 0 个 ParticleSystem，特效全是 Spine
+title: 特效实现：逻辑层不播粒子，四类特效四种回收
 category: "[代码解析]"
 date: 2026-11-18
-project: 猫骑士（Unity 小游戏）
+project: 炮塔大作战
 ---
 
-迁移猫骑士到 Unity 时先钉死一个事实：全工程一个 ParticleSystem 都没有，特效全是 Spine——`Assets/Root/Spine` 下 42 套 SkeletonData，在 UI 坐标系里直接播。
+炮塔大作战的逻辑层从不直接播粒子：命中、燃烧、拖尾、碎片四类特效各走各的 Manager 和池，Logic 只往命令缓冲里写一行 RenderCommand。
 
-## 一、0 个粒子系统，不是省事，是继承
+## 一、边界先画死：Logic 不碰节点
 
-`rg ParticleSystem` 扫全工程的 .cs/.prefab/.unity，命中数为 0；UIParticle、SortingGroup 同样是 0。这个决定首先是迁移事实逼出来的：Laya 源工程里的特效本来就是 Spine 动画（治疗泉、技能台、开箱全是 .sk 资产），迁移时资产原样进包，Unity 侧没有再引入第二套粒子体系。42 套 SkeletonData 之外，主角一套单独放在 `Assets/Load/Spine`。
+这条边界写在文档里也是代码里——`Docs/CombatWorld说明.md` 的原话是"不直接播放动画、音效或粒子"。逻辑层的输出只有数据：`CombatOutput.pushPlayHitEffect(...)` 这类方法把请求写进 `RenderCommand[]`，`CombatStageView.handleCommand` 在渲染帧统一消费。`RenderCommand` 的注释写明了它的定位：
 
-把两套特效体系摆在一起，这个选择的收益才看得清：
+```text
+RenderCommand[]：表现命令，告诉渲染层播放攻击动画、生成子弹、移动子弹、播放命中特效、飘字和音效。
+```
 
-| 维度 | 粒子系统方案 | 我们（Spine 方案） |
-| --- | --- | --- |
-| 特效挂接 | 粒子挂在特效 prefab 上，需要 PrefabHolder 之类的加载器 | Spine 资产按 catalog 键加载，组件预置或运行时挂接 |
-| 排序 | 粒子与 UI 混排要 UIParticle/SortingGroup 桥接 | Spine 就是 UI 节点，父子关系即层级 |
-| 素材管线 | 美术要学 Unity 粒子 | 美术沿用 Spine，角色和特效一套工具 |
-| WebGL 包体 | 每个特效 prefab + 材质 + 贴图 | SkeletonData 六件套（json/atlas/材质） |
+边界的好处立刻能兑现：`Render/Null/NullCombatStageView.ts` 实现同一个 `ICombatStageView` 接口，但什么都不渲染，只把快照和命令克隆进数组——无 Cocos 环境下验证整条 Logic 链路时，特效请求是否发出、发了几次，都变成可断言的数据：
 
-代价也直说：粒子擅长的连续光效、区域氛围（雨、雾、流光）用 Spine 做会吃力；目前玩法里没有这类需求，等有了再议。
+```ts
+export default class NullCombatStageView implements ICombatStageView {
+    public snapshots: CombatSnapshot[] = [];
+    public events: CombatEvent[] = [];
+    public commands: RenderCommand[] = [];
 
-## 二、三种生命周期：预置复用、即播即毁、列表清理
+    public handleCommand(command: RenderCommand): void {
+        this.commands.push(this.cloneCommand(command));
+    }
+    // ...
+}
+```
 
-全工程没有特效对象池。三种播放场景走了三种生命周期，各对齐自己的频率：
+## 二、四类特效，四种生命周期
 
-| 场景 | 方式 | 回收 |
-| --- | --- | --- |
-| 开箱特效（高频复用） | prefab 预置 `SpineEffectView`，`Play(variant)` | 播完只 `enabled=false`，实例保留 |
-| 死亡魂魄（低频一次性） | 从场景模板 `Instantiate` | `IsComplete` 后 `Destroy` |
-| 技能光效（可叠加） | 运行时工厂建实例 | 同类型先 `Destroy` 再建，列表清理 |
+渲染层内部没有"统一特效系统"，而是按生命周期拆成四个 Manager，各配各的回收策略：
 
-预置复用的核心是 `Assets/Root/Script/Core/Component/SpineEffectView.cs`，它管四件事：变体切换、动画名校验、完成回调、防串帧：
+| 类别 | Manager | 播放方式 | 回收时机 |
+| --- | --- | --- | --- |
+| 世界坐标一次性（命中/爆炸/死亡） | `EffectManager` | 动画播完回调 | onComplete → clear → 入池 |
+| 实体持续型（燃烧等） | `EntityEffectManager` | 挂到 EntityView 子节点 | `tween.delay(duration)` 到期，重复请求只续期 |
+| 子弹拖尾（真粒子） | `BulletViewManager` | `cc.ParticleSystem` | `stopSystem()` 后等残粒消散 |
+| 碎片飞溅（伪粒子） | `SplashParticleManager` | sprite 物理模拟 | 池上限 160，超限回收最旧 |
 
-```csharp
-finished = onFinished; int playback = version;
-entry = graphic.AnimationState.SetAnimation(0, "animation", loop);
-if (loop) return true;
-completed = current => {
-    if (playback != version || current != entry) return;
-    entry.Complete -= completed; entry = null; completed = null;
-    graphic.enabled = false;
-    var callback = finished; finished = null; callback?.Invoke();
+世界坐标一次性特效的映射表和回收链（`Render/Core/EffectManager.ts`）：
+
+```ts
+const EFFECT_ASSET_NAMES: { [key: string]: string } = {
+    [EffectType.HitBasic]: "HitEffect_01",
+    [EffectType.DeathBasic]: "HitEffect_03",
+    [EffectType.ExplosionBasic]: "HitEffect_03",
 };
-entry.Complete += completed;
-```
-
-`Stop()` 会把 `version` 加一，迟到的 Complete 回调靠 `playback != version` 丢弃——同一个组件被快速重播时，上一轮的回调不会误触发。播放前还有一道 `FindAnimation("animation")` 校验，缺动画直接告警返回，不会静默黑屏。
-
-开箱是预置复用的典型调用方（`Frames/Shop/ChestOpeningPanelView.cs`）：`effect.Play(chestType - 1, () => { opened = true; ... })`，播完才亮"下一步"按钮——特效完成就是流程门槛。
-
-死亡魂魄走即播即毁（`Frames/Game/MonsterDeathView.cs`）：
-
-```csharp
-soul = UnityEngine.Object.Instantiate(soulTemplate, body.parent, false);
-soul.name = "MonsterSoul_" + monster.Index; soul.gameObject.SetActive(true);
-soul.Initialize(false); soul.AnimationState.SetAnimation(0, "animation", false);
 // ...
-private void ReleaseSoul()
-{
-    if (soul == null) return;
-    soul.gameObject.SetActive(false); soul.AnimationState?.ClearTracks();
-    UnityEngine.Object.Destroy(soul.gameObject); soul = null;
+private recycle(view: EffectView): void {
+    for (let i = this.activeEffects.length - 1; i >= 0; i--) {
+        if (this.activeEffects[i] === view) { this.activeEffects.splice(i, 1); break; }
+    }
+    const viewType = EFFECT_VIEW_TYPE_PREFIX + view.effectType;
+    view.clear();
+    this.getPool().put(viewType, view.node);
 }
 ```
 
-敢不做池子的前提：销毁的只是 GameObject 实例，SkeletonData 资产由加载器持有、不随实例销毁；同屏魂魄数量是个位数，Instantiate 的成本可忽略。
+`Prefab/Game/Effect/` 下就 9 个 `HitEffect_0X.prefab`，三种逻辑事件复用两个 prefab——特效的种类远少于事件的种类，靠映射表而不是给每种伤害做一个特效。
 
-技能光效是第三种（`Frames/Game/HeroVisual.cs`）：同类型先清场再建新的，避免两个同类光效叠画面：
+实体持续型是去重续期设计（`Render/Core/EntityEffectManager.ts`）：同一个实体挂同一个特效，重复命令不重建实例，只重设位置并重置回收定时：
 
-```csharp
-case 7: case 14:
-    for (int i = skillEffects.Count - 1; i >= 0; i--)
-        if (skillEffects[i].type == feedback.Type) { Destroy(skillEffects[i].rect.gameObject); skillEffects.RemoveAt(i); }
-    var rect = MainWorld.Image("SkillTouch_" + feedback.Type, touchSprites[feedback.Type == 7 ? 0 : 1], transform);
-    rect.localPosition = new Vector3(actorX + 10, 20, 0); skillEffects.Add((rect, feedback.Type, 0)); break;
-```
-
-## 三、挂接与层级：一个 Node 工厂，父子关系即层级
-
-运行时创建的特效统一从 `MainWorld.Node()` 工厂出生（`Frames/Game/MainWorld.cs`）：
-
-```csharp
-internal static RectTransform Node(string name, Transform parent, Vector2 position, Vector2 size)
-{
-    var node = new GameObject(name, typeof(RectTransform)); node.layer = 5; node.transform.SetParent(parent, false);
-    var rect = (RectTransform)node.transform; rect.anchorMin = rect.anchorMax = Vector2.zero; rect.pivot = Vector2.zero;
-    rect.anchoredPosition = position; rect.sizeDelta = size; return rect;
+```ts
+const key = command.entityId + "_" + command.effectKey;
+const existing = this.activeEffects[key];
+if (existing) {
+    if (existing.node && cc.isValid(existing.node)) existing.node.setPosition(view.getEntityEffectLocalPosition(command.effectKey));
+    if (existing.tween) existing.tween.stop();
+    existing.tween = this.scheduleRecycle(key, command.duration);
+    return;
 }
 ```
 
-挂到谁下面，层级就在谁里面——不碰 `sortingOrder`。全工程只有一处主动改排序：宠物蛋拖拽时 `dragCanvas.sortingOrder = rootCanvas.sortingOrder + 1`（`PetEggView.cs:16`），因为拖拽物要临时越过整个 UI。其余层级全部靠 `SetParent` 和 `SetAsFirstSibling`。
+挂接偏移由 `EntityView.getEntityEffectLocalPosition()` 提供（默认 y = height * 0.5，特殊特效挂专用 anchor 子节点）——渲染细节归渲染层，Logic 只报"谁、什么特效、多久"。
 
-工厂之上包一层 Spine 专用装配（`HeroVisual.SpineEffect`）：
+子弹拖尾是真正的 Cocos 粒子，回收时机最讲究（`Render/Core/BulletViewManager.ts`）：停止发射后残粒还在飞，立刻回收会凭空消失，所以等 `life + lifeVar` 秒：
 
-```csharp
-private SkeletonGraphic SpineEffect(string name, string key, string animation, bool loop)
-{
-    var data = packages.Asset<SkeletonDataAsset>(key);
-    var node = MainWorld.Node(name, transform, new Vector2(actorX, 10), Vector2.zero);
-    var graphic = SkeletonGraphic.AddSkeletonGraphicComponent(node.gameObject, data);
-    graphic.material = UnityEngine.UI.Graphic.defaultGraphicMaterial; graphic.raycastTarget = false;
-    graphic.MeshGenerator.settings.pmaVertexColors = false;
-    graphic.AnimationState.SetAnimation(0, animation, loop); return graphic;
+```ts
+private bulletTrailPool: cc.NodePool = new cc.NodePool();
+// ...
+private stopBulletTrail(bulletId: number): void {
+    const particle = this.bulletTrailViews[bulletId];
+    if (!particle) return;
+    particle.stopSystem();
+    this.bulletTrailStopDelays[bulletId] = particle.life + particle.lifeVar;
 }
 ```
 
-三个细节是踩出来的：`raycastTarget = false` 让特效不挡点击；`pmaVertexColors = false` 对齐美术导出的贴图预乘设置；挂接偏移（`actorX + 10, 20`、死亡魂魄的 `deathX + 30`）直接写在视图代码里。偏移没有配置化是当前的债——换绑点要改代码，好在频率不高。
+碎片飞溅干脆不用粒子系统：`SplashParticleManager` 自己做 sprite 物理模拟（重力、弹跳、摩擦），节点走自管数组池，`maxActiveCount = 160`，超限回收最旧的一颗——碎片数量失控时先保证帧率。
 
-## 四、资产进包：catalog 键 + 内嵌/远程双通道
+## 三、ViewPool：一个池子，键即约定
 
-Spine 资产的包内地址是规则化的：`spine/<source>/<field>`，六件套（json、playbackJson、atlasText、material、atlasAsset、dataAsset）各自注册（`PackageBuildMigration.cs`）：
+四个 Manager 共用 `Render/Core/ViewPool.ts` 这个通用节点池，结构简单到只有两根手指：`pool[viewType]: any[]` 是 LIFO 栈，`get` 先弹栈、空了才 `instantiate`，`put` 只做 deactivate + removeFromParent：
 
-```csharp
-var spine = JObject.Parse(File.ReadAllText(SpineImportMigration.InputPath));
-foreach (JObject row in spine["rows"].Where(row => (string)row["textureBundle"] != "Load"))
-    foreach (var field in new[] { "json", "playbackJson", "atlasText", "material", "atlasAsset", "dataAsset" })
-        // Keep native data with its texture owner; Root-to-FrameHome would form a bundle cycle.
-        if (row[field] != null) Own((string)row[field], ((string)row["textureBundle"]).ToLowerInvariant(), "spine/" + (string)row["source"] + "/" + field);
+```ts
+private pool: { [key: string]: any[] } = {};
+
+public get(viewType: string, prefab: any, parent: any): any {
+    const list = this.pool[viewType] || [];
+    let node = list.length > 0 ? list.pop() : null;
+    if (!node && prefab) node = cc.instantiate(prefab);
+    if (node) {
+        node.parent = parent;
+        if (parent && parent.group) CocosUtil.setGroup(node, parent.group);
+        node.active = true;
+    }
+    return node;
+}
 ```
 
-注释里的"bundle cycle"是真实的坑：Spine 数据跟着贴图所在的包走，否则 Root 包和 FrameHome 包会互相引用成环。加载端 `Assets/Load/Script/PackageLoader.cs` 双通道：内嵌包走 `resources:///CatKnightBundles/` 常量基址；远程包走 `UnityWebRequestAssetBundle` + `CachedAssetBundle("catknight_" + name, hash, crc)`，并显式禁用原生 Caching——小游戏平台的持久缓存需要渠道适配器，不能指望 Unity 默认行为。
+池没有上限——上限的职责在每个 Manager 手里（碎片 160、实体特效靠 duration 到期）。复用键是字符串约定：`"Effect_" + prefabPath`、`"EntityEffect_" + effectKey`、`prefabPath + "#FlameStream"`，键相同即节点结构相同，跨 Manager 不会串。`EffectView.resolveAnimation()` 还做了资产适配：prefab 里的动画组件是 BaseAnimation、Spine 或逐帧动画，取出来统一当动画播，回收时 `clear()` 复位。
 
-## 五、验收与检查单
+## 四、粒子要跟着游戏速度走
 
-特效不靠目检收货。`Tools/check-collected-loot.cjs` 里有专门的分包播放用例：`spine-ui`、`spine-world-ui`、`spine-dungeon-ui` 在真实包里跑，证据落在 `Migration/Evidence/collected-loot-case-spine-ui.json` 等文件。素材缺口也照实记录：源导弹爆炸路径 `spine/baoz/baoz.sk` 在原生导入清单和 Assets 里都没有对应资产，`Migration/SPINE_UI_WIRING.md` 写明"不假造图片或换用不相干 Spine"，而不是拿别的东西凑。
+全局变速（倍速战斗）对特效的含义是"发射频率和寿命同时改"，`Core/Component/Particle.ts` 把这件事封死在组件里：
 
-上线前核对：
+```ts
+public setSpeed(speed) {
+    if (!this.data) this.init();
+    const scale = isFinite(Number(speed)) && Number(speed) > 0 ? Number(speed) : 1;
+    this.speed = scale;
+    this.particle.speed = this.data.speed * scale;
+    this.particle.speedVar = this.data.speedVar * scale;
+    this.particle.life = this.data.life / scale * this.lifeScale;
+    this.particle.lifeVar = this.data.lifeVar / scale * this.lifeScale;
+    this.particle.emissionRate = this.data.emissionRate * scale;
+}
+```
 
-- `rg ParticleSystem` 保持 0 命中；新特效一律走 Spine，不引入第二套体系
-- 新 Spine 资产六件套登记进导入清单，键规则 `spine/<source>/<field>`，贴图归属决定所在 bundle
-- 动画名统一 `animation`；`SpineEffectView.Play` 的 FindAnimation 校验不允许被绕过
-- 快速重播场景（开箱、技能）必须过 `version` 防串帧，不许裸订阅 Complete
-- 缺素材登记进 SPINE_UI_WIRING.md 的"未接"清单，宁可空着不接，不拿不相干资产顶
-- 改挂接偏移后跑 `check-collected-loot.cjs --case spine-ui`（或对应场景用例）
+速度正比放大、寿命反比缩短、发射率正比放大——粒子在变速下"长得一样快"，而不是慢动作。组件监听 `CoreEvent.GameSpeedChange` 自动同步。代码参数的粒子也走同一套约定：`MechanicalSmokeView` 的双层烟雾（core 48 粒 + outer 36 粒）全部参数写死在代码里，`intensity/burst` 只调 `emissionRate`——美术参数进代码，换来的是改动可 diff、可回滚。
+
+## 五、上线前核对
+
+- 逻辑层新增表现需求只准加 RenderCommand 类型，禁止在 Logic 里 `instantiate`/`play`
+- 新特效先定生命周期类别（一次性/持续/拖尾/碎片），再选 Manager；持续型必须给 duration，靠续期而不是重建
+- 入池前 `clear()` 复位是硬要求，跨场景 `clearDynamic` 全清；池键遵循 `"Effect_" + path` 约定
+- 粒子组件挂 `Particle.ts` 走速度缩放，禁止直接改 `emissionRate` 绕过变速
+- 高频碎片类特效必须设池上限，超限策略默认回收最旧
+- 无渲染验证用 `NullCombatStageView` 断言命令序列，不启动 Cocos 场景

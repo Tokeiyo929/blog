@@ -212,11 +212,11 @@
     },
     {
       "id": 1,
-      "title": "特效实现：全工程 0 个 ParticleSystem，特效全是 Spine",
-      "excerpt": "迁移猫骑士到 Unity 时先钉死一个事实：全工程一个 ParticleSystem 都没有，特效全是 Spine——Assets/Root/Spine 下 42 套 SkeletonData，在 UI 坐标系里直接播。",
+      "title": "特效实现：逻辑层不播粒子，四类特效四种回收",
+      "excerpt": "炮塔大作战的逻辑层从不直接播粒子：命中、燃烧、拖尾、碎片四类特效各走各的 Manager 和池，Logic 只往命令缓冲里写一行 RenderCommand。",
       "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "猫骑士（Unity 小游戏）",
+      "project": "炮塔大作战",
       "link": "post1.html"
     }
   ]
