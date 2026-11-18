@@ -176,13 +176,12 @@
     },
     {
       "id": 6,
-      "title": "美术资源制作规范",
-      "excerpt": "文档历史",
-      "date": "2025-12-08",
+      "title": "美术资源规范：1612 条资源清单就是法律",
+      "excerpt": "猫骑士的美术规范不靠文档靠清单：package-layout.json 里 1612 条资源逐条登记路径和 SHA256，改任何一张图、挪任何一次位置都会撞上 Verify 的哈希校验。",
+      "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "",
-      "link": "post6.html",
-      "image": "images/img_006_001.png"
+      "project": "猫骑士（Unity 小游戏）",
+      "link": "post6.html"
     },
     {
       "id": 5,
