@@ -215,13 +215,12 @@
     },
     {
       "id": 1,
-      "title": "PrefabHolder",
-      "excerpt": "本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。关键要点包括：​",
-      "date": "2025-12-03",
+      "title": "特效实现：全工程 0 个 ParticleSystem，特效全是 Spine",
+      "excerpt": "迁移猫骑士到 Unity 时先钉死一个事实：全工程一个 ParticleSystem 都没有，特效全是 Spine——Assets/Root/Spine 下 42 套 SkeletonData，在 UI 坐标系里直接播。",
+      "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "",
-      "link": "post1.html",
-      "image": "images/img_001_001.jpg"
+      "project": "猫骑士（Unity 小游戏）",
+      "link": "post1.html"
     }
   ]
 }
