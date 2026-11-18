@@ -1,607 +1,125 @@
-LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。
-
+---
+title: 存档设计：15 个模块一个事务，冲突时拒绝写入
+category: "[代码解析]"
+date: 2026-11-18
+project: 猫骑士（Unity 小游戏）
 ---
 
-## 功能简介
-- 对比 PlayerPrefs进行封装,优化访问性能,减少了GC。
-- 提供对int、float、string类型的本地数据读写接口。
-- 支持用户级和全局级键值分离。
-- 提供本地缓存写入、读取、检测和删除功能。
-- 支持将内存中缓存的值批量刷新到本地存储。
+猫骑士没用 PlayerPrefs 存档：15 个模块打进一个 checkpoint，桌面/网页/微信/抖音四个后端共用一套编解码，检测到外部改动会让保存直接抛异常。
 
----
+## 一、后端抽象只有两个原语
 
-## 使用场景
-适用于以下场景:
-- 存储用户设定(如音量、分辨率、用户名)。
-- 缓存玩家进度或偏好设置。
-- 记录全局状态或配置(如首次启动标记、默认语言)。
-- 支持在无权限写入PlayerPrefs时先写入内存缓存。
+存档的存储层被压成一个接口 `IAccountStorage`：`Load()` 返回 JObject，`Save(JObject)` 落盘。四个平台各给一个实现，上层完全不感知差异：
 
----
+| 平台 | 后端 | 落点 |
+| --- | --- | --- |
+| Windows/编辑器 | `AtomicJsonSave` | `persistentDataPath/local-account.json` |
+| web-mobile（网页） | jslib 桥 → `localStorage` | `catknight/web/{projectCode}/{channelCode}` |
+| 微信/抖音/快手小游戏 | jslib 桥 → `wx/tt/ks.getStorageSync` | `catknight.account.v1/{scope}` |
+| 微信/抖音云存档 | HTTPS 上传/下载 | `catknight-account-v1` 信封 |
 
-## 使用方式
-
-### 写入本地数据
-```csharp
-LocalCache.SetLocalString("username","张三");
-LocalCache.SetLocalint("level", 10);
-LocalCache.SetLocalFloat("volume", 0.5f);
-```
-
-### 读取本地数据
-```csharp
-var name = LocalCache.GetLocalstring("username","默认用户名");
-var level = LocalCache.GetLocalint("level", 1);
-var volume = LocalCache.GetLocalFloat("volume");
-```
-
-### 检查本地键是否存在
-```csharp
-if (LocalCache.HasLocalKey("username"))
-    // 键存在
-```
-
-### 删除本地键
-```csharp
-LocalCache.DeleteLocalkey("username");
-```
-
----
-
-## 全局数据操作
-不依赖用户前缀,适合全局设定或设备级存储。
+桌面端的原子写在 `Core/Sys/AtomicJsonSave.cs`，写之前先把现有文件读一遍——损坏的存档必须以错误形式暴露，而不是被无声覆盖：
 
 ```csharp
-LocalCache.SetGlobalString("language", "zh-CN");
-var lang = LocalCache.GetGlobalString("language", "en");
-LocalCache.DeleteGlobalKey("language");
-```
-
----
-
-## 刷新缓存到本地
-将当前保存在内存中的值写入本地存储:
-
-```csharp
-LocalCache.FlushCache();
-```
-
-适用于在离线、权限限制等场景下的缓存同步。
-
-```csharp
-using UnityEngine;
-using System.Collections.Generic;
-
-public static class LocalCache
+if (File.Exists(path)) Load();
+var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+try
 {
-    private static Dictionary<string, string> _strDict = new Dictionary<string, string>();
-    private static Dictionary<string, int> _intDict = new Dictionary<string, int>();
-    private static Dictionary<string, float> _floatDict = new Dictionary<string, float>();
-    private static Dictionary<string, bool> _keyDict = new Dictionary<string, bool>();
-
-    public static string userKeyPrefix = string.Empty;
-    public static string globalKeyPrefix = "";
-    private static LRUCache<(string, string), string> keyCache = new LRUCache<(string, string), string>(64);
-    private static bool _CheckPermission()
+    var bytes = new UTF8Encoding(false).GetBytes(text);
+    using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
     {
-        return true;
+        stream.Write(bytes, 0, bytes.Length);
+        stream.Flush(true);
     }
-
-    public static void FlushCache()
-    {
-        if (!_CheckPermission())
-        {
-            return;
-        }
-
-        foreach (var pairs in _strDict)
-        {
-            PlayerPrefs.SetString(pairs.Key, pairs.Value);
-        }
-        foreach (var pairs in _intDict)
-        {
-            PlayerPrefs.SetInt(pairs.Key, pairs.Value);
-        }
-        foreach (var pairs in _floatDict)
-        {
-            PlayerPrefs.SetFloat(pairs.Key, pairs.Value);
-        }
-    }
-    private static string _GetCacheKey(string prefix, string key)
-    {
-        var tmpKey = (prefix, key);
-        var fixedKey = keyCache.Get(tmpKey);
-        if (string.IsNullOrEmpty(fixedKey))
-        {
-            fixedKey = string.Format("{0}_{1}", prefix, key);
-            keyCache.Set(tmpKey, fixedKey);
-        }
-
-        return fixedKey;
-    }
-
-    private static string _GetUserKey(string key)
-    {
-        return _GetCacheKey(userKeyPrefix, key);
-    }
-
-    public static bool HasLocalKey(string key)
-    {
-        if (!_CheckPermission())
-        {
-            return _keyDict.ContainsKey(_GetUserKey(key));
-        }
-        return PlayerPrefs.HasKey(_GetUserKey(key));
-    }
-
-    public static void DeleteLocalKey(string key)
-    {
-        PlayerPrefs.DeleteKey(_GetUserKey(key));
-    }
-
-    public static bool HasGlobalKey(string key)
-    {
-        if (!_CheckPermission())
-        {
-            return _keyDict.ContainsKey(_GetGlobalKey(key));
-        }
-        return PlayerPrefs.HasKey(_GetGlobalKey(key));
-    }
-
-    public static void DeleteGlobalKey(string key)
-    {
-        PlayerPrefs.DeleteKey(_GetGlobalKey(key));
-    }
-
-    /// <summary>
-    /// 用户绑定,
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="defaultVal"></param>
-    /// <returns></returns>
-    public static int GetLocalInt(string key, int defaultVal = 0)
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            if (_intDict.TryGetValue(key,out var result))
-            {
-                return result;
-            }
-            return defaultVal;
-        }
-        return PlayerPrefs.GetInt(key, defaultVal);
-    }
-
-    public static float GetLocalFloat(string key)
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            if (_floatDict.TryGetValue(key, out var result))
-            {
-                return result;
-            }
-            return 0f;
-        }
-        return PlayerPrefs.GetFloat(key, 0f);
-    }
-
-    public static string GetLocalString(string key, string defaultVal = "")
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            if (_strDict.TryGetValue(key, out var result))
-            {
-                return result;
-            }
-            return defaultVal;
-        }
-        return PlayerPrefs.GetString(key, defaultVal);
-    }
-
-    public static void SetLocalString(string key, string val)
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            _strDict[key] = val;
-            _keyDict[key] = true;
-            return;
-        }
-        PlayerPrefs.SetString(key, val);
-    }
-
-    public static void SetLocalInt(string key, int val)
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            _intDict[key] = val;
-            _keyDict[key] = true;
-            return;
-        }
-        PlayerPrefs.SetInt(key, val);
-    }
-
-    public static void SetLocalFloat(string key, float val)
-    {
-        key = _GetUserKey(key);
-        if (!_CheckPermission())
-        {
-            _floatDict[key] = val;
-            _keyDict[key] = true;
-            return;
-        }
-        PlayerPrefs.SetFloat(key, val);
-    }
-
-    private static string _GetGlobalKey(string key)
-    {
-        return _GetCacheKey(globalKeyPrefix, key);
-    }
-
-    public static void SetGlobalString(string key, string val)
-    {
-        key = _GetGlobalKey(key);
-
-        if (!_CheckPermission())
-        {
-            _strDict[key] = val;
-            _keyDict[key] = true;
-            return;
-        }
-        PlayerPrefs.SetString(key, val);
-    }
-
-    /// <summary>
-    /// 全局绑定,与用户ID无关.
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="defaultVal"></param>
-    /// <returns></returns>
-    public static string GetGlobalString(string key, string defaultVal = "")
-    {
-        key = _GetGlobalKey(key);
-
-        if (!_CheckPermission())
-        {
-            if (_strDict.TryGetValue(key, out var result))
-            {
-                return result;
-            }
-            return defaultVal;
-        }
-        return PlayerPrefs.GetString(key, defaultVal);
-    }
-
-    public static int GetGlobalInt(string key, int defaultVal = 0)
-    {
-        key = _GetGlobalKey(key);
-        if (!_CheckPermission())
-        {
-            if (_intDict.TryGetValue(key, out var result))
-            {
-                return result;
-            }
-            return defaultVal;
-        }
-        return PlayerPrefs.GetInt(key, defaultVal);
-    }
-
-    public static void SetGlobalInt(string key, int val)
-    {
-        key = _GetGlobalKey(key);
-        if (!_CheckPermission())
-        {
-            _intDict[key] = val;
-            _keyDict[key] = true;
-            return;
-        }
-        PlayerPrefs.SetInt(key, val);
-    }
+    if (File.Exists(path)) File.Replace(temporary, path, path + ".bak");
+    else File.Move(temporary, path);
 }
 ```
 
-```csharp
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Pool; //引入对象池 (JasonLee)
+小游戏端没有文件系统可依赖，读写走 jslib 桥 `Assets/Plugins/WebGL/ChannelServices.jslib`，按渠道选 SDK：
 
-/// <summary>
-/// 基于 UnityEngine.Pool.ObjectPool 的 LRU 缓存容器(JasonLee)
-/// </summary>
-public class LRUCache<T,DATA>:IEnumerable<DATA>,IDisposable
-{
-    /// <summary>
-    /// 双向链表节点结构(Jason Lee)
-    /// </summary>
-    public class ListNode<T2,DATA2>
-    {
-        public ListNode<T2,DATA2> Prev;
-        public ListNode<T2,DATA2> Next;
-        public DATA2 Value;
-        public T2 Key;
-        public ListNode(T2 key, DATA2 val)
-        {
-            Value = val;
-            Key = key;
-            this.Prev = null;
-            this.Next = null;
-        }
-        //用于池化回收时的字段清空(JasonLee)
-        public void Reset()
-        {
-            Prev = null;
-            Next = null;
-            Key = default;
-            Value = default;
-        }
-    }
-
-    private int _size;//链表长度
-    private int _capacity;//缓存容量 
-    
-    //初始化字典时应设置容量，避免多次扩容引发 GC(JasonLee)
-    private Dictionary<T, ListNode<T,DATA>> _dic;//key +缓存数据
-	public IReadOnlyCollection<T> Keys => _dic.Keys;
-    private ListNode<T,DATA> _linkHead;// 作为一个哨兵节点，简化链表操作
-    // 用于存储回收的 ListNode 对象池(JasonLee)
-    private ObjectPool<ListNode<T, DATA>> _nodePool;
-    private System.Action<T, DATA> OnRemoveCall;
-    public LRUCache(int capacity,System.Action<T,DATA> OnRemoveCall = null)
-    {
-        _linkHead = new ListNode<T,DATA>(default(T), default(DATA));
-        _linkHead.Next = _linkHead.Prev = _linkHead;
-        this._size = 0;
-        this._capacity = capacity;
-        this._dic = new Dictionary<T, ListNode<T,DATA>>(_capacity);//初始化 Dictionary 时设置容量，避免哈希表扩容引发 GC(JasonLee)        
-        this.OnRemoveCall = OnRemoveCall;
-        //初始化 Unity 对象池，带 OnRelease 清理逻辑，最大容量设置为 2 倍(JasonLee)
-        _nodePool = new ObjectPool<ListNode<T, DATA>>(
-            createFunc: () => new ListNode<T, DATA>(default, default),
-            actionOnGet: null,
-            actionOnRelease: n => n.Reset(),
-            collectionCheck: true,
-            defaultCapacity: capacity,
-            maxSize: capacity * 2
-        );
-    }
-
-    public int Count=> _size;
-
-    /// <summary>
-    /// 方便处理值类型
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public bool TryGet(T key,out DATA value)
-    {
-        if (_dic.TryGetValue(key, out var listNode))
-        {
-            MoveToHead(listNode);
-            value = listNode.Value;
-            return true;
-        }
-
-        value= default(DATA);
-        return false;
-    }
-
-    public DATA Get(T key)
-    {
-        if (_dic.TryGetValue(key, out var listNode))
-        {
-            MoveToHead(listNode);
-            return listNode.Value;
-        }
-        return default(DATA);
-    }
-
-    /// <summary>
-    /// 原返回值并无应用，且没有相应的资源释放，此处改为void，并添加内存回收（JasonLee）
-    /// </summary>
-    /// <param name="key"></param>
-    public void Remove(T key)
-    {
-        if (!_dic.TryGetValue(key, out var node))//添加out逻辑(JasonLee)
-        {
-            return;
-        }
-        else
-        {
-            //ListNode<T, DATA> n = _dic[key];//避免重新分配内存指针(JasonLee)
-            RemoveFromList(node);
-            _dic.Remove(key);
-            _size--;
-            OnRemoveCall?.Invoke(node.Key, node.Value);//补充遗漏回调逻辑(JasonLee)
-            RecycleNode(node); //释放 ListNode 对象，放入池中复用(JasonLee)            
-        }
-    }
-
-    public void Set(T key, DATA value)
-    {
-        ListNode<T,DATA> n;
-        if (_dic.TryGetValue(key, out var listNode))
-        {
-            n = listNode;
-            n.Value = value;
-            MoveToHead(n);
-        }
-        else
-        {
-            //n = new ListNode<T,DATA>(key, value);
-            n = GetOrCreateNode(key, value);//替代 new，使用池获取或创建(JasonLee)
-            AttachToHead(n);
-            _size++;
-            _dic.Add(key, n);
-        }
-        if (_size > _capacity)
-        {
-            //内部须池化节点（JasonLee）
-            RemoveLast();// 如果更新节点后超出容量，删除最后一个 ,removeLast中做了size--操作
-        }
-    }
-
-    public bool IsFull()
-    {
-        return _dic.Count == _capacity;
-    }
-
-    //改动较多，重写Clear方法（JasonLee）
-    public void Clear()
-    {
-        var node = _linkHead.Next;
-        while (node != _linkHead) // 避免 foreach 带来的 GC 分配，并精确操作链表（JasonLee）
-        {
-            var next = node.Next; // 回收前缓存 Next，避免 RecycleNode 清空后断链（JasonLee）
-
-            OnRemoveCall?.Invoke(node.Key, node.Value); 
-            RecycleNode(node); // 将节点归还对象池，释放内存引用，支持复用（JasonLee）
-            node = next;
-        }
-
-        _linkHead.Next = _linkHead.Prev = _linkHead;
-        _dic.Clear();
-        _size = 0;
-    }
-
-    public void Dispose()
-    {
-        Clear();
-        OnRemoveCall = null;
-        _nodePool.Clear();//Unity 对象池清空（彻底释放）
-    }
-
-    // 移出链表最后一个节点
-    //自己检测,
-    public T PopLast(out DATA data)
-    {
-        ListNode<T, DATA> deNode = _linkHead.Prev;
-        if(deNode == null || _linkHead == deNode)
-        {
-            throw new InvalidOperationException("Check Before PopLast");
-        }
-        RemoveFromList(deNode);
-        _dic.Remove(deNode.Key);
-        _size--;
-        var key = deNode.Key;
-        data = deNode.Value;
-        OnRemoveCall?.Invoke(key, data);
-        RecycleNode(deNode); //放入对象池（JasonLee）
-        return key;
-    }
-
-    public bool TryLast(out T key, out DATA data)
-    {
-        ListNode<T, DATA> deNode = _linkHead.Prev;
-        if (deNode == null || _linkHead == deNode)
-        {
-            key = default(T);
-            data = default(DATA);
-            return false;
-        }
-
-        key = deNode.Key;
-        data = deNode.Value;
-        return true;
-    }
-
-    // 移出链表最后一个节点
-    private void RemoveLast()
-    {
-        ListNode<T,DATA> deNode = _linkHead.Prev;
-        RemoveFromList(deNode);
-        _dic.Remove(deNode.Key);
-        _size--;
-        OnRemoveCall?.Invoke(deNode.Key, deNode.Value);
-        RecycleNode(deNode); //放入对象池（JasonLee）
-    }
-
-    // 将一个孤立节点放到头部
-    private void AttachToHead(ListNode<T,DATA> n)
-    {
-        n.Prev = _linkHead;
-        n.Next = _linkHead.Next;
-        _linkHead.Next.Prev = n;
-        _linkHead.Next = n;
-    }
-
-    // 将一个链表中的节点放到头部
-    private void MoveToHead(ListNode<T,DATA> n)
-    {
-        RemoveFromList(n);
-        AttachToHead(n);
-    }
-    private void RemoveFromList(ListNode<T,DATA> n)
-    {
-        //将该节点从链表删除
-        n.Prev.Next = n.Next;
-        n.Next.Prev = n.Prev;
-
-        n.Prev = null; //清理引用避免悬挂(JasonLee)
-        n.Next = null;
-    }
-
-    /// <summary>
-    /// 从 Unity 对象池中获取新节点或复用节点(JasonLee)
-    /// </summary>
-    private ListNode<T, DATA> GetOrCreateNode(T key, DATA value)
-    {
-        var node = _nodePool.Get(); //Unity 内置池中取对象
-        node.Key = key;
-        node.Value = value;
-        return node;
-    }
-
-    /// <summary>
-    /// 回收节点到 Unity 对象池(JasonLee)
-    /// </summary>
-    private void RecycleNode(ListNode<T, DATA> node)
-    {
-        _nodePool.Release(node); // 调用 OnRelease 自动 Reset
-    }
-    public Enumerator GetEnumerator()
-    {
-        return new Enumerator(_dic.Values);
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-    IEnumerator<DATA> IEnumerable<DATA>.GetEnumerator()
-    {
-        return this.GetEnumerator();
-    }
-
-    public struct Enumerator : IEnumerator<DATA>, IDisposable, IEnumerator
-    {
-        public DATA Current => temp.Current.Value;
-        object IEnumerator.Current => temp.Current.Value;
-
-        private Dictionary<T, ListNode<T, DATA>>.ValueCollection.Enumerator temp;
-        public Enumerator(Dictionary<T, ListNode<T,DATA>>.ValueCollection temp)
-        {
-            this.temp = temp.GetEnumerator();
-        }
-        public void Dispose()
-        {
-            temp.Dispose();
-        }
-        public bool MoveNext()
-        {
-            return temp.MoveNext();
-        }
-        public void Reset()
-        {
-            this.temp = default(Dictionary<T, ListNode<T, DATA>>.ValueCollection.Enumerator);
-        }
-    }
+```js
+CatKnight_ChannelRead: function (key) {
+  var name = UTF8ToString(key);
+  var web = (globalThis.__CHANNEL_CONFIG__ || {}).platform === 'web-mobile';
+  var data = web ? globalThis.localStorage.getItem(name) : CatKnightChannel.api().getStorageSync(name);
+  if (data === undefined || data === null || !web && data === '') data = null;
+  if (data !== null && typeof data !== 'string') throw Error('invalid-storage-type');
+  result = {success:true,data:data};  // ...
 }
 ```
 
+`api()` 按 platform 返回 `wx`/`tt`/`ks`，网页则退回 `localStorage`——一套 C# 代码，四端行为一致。
+
+## 二、编解码：15 个模块 + 21 个旁路键
+
+存档不是一个 JSON 对象随便塞。`Core/Sys/AccountStorageCodec.cs` 把数据组织成"固定清单"：15 个核心模块以 `dat_{id}` 为键，模块 id 是写死的长数组，缺一个都算存档损坏：
+
+```csharp
+// Fixed source ids. Full module restore implementations are migrated separately.
+public static readonly IReadOnlyList<int> ModuleIds = Array.AsReadOnly(new[] {
+    1, 2, 3, 4, 1002, 2002, 2001, 1003, 2003, 3001, 1004, 1005, 1006, 1100, 1101
+});
+```
+
+模块之外还有 **21 个旁路键**（`eqpLcks`、`guideArrs`、`dailyTask`、`onlineT` 这类独立小状态），集合写在同一个文件里，`IsAccountSideKey()` 判定归属。信封是一个 `Rec` 记录加 `datVer` 版本号，版本格式是 `YYMMdd`（`Core/Util/GameClock.cs`）：
+
+```csharp
+public string SaveVersion(double milliseconds = 0)
+{
+    var date = milliseconds == 0 ? RulesLocalDate() : LocalDate(milliseconds);
+    // Original getDateString does not pad years below 10 after year % 100.
+    return (date.Year % 100).ToString(CultureInfo.InvariantCulture) + date.ToString("MMdd", CultureInfo.InvariantCulture);
+}
+```
+
+注释里的坑值得抄下来：源工程 `getDateString` 对 2009 年这种 `%100 < 10` 的年份不补零，新实现必须保持同样的不补零行为，否则老存档的版本比对会错位。兼容性藏在注释里，不在文档里。
+
+## 三、保存是一个事务，不是一次写文件
+
+`Core/Sys/AccountPersistence.cs` 的 `TrySave()` 把保存做成事务：先拍快照，再检测外部改动，确认自己上次提交的状态还躺在存储里，才允许覆盖：
+
+```csharp
+long capturedRevision = revision;
+var snapshot = models.Session.CreateStorageSnapshot(version());
+Active();
+// Detect an external replacement before overwriting another account/cloud decision.
+if (!JToken.DeepEquals(committed, storage.Load())) throw new InvalidOperationException("Account storage changed since restore; retain both states for recovery");
+storage.Save(snapshot);
+committed = (JObject)snapshot.DeepClone();
+if (revision == capturedRevision) pending.Clear();
+```
+
+`DeepEquals` 那一行是整个设计的锚点：如果存档在恢复之后被别的进程、别的账号或云同步改过，**保存直接抛异常**，异常消息就是处置方案——"retain both states for recovery"，两份状态都留着，人来裁决。绝不静默覆盖。配合 `saving` 重入保护和 `revision` 对账（保存期间来了新变更就不清 pending），一次保存要么完整落地、要么完整失败。
+
+## 四、云同步：冲突不猜，状态置 Conflict
+
+微信/抖音的云存档走 `ChannelAccountSession`（HTTPS 上传/下载），本地信封由 `ChannelAccountStorage` 管理。信封字段把同步所需的一切都带上：`schema`、`scope`、`records`、`updatedAt`、`remoteTimestamp`、`syncedHash`：
+
+```csharp
+private JObject Wrap(JObject records, double updated, double remote, string synced) => new JObject {
+    ["schema"] = 1, ["scope"] = Scope, ["records"] = records.DeepClone(), ["updatedAt"] = updated,
+    ["remoteTimestamp"] = remote, ["syncedHash"] = synced };
+```
+
+本地脏检测用 SHA256：`Hash(records) != syncedHash` 即为脏。上传请求带签名（`MD5(timestamp + version + json + signingKey)`），而冲突判定是三处显式检查——本地有值但远端时间戳非零、远端时间戳对不上、远端记录哈希对不上，任何一处命中就 `Status = "Conflict"` 直接返回：
+
+```csharp
+if (local != null && Storage.RemoteTimestamp != 0) { Status = "Conflict"; return; }
+// ...
+else if (remote.Timestamp != Storage.RemoteTimestamp || !Storage.MatchesBase(remote.Records)) { Status = "Conflict"; return; }
+```
+
+冲突不自动合并、不挑一边覆盖——把 Conflict 状态交给上层 UI 呈现，和 `TrySave` 的"抛异常留两份"是同一个哲学：**存档出错时，宁可停住，不可猜错**。
+
+## 五、验证：30,801 条断言 + 向量对照
+
+这套存档的回归不靠手测：`Migration/ACCOUNT_STORAGE.md` 记录 **30,801 条 account 断言**通过、1396 个代码哈希对账（证据 `Migration/Evidence/account-storage-verification.json`）。渠道同步逻辑另有一层"向量检查"：`Tools/account-session-vectors.cjs` 在 vm 里加载 Laya 源工程的 TS 实现，把新旧两端在同样输入下的行为逐例对照——迁移不等于重写，行为要和源实现对表。
+
+上线前核对：
+
+- 新增存档字段先进 15 个模块或 21 个旁路键清单，禁止绕过 codec 直接读写存储
+- `SaveVersion` 的不补零行为不许"修好"；改日期逻辑先跑向量对照
+- 任何绕过 `AccountPersistence.TrySave` 的写路径都是 bug；云同步冲突只能置 Conflict，不许自动覆盖
+- 平台后端改动后，桌面 `.bak` 回滚、网页 localStorage、小游戏 getStorageSync 三条路都要过一遍
+- 存档损坏场景写进用例：坏 JSON、缺模块、信封字段缺失必须抛 FormatException，不许静默重建

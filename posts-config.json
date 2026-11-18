@@ -196,11 +196,11 @@
     },
     {
       "id": 4,
-      "title": "LocalCache&LRUCache",
-      "excerpt": "LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。",
-      "date": "2025-12-08",
+      "title": "存档设计：15 个模块一个事务，冲突时拒绝写入",
+      "excerpt": "猫骑士没用 PlayerPrefs 存档：15 个模块打进一个 checkpoint，桌面/网页/微信/抖音四个后端共用一套编解码，外部改动会让保存直接抛异常。",
+      "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "",
+      "project": "猫骑士（Unity 小游戏）",
       "link": "post4.html"
     },
     {
