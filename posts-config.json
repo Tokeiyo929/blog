@@ -186,13 +186,12 @@
     },
     {
       "id": 5,
-      "title": "EM UI结构",
-      "excerpt": "EM的UI系统，使用Unity的UGUI+C# MonoBehaviour脚本挂载的方式制作。​",
-      "date": "2025-12-03",
+      "title": "UI 框架：我们没写 Window 基类，也没有 UI 栈",
+      "excerpt": "猫骑士的 UI 层没有 Window 基类、没有 UI 栈、没有路由表：pages/dialogs 两层宿主挂 66 个 Page，互斥靠字段判空，正确性靠 81 个 UiChecks 兜底。",
+      "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "",
-      "link": "post5.html",
-      "image": "images/img_005_001.png"
+      "project": "猫骑士（Unity 小游戏）",
+      "link": "post5.html"
     },
     {
       "id": 4,

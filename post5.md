@@ -1,520 +1,99 @@
-# EM UI结构​
-## 一.UI显示逻辑构架​
-### 1.UI逻辑显示简介​
-EM的UI系统，使用Unity的UGUI+C# MonoBehaviour脚本挂载的方式制作。​
-先做好UGUI的prefab-》然后挂载Window及相关子类拓展脚本-》通过脚本设置好UI参数-》将Prefab放入UI逻辑栈中管理​
-UI逻辑栈分多个渲染层级，每个层级又有多个子层级，所有显示管理都在PopupWindowManager中。​
-### 2.主要逻辑代码结构​
-(1) PopupWindowManager文件中包含了UI逻辑构架的主要代码。​
-(2) PrefabPath，RefPrefabClassType 对prefab路径，Bar等进行管理的自定义Attribute。​
-(3) Window及子类PopupWindow，Dialog，NativeWindow，UIPuzzleResultMapController等窗口管理类。在制作Prefab的UI时，将相关自定义脚本挂载在Prefab上，然后在脚本上设置UI参数。同时，该类族也有窗口常见操作的逻辑代码，如打开，关闭，隐藏等。​
-(4) 外部调用显示UI窗口的示例如下：​
-界面：PopupWindowManager.Instance.showPopupWindow<UIPuzzleResultMapController>()​
-隐藏当前显示界面：PopupWindowManager.Instance.HidePopupWindow()​
-### 3.PopupWindow窗口显示结构​
-（1）PopupWindow有显示内容的prefab和显示UI上面Bar的prefab，这两个prefab分开的。​
-（2）显示Popupwindow时，先加载具体弹窗的Prefab，然后Instance一个WindowTopBar的prefab，放在弹窗Prefab界面上，整个弹窗才显示完整。​
-（3）PopupWindow是需要入栈的UI，每次显示新UI，将最新UI放在栈上层。隐藏，则弹出最上层栈的UI，并销毁。​
-（4）SetTitle：设置最上方显示的Bar​
-（5）OnPause，OnResume，OnClosed：隐藏，恢复，销毁时的回调函数​
-（6）示意图，1：bar  2:Prefab显示内容​
-​​​![飞书文档 - 图片](images/img_005_001.png)
-​
-### 4.PopupWindowManager中显示逻辑结构构架​
-（1）EM所有显示逻辑构架都在PopupWindowManager的中管理，所以该类非常重要。​
-（2）渲染层级定义，分为主层级 和 次级层级；​
-主层级gameObject.layer/canvas.sortingLayerName/canvas.sortingLayerID设定，次级层级用canvas.sortingOrder设定；​
-层级越大，显示越靠前；​
-主层级大的必定显示在主层级小的UI之上；​
-主层级相等时，次层级更大的，显示在次层级小的UI之上；​
-特效的层级，通过UIAnimator设置，且只设置sorderOrder（次层级）。​
-（3）显示UI的主要接口​
-showPopupWindow：显示入栈弹窗，其他所有显示函数都是调用改函数。改函数加载UI的Prefab，组装TitleBar成完整可显示的UI，并显示在界面上。同时，逻辑入栈。​
-HidePopupWindow，PopToWindow：显示出栈弹窗，并销毁在需要显示的Prefab。​
-## 二.PopupWindowManager重要的逻辑代码详细解析​
-### 1.代码中渲染主层级定义​
-```csharp
-private const int GUIDE_LAYER = 30; 引导UI的主层级​
-private const int TIPS_LAYER = 31; 提示UI的主层级​
-private const int SPEAKER_LAYER = 31;广播UI的主层级​
-private const int MAINUI_LAYER = 10; 入栈的主UI的主层级的最小层级​
-//入栈UI的当前最大层级，11~31，只渲染最上面可见的入栈UI主层级​
-//有新UI入栈，maxLayer都会加一，出栈，减一​
-private int maxLayer = MAINUI_LAYER + 1;​c
-```
-
-注意：引导，Tips，广播都是只有一个主层级，且写死的；但是入栈UI主层级有多个，每个入栈UI都有一个主层级(layer)，每次入栈加一，出栈减一。​
-### 2.入栈的UI的次级层级(sortingOrder)排序相关定义：​
-```csharp
-//有新的UI入栈，都会将maxSortLayer + SORT_LAYER_INC，出栈 -SORT_LAYER_INC​
-//（不明白有何意义，或许是为了每个层级都划分清楚）​
-private const int SORT_LAYER_INC = 30; ​
-//入栈UI当前最上面那个UI的sortingLayer​
-private int maxSortLayer = 0;​
-```
-
-### 3.主层级的对象​
-```csharp
-private GameObject tipsWindow = null; //提示window ​
-private GameObject guideWindow = null;//引导window ​
-private GameObject puzzleguideWindow = null;//解密引导window ​
-private GameObject speakerWindow = null; //广播消息window ​
-//需要入栈的UI的对象缓存，每个UI都有一个GameObject，显示UI入栈，弹出UI出栈​
-public Stack<GameObject> windowsStack = new Stack<GameObject>();​
-```
-
-除了入栈的ui栈，其他四个层级都是写死的，并且只有一个UI对象。​
-### 4.showPopupWindow显示入栈UI逻辑细节​
-（1）接口定义public T showPopupWindow<T>(bool guide = true, int index = 0) where T : Window​
-（2）先根据T获取PrefabPath属性，获得prefab路径，并实例化。​
-（3）若是PopupWindow，则根据胚子的WindowTopBar，实例化一个Bar，添加到UI的Prefab上，并赋值相关数据。​
-（4）隐藏旧最上层UI，执行旧最上层UI的OnPause回调。​
-（5）将新UI的Prefab放在一个新建的Cavans（UIWindowRootCameraCanvas）下，设置主层级和次层级，入栈新UI，并更新渲染显示，将新UI显示。​
-### 5.HidePopupWindow/PopToWindow弹出栈UI逻辑细节​
-（1）获取栈顶UI，执行销毁UI回调，销毁UI。​
-（2）主层级和次级层级回退。​
-（3）若是需要回退到特定界面，需要一直循环，直到最上层界面是特定界面为止。​
-### 6.Tips/Speaker等特定UI​
-这些特定UI，和普通入栈UI相比，有一些特殊处理，但是逻辑基本一致。而且只有一个UI界面，不会有入栈，出栈操作，渲染层级也是写死不变的。​
-
+---
+title: UI 框架：我们没写 Window 基类，也没有 UI 栈
+category: "[代码解析]"
+date: 2026-11-18
+project: 猫骑士（Unity 小游戏）
 ---
 
-```csharp
-using DG.Tweening;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+猫骑士的 UI 层没有 Window 基类、没有 UI 栈、没有路由表：`pages/dialogs` 两层宿主挂 66 个 Page，互斥靠字段判空，正确性靠 81 个 UiChecks 兜底。
 
-public abstract class Window : MonoBehaviour
-{
-    public bool isBackButtonEnable = true;
-    public bool isOnPopToRoot = false;
-    public bool isFullScreenInPC = false;
-    //顶部bar的类型
-    public enum WindowTopBar
-    {
-        None,
-        Resource,
-        Title,
-        effects,
-        ActionTitle,
-        ReportTitle,
-        GuildTitle,
-        ReadTopBarInfo,
-        OnlyReturn,
-    }
+## 一、只有两层宿主
 
-    [System.Serializable]
-    public struct WindowTopBarInfo
-    {
-        [EnumAttirbute("返回按钮是否显示")]
-        public bool ShowCloseBtn;
-        [EnumAttirbute("title是否显示")]
-        public bool ShowTitle;
-        [EnumAttirbute("资源道具图标显示数量（从右往左依次显示，只有两个）")]
-        public int ShowResourcesNum;
-        [EnumAttirbute("详情按钮是否显示")]
-        public bool ShowInfoBtn;
-        [EnumAttirbute("资源道具ID列表")]
-        public uint[] ShowResourceIds;
-    }
-
-    public enum CanvasType
-    {
-        Camera,
-        Screen
-    }
-
-    public enum PopupAnimationType
-    {
-        None,
-        popupZoom,    //弹出时放大回缩
-        popupEnlarge, //弹出后缓慢放大
-    }
-
-    public enum CloseAnimationType
-    {
-        None,
-        closeZoom,    //关闭时放大回缩
-        closeRetract, //关闭时缩小
-        Nothing       //放最后，无任何关闭特效
-    }
-
-    public enum BackgroundType
-    {
-        None,
-        Mask,//仅黑色背景
-        MaskCloseButton,//黑色背景+点击背景关闭按钮
-        MaskAndCloseButton,//黑色背景+点击背景关闭按钮+有实体关闭按钮点击
-        NoneCloseButton,//透明背景+点击背景关闭按钮
-    }
-
-    public enum OpenWindowPlaySoundType
-    {
-        None, //手动选择 不播放声音
-        Default,//默认声音 全屏界面播放 PopWindow_normal  弹窗界面播放 Dialog_normal
-        Dialog_normal,//普通窗口界面
-        Dialog_pay,//付费窗口界面
-        PopWindow_normal,//普通全屏界面
-        PopWindow_pay,//付费全屏界面
-        GiftPackWindow,//礼包界面
-        IrregularWindow,//非规则窗口
-        FestivalWindow,//节日全屏界面
-        PopupTipsWindow,//弹出tip界面
-    }
-
-    public enum CloseWindowPlaySoundType
-    {
-        None, //手动选择 不播放声音
-        Default,//默认声音 播放 CloseUI_1
-    }
-
-    [HideInInspector]
-    public delegate void OnWindowClosed();
-    public OnWindowClosed windowCloseListener;
-    [HideInInspector]
-    public delegate void OnWindowOpened();
-    public OnWindowOpened windowOpenListener;
-    public virtual PopupAnimationType PopupAnimType { get; set; }
-    public virtual CloseAnimationType CloseAnimType { get; set; }
-    public OpenWindowPlaySoundType openWindowPlaySoundType = OpenWindowPlaySoundType.Default;
-    public CloseWindowPlaySoundType closeWindowPlaySoundType = CloseWindowPlaySoundType.Default;
-    public bool isNeedResorePosition = false;
-    protected bool isPause = false;
-    /// <summary>
-    /// 是否覆在MainUI上。dialog的情况一般是true。窗口的情况一般是false
-    /// </summary>
-    /// <returns></returns>
-    public abstract bool IsOverlayMainUI();
-    /// <summary>
-    /// 是否不透明。影响被遮住的window、场景是否渲染问题
-    /// </summary>
-    /// <returns></returns>
-    public abstract bool IsOpaque();
-    public int sortLayer;
-    public bool isClose = false;
-    public Sequence closeAnimSequence = null;
-
-    public virtual void SetWindowVisible(bool isVisible)
-    {
-
-    }
-
-    public void CloseWindow()
-    {
-        CloseWindow(false, true);
-    }
-
-    public void CloseWindow(bool popToRoot)
-    {
-        CloseWindow(popToRoot, true);
-    }
-
-    public virtual void CloseWindow(bool popToRoot, bool isCheckGuide)
-    {
-        if (isClose)
-        {
-            return;
-        }
-        //if (PopupWindowManager.Instance.windowsStack.Count > 0)
-        //{
-        //    Debug.Log($"CloseWindowFrom:{gameObject?.name}===>CloseWindow:{PopupWindowManager.Instance.windowsStack.Peek()?.gameObject?.name}");
-        //}
-        /*ky if (PopupWindowManagerAOT.Instance.StackCount > 0)
-        {
-            if (PopupWindowManagerAOT.Instance.IsPeekWindowObj(this.gameObject))
-            {
-                isClose = true;
-            }
-        }
-        else
-        {
-            return;
-        }
-        PopupWindowManagerAOT.Instance.HidePopupWindow(popToRoot, isCheckGuide);*/
-    }
-
-    public virtual void OnPause()
-    {
-        isPause = true;
-    }
-
-    public virtual void OnResume()
-    {
-        isPause = false;
-    }
-
-    public virtual void OnClosed()
-    {
-        //ky PopupWindowManagerAOT.Instance.OnWindowClosed(this);
-    }
-
-    public virtual void OnCloseAnimationComplete()
-    {
-        //ky PopupWindowManagerAOT.Instance.SetLayer(this.gameObject);
-        if (closeAnimSequence != null)
-        {
-            closeAnimSequence.Kill(false);
-            closeAnimSequence = null;
-        }
-    }
-
-    public virtual bool CheckCanClose()
-    {
-        return true;
-    }
-
-    public virtual bool ExitOnLogin()
-    {
-        return true;
-    }
-
-    public virtual bool PopupToRootOnLogin()
-    {
-        return true;
-    }
-
-    public virtual void OnLogin() { }
-
-    public virtual PopupAnimationType GetWindowPopupAnimationType()
-    {
-        //if (!PlayerData.Instance.IsOpenUI2())
-        //{
-        //    return PopupAnimationType.None;
-        //}
-        return PopupAnimType;
-    }
-
-    public virtual CloseAnimationType GetWindowCloseAnimationType()
-    {
-        //if (!PlayerData.Instance.IsOpenUI2())
-        //{
-        //    return CloseAnimationType.None;
-        //}
-        return CloseAnimType;
-    }
-
-    public virtual void UIPopupAnimationComplete() { }
-
-    public virtual void SetResorePosition(bool need = true)
-    {
-        isNeedResorePosition = need;
-    }
-
-    /// <summary>
-    /// 做最后的清理.
-    /// </summary>
-    protected virtual void DoDestroy()
-    {
-        windowCloseListener = null;
-    }
-
-    protected virtual void OnDestroy()
-    {
-        DoDestroy();
-    }
-}
-
-public class PopupWindow : Window
-{
-    [HideInInspector]
-    //ky public UIWindowTopBar titleBar = null;
-
-    public WindowTopBar topBarType = WindowTopBar.Resource;
-    [Header("ReadTopBarInfo类型数据")]
-    public WindowTopBarInfo windowReadTopBarInfo;
-
-    public string titleKey = "";
-    public bool showBackBtnBg = true;
-    public bool isOpaque = true;
-
-    [HideInInspector]
-    public delegate void OnWindowInfo();
-    public OnWindowInfo windowInfoListener;
-
-    //  public bool isCloseBtnShow=true;
-    //是否覆盖显示在之前的window上。。窗口的情况一般是false
-    public override bool IsOverlayMainUI()
-    {
-        return false;
-    }
-
-    public override bool IsOpaque()
-    {
-        return isOpaque;
-    }
-
-    public virtual WindowTopBar GetWindowTopBarType()
-    {
-        return topBarType;
-    }
-
-    /*ky public virtual string GetTitle()
-    {
-        return LocalizationManagerAOT.Instance.GetString(titleKey);
-    }
-
-    public void SetTitle(string title)
-    {
-        PopupWindowManagerAOT.Instance.SetTitle(titleBar, title);
-    }
-
-    /// <summary>
-    /// 顶部info按钮点击事件
-    /// </summary>
-    /// <param name="clickListener"></param>
-    public void SetInfoBtnCallBack(OnWindowInfo clickListener)
-    {
-        if (titleBar != null)
-        {
-            titleBar.reportButton.onClick.RemoveAllListeners();
-            titleBar.reportButton.onClick.AddListener(delegate () { clickListener(); });
-        }
-    }*/
-}
-
-public class Dialog : Window
-{
-    public PopupAnimationType popupAnimType = PopupAnimationType.popupZoom;
-    public CloseAnimationType closeAnimType = CloseAnimationType.closeZoom;
-
-    public override PopupAnimationType PopupAnimType
-    {
-        get { return popupAnimType; }
-        set { popupAnimType = value; }
-    }
-
-    public override CloseAnimationType CloseAnimType
-    {
-        get { return closeAnimType; }
-        set { closeAnimType = value; }
-    }
-
-    public BackgroundType backgroundType = BackgroundType.None;
-    public Button dialogCloseButton;
-
-    public bool IsUseBlur = true;
-    public override bool IsOverlayMainUI()
-    {
-        return true;
-    }
-
-    public override bool IsOpaque()
-    {
-        return false;
-    }
-
-    // 是否通过手动点击关闭窗口
-    private bool _isCloseOnClick = false;
-    public bool IsCloseOnClick
-    {
-        get { return _isCloseOnClick; }
-        set { _isCloseOnClick = value; }
-    }
-}
-
-public class NativeWindow : Window
-{
-    public override bool IsOverlayMainUI() { return true; }
-    public override bool IsOpaque()
-    {
-        return false;//这里不能设置为true，否则插件窗口弹出时，游戏场景就隐藏了，会有闪动
-    }
-}
-
-```
+整个 UI 的骨架是 `Core/Sys/RootUiController.cs` 里的两个 RectTransform：`pages`（全屏页）和 `dialogs`（弹窗）。开机装配只有一段直线代码：
 
 ```csharp
-using System;
-using UnityEngine;
-
-#if UNITY_EDITOR
-using UnityEditor;
-using System.Reflection;
-using System.Text.RegularExpressions;
-#endif
-
-/// <summary>
-/// 设置枚举名称
-/// </summary>
-#if UNITY_EDITOR
-[AttributeUsage(AttributeTargets.Field)]
-#endif
-public class EnumAttirbute : PropertyAttribute
+private void EnterBattle()
 {
-    /// <summary>
-    /// 枚举名称
-    /// </summary>
-    public string name;
-    public EnumAttirbute(string name)
-    {
-        this.name = name;
-    }
-}
-
-#if UNITY_EDITOR
-[CustomPropertyDrawer(typeof(EnumAttirbute))]
-public class EnumNameDrawer : PropertyDrawer
-{
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        // 替换属性名称
-        EnumAttirbute enumAttirbute = (EnumAttirbute)attribute;
-        label.text = enumAttirbute.name;
-
-        bool isElement = Regex.IsMatch(property.displayName, "Element \\d+");
-        if (isElement)
-        {
-            label.text = property.displayName;
-        }
-
-        if (property.propertyType == SerializedPropertyType.Enum)
-        {
-            DrawEnum(position, property, label);
-        }
-        else
-        {
-            EditorGUI.PropertyField(position, property, label, true);
-        }
-    }
-
-    /// <summary>
-    /// 重新绘制枚举类型属性
-    /// </summary>
-    /// <param name="position"></param>
-    /// <param name="property"></param>
-    /// <param name="label"></param>
-    private void DrawEnum(Rect position, SerializedProperty property, GUIContent label)
-    {
-        EditorGUI.BeginChangeCheck();
-        Type type = fieldInfo.FieldType;
-
-        string[] names = property.enumNames;
-        string[] values = new string[names.Length];
-        while (type.IsArray)
-        {
-            type = type.GetElementType();
-        }
-
-        for (int i = 0; i < names.Length; ++i)
-        {
-            FieldInfo info = type.GetField(names[i]);
-            EnumAttirbute[] enumAttributes = (EnumAttirbute[])info.GetCustomAttributes(typeof(EnumAttirbute), false);
-            values[i] = enumAttributes.Length == 0 ? names[i] : enumAttributes[0].name;
-        }
-
-        int index = EditorGUI.Popup(position, label.text, property.enumValueIndex, values);
-        if (EditorGUI.EndChangeCheck() && index != -1)
-        {
-            property.enumValueIndex = index;
-        }
-    }
-}
-#endif
-
-public class ChineseEnumTool : MonoBehaviour
-{
+    if (MainPage != null) return;
+    if (Prologue != null) { Prologue.finished.RemoveListener(EnterBattle); Prologue = null; }
+    MainPage = Instantiate(PackageLoader.Current.Asset<GameObject>("ui/main/scenes/GameScene.scene"), pages, false);
+    MainPage.GetComponent<CatKnight.Frames.Game.MainPage>().dialogs = dialogs;
+    // MainPage.Start binds after this host is supplied; no runtime layout changes.
 }
 ```
 
+`MainPage`（`Frames/Game/MainPage.cs`，1030 行）是唯一的调度中枢：每个弹窗对应一个可空字段（`ShopPage`、`Activity`、`VipPage`、`DailyGift`……），页面类全部是 `sealed MonoBehaviour`，约定三件套——`Open(...)`、`Cancel()/Close()`、完成回调。Frames 目录下 140 个 .cs 里，`*Page` 后缀 66 个。没有基类意味着没有统一的生命周期钩子可依赖，契约全靠约定和检查，这是这个方案的底色。
+
+## 二、"暂停态"是字段聚合，不是栈查询
+
+常见框架回答"现在是否暂停"会去查 UI 栈是否非空。我们把它写成了字段聚合——`MainPage` 顶部两个属性：
+
+```csharp
+private bool HasDockModal => automaticMerge?.Offer != null || campaignHud?.DebugPage != null || bag.HasModal || Mansion?.Treasure != null || Mansion?.Help != null ||
+    PetBag?.Details != null || PetBag?.Acquisition != null || PetBag?.EggPanel?.Busy == true || PetBag?.CollectionPanel?.Busy == true;
+public bool IsCombatPaused => applicationPaused || applicationUnfocused || HasDockModal || SideDungeonMenu != null || TowerPage != null || RaidPage != null ||
+    ShopPage != null || Activity != null || VipPage != null || VipLevelUp != null || TasksPage != null || IncomePage != null ||
+    HomeUtility != null || Leaderboard != null || DailyGift != null || TreasureHelp != null || RewardSummary != null || LanternPage != null;
+```
+
+原因很直接："哪些弹窗挡住战斗"是玩法事实，不是数据结构事实。栈查询只能告诉你"有东西开着"，不能区分挂机收益页（要暂停）和 toast（不暂停）。把清单摊开写，每一行都可审、可注释、可检查——代价是每加一种弹窗要手动登记，漏登记编译器不管（见第五节）。
+
+## 三、打开一个弹窗：三步加回滚
+
+典型入口 `OpenShop()`（`MainPage.cs:431`）只有三步，外加一条完整的失败回滚：
+
+```csharp
+var page = Instantiate(PackageLoader.Current.Asset<GameObject>("ui/shop/scenes/ShopScene.scene"), dialogs, false).GetComponent<CatKnight.Frames.Shop.ShopPage>();
+ShopPage = page; battleInput.Stop(); battleInput.SetBlocked(page, true);
+try { page.Open(runtime, () => { if (ShopPage == page) ShopPage = null; battleInput.SetBlocked(page, false); Changed("shop_closed", null); }); }
+catch { page.gameObject.SetActive(false); Destroy(page.gameObject); ShopPage = null; battleInput.SetBlocked(page, false); throw; }
+```
+
+四个动作各有含义：实例从 catalog 按键取（`ui/shop/scenes/ShopScene.scene` 的命名约定贯穿全工程）；字段赋值在 `Open` 之前完成，互斥守卫立即生效；`battleInput.Stop()/SetBlocked` 把战斗输入显式交接给弹窗；`try/catch` 保证 Open 中途抛异常时实例销毁、字段复位、输入恢复、异常继续上抛。Dock 类面板（庄园/宠物包）的互斥另有 `CloseDockPanels()`：关旧开新，切完回装备坞。
+
+## 四、生命周期契约：Open 一次、Cancel 兜底、动效收尾
+
+没有基类，契约就写在最常用的页面里当范本。`Frames/Common/ConfirmationPage.cs` 是最短的一个：
+
+```csharp
+public void Open(string heading, string message, Action<bool> callback, bool requireDecision = false)
+{
+    if (closed != null || callback == null) throw new InvalidOperationException("Open a confirmation once");
+    // ...
+}
+private void Finish(bool accepted)
+{
+    if (settled) return; settled = true; PopupMotion.Hide(gameObject); closed?.Invoke(accepted);
+}
+public void Cancel() => Finish(false);
+private void OnDisable() { if (!settled) Cancel(); }
+```
+
+三条铁律：`Open` 重复调用直接抛异常（一个页面实例只活一轮）；结算有 `settled` 防重入；`OnDisable` 时未结算自动 `Cancel()`——弹窗被外部销毁不会留下悬空回调。开关动效统一在 `Core/Component/PopupMotion.cs`：0.2 秒 Back ease（`1 + 2.70158f*u³ + 1.70158f*u²`）从 0.1 倍缩放弹出，`Hide()` 反向播完再 `Destroy`，静态 `HashSet<PopupMotion> playing` 供外部查询"有没有弹窗正在动"。
+
+全工程唯一真正的队列是 toast（`TextTipPresenter`）：`List<(string, double)>` 排队 + `HashSet<string>` 去重（同一条提示不重复弹）+ 协程逐条出队。弹窗不排队——排队意味着同时有多个弹窗待开，这本身就是设计问题。
+
+## 五、正确性不靠框架，靠检查
+
+没有基类统一拦截，错误只能靠检查网兜住：`Assets/Editor` 下 **81 个 `*UiChecks.cs`**，全部是编辑器协程。代表性的一段（`ActivityOffersUiChecks.cs`）验证"按钮真的可点，且点了不产生任何存档副作用"：
+
+```csharp
+var hits = new List<RaycastResult>(); EventSystem.current.RaycastAll(pointer, hits);
+check(button.isActiveAndEnabled && button.IsInteractable() && hits.Count > 0 &&
+    ExecuteEvents.GetEventHandler<IPointerClickHandler>(hits[0].gameObject) == button.gameObject, "...");
+var before = runtime.Models.Session.CreateCheckpoint(); var disk = File.ReadAllBytes(DesktopAccountRuntime.StoragePath);
+ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerClickHandler);
+check(JToken.DeepEquals(before, runtime.Models.Session.CreateCheckpoint()) && disk.SequenceEqual(File.ReadAllBytes(DesktopAccountRuntime.StoragePath)), "unavailable SDK or dismiss never grants/consumes/saves");
+```
+
+点击不是直接调方法，而是构造 `PointerEventData` 走 `RaycastAll` 命中测试——遮罩挡没挡住、按钮被谁盖住，这类框架层问题在这里现形；存档 checkpoint 和磁盘字节双重比对，把"点了不该点的按钮"也纳入断言。
+
+代价照实说：互斥守卫和暂停聚合靠手写，漏登记没有编译错误，只能靠 UiChecks 事后暴露；`MainPage` 1030 行，字段改名牵一发动全身。换来的是零框架魔法——每个弹窗的行为都能在一处代码里读完。
+
+上线前核对：
+
+- 新弹窗先补 `MainPage` 字段 + `OpenXxx` 互斥守卫 + `IsCombatPaused` 登记，三处缺一不可
+- 页面类保持 `sealed`，遵守 Open 一次 / Cancel 兜底 / `settled` 防重入
+- 弹窗打开必须走 `try { Open } catch { 销毁+复位+上抛 }`，输入交接（Stop/SetBlocked）成对出现
+- 交互改动跑对应 `*UiChecks`（编辑器协程），弹窗动效期间的状态查询用 `PopupMotion.AnyPlaying`
+- `rg "sortingOrder"` 只允许 PetEggView 拖拽一处；层级调整走父子关系
