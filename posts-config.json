@@ -173,55 +173,6 @@
       "project": "",
       "link": "post7.html",
       "image": "images/img_007_001.jpg"
-    },
-    {
-      "id": 6,
-      "title": "美术资源制作规范",
-      "excerpt": "文档历史",
-      "date": "2025-12-08",
-      "category": "[代码解析]",
-      "project": "",
-      "link": "post6.html",
-      "image": "images/img_006_001.png"
-    },
-    {
-      "id": 5,
-      "title": "EM UI结构",
-      "excerpt": "EM的UI系统，使用Unity的UGUI+C# MonoBehaviour脚本挂载的方式制作。​",
-      "date": "2025-12-03",
-      "category": "[代码解析]",
-      "project": "",
-      "link": "post5.html",
-      "image": "images/img_005_001.png"
-    },
-    {
-      "id": 4,
-      "title": "LocalCache&LRUCache",
-      "excerpt": "LocalCache是一个用于本地数据缓存与读取的静态工具类,基于Unity的PlayerPrefFs,支持用户级(Local)与全局级(Global)的数据存储。",
-      "date": "2025-12-08",
-      "category": "[代码解析]",
-      "project": "",
-      "link": "post4.html"
-    },
-    {
-      "id": 2,
-      "title": "通用UI组件文档与备注",
-      "excerpt": "为了能够快速复用组件，请大伙尽量写的能够复用",
-      "date": "2025-12-03",
-      "category": "[代码解析]",
-      "project": "",
-      "link": "post2.html",
-      "image": "images/img_002_001.png"
-    },
-    {
-      "id": 1,
-      "title": "PrefabHolder",
-      "excerpt": "本文讨论了 prefab 中特效的处理方式，旨在解决特效嵌入 prefab 导致的资源卸载困难和纹理资源冗余问题，同时统一制作方式并减少程序接入。关键要点包括：​",
-      "date": "2025-12-03",
-      "category": "[代码解析]",
-      "project": "",
-      "link": "post1.html",
-      "image": "images/img_001_001.jpg"
     }
   ]
 }
