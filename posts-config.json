@@ -205,13 +205,12 @@
     },
     {
       "id": 2,
-      "title": "通用UI组件文档与备注",
-      "excerpt": "为了能够快速复用组件，请大伙尽量写的能够复用",
-      "date": "2025-12-03",
+      "title": "弹窗遮罩规范：CloseSelf 是默认，BlockOnly 要写明理由",
+      "excerpt": "猫骑士 155 个页面的遮罩行为登记在 Migration/Input/modal-input.json：CloseSelf 51 条、BlockOnly 25 条，例外都要附源码依据，442 条断言守着规范不被改坏。",
+      "date": "2026-11-18",
       "category": "[代码解析]",
-      "project": "",
-      "link": "post2.html",
-      "image": "images/img_002_001.png"
+      "project": "猫骑士（Unity 小游戏）",
+      "link": "post2.html"
     },
     {
       "id": 1,
