@@ -87,7 +87,7 @@ def build_post_config(post_data, post_filename):
         "id": post_data.get('post_number', 0),
         "title": post_data.get('title', '无标题'),
         "excerpt": post_data.get('excerpt') or extract_excerpt(post_data.get('content', '')),
-        "date": post_data.get('date', datetime.now().strftime("%Y年%m月%d日")),
+        "date": post_data.get('date', datetime.now().strftime("%Y-%m-%d")),  # strftime 不支持非 ASCII 格式串（Windows locale codec 报错）
         "category": post_data.get('category', DEFAULT_CATEGORY),
         "project": post_data.get('project', ''),
         "link": post_filename
