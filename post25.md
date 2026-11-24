@@ -1,5 +1,5 @@
 ---
-title: 死亡结算改了五版：发奖即时、展示延迟，与动画和暂停彻底解耦
+title: 逻辑和表现解耦：死亡回调不等动画，只认固定延迟
 category: "[代码解析]"
 date: 2026-11-23
 project: 炮塔大作战
@@ -83,6 +83,8 @@ this.scheduleOnce(display, VICTORY_RESULT_DELAY);  // 0.5s
 
 顺带补上设置面板的口子：`onBtnSetting` 在 `resultShowing` 时直接 return，设置面板已开着则强制隐藏——结算面板不再可能被设置界面盖住。
 
+把结算时序和动画彻底切开——这条不变量也不是我们头一次画，**逻辑与表现解耦是成熟引擎的老架构**：Doom 的游戏逻辑按 35Hz 固定 tic 推进，渲染帧率完全独立（id Software 1997 年开源的源码至今如此）；Minecraft 的世界逻辑固定每秒 20 tick，帧率再高模拟步进也不动。落到"死亡后延迟展示"这类时序上，成熟引擎同样不把逻辑裁决挂在动画回调上：Godot 把 `call_deferred()` 和一次性 `create_timer()` 做成引擎级 API，我们用的 Cocos Creator 同理——`scheduleOnce` 挂固定延迟，而不是等动画播完。动画回调适合表现层接力（爆炸音效、镜头震动），不适合逻辑层裁决（该不该发奖、该不该弹面板）。
+
 ## 四、每版踩的坑，最终都变成守卫
 
 五版迭代留下的守卫今天还在，各自盯着当年的坑：
@@ -121,3 +123,9 @@ for (const bossId of [1001, 1004, 1005]) for (const pause of ['选卡', '复活'
 - 改动结算链路先跑 `chapter-chest-settlement-isolation.test.cjs`，新增暂停态要进矩阵
 
 回头看，第五版并没有比第四版多写多少代码——删掉 `waitForDeferredDeathAnimation` 那条链路之后，剩下的守卫反而都变得各司其职。死亡结算这种"所有系统在这里交汇"的位置，尽早把不变量拆干净，比多打一个补丁值钱得多。
+
+## 参考
+
+- [id-Software/DOOM（GitHub）](https://github.com/id-Software/DOOM)：游戏逻辑按 35Hz 固定 tic 推进，与渲染解耦
+- [Tick - Minecraft Wiki](https://minecraft.wiki/w/Tick)："The game normally runs at a fixed rate of 20 ticks per second"
+- [Object.call_deferred - Godot 文档](https://docs.godotengine.org/en/stable/classes/class_object.html)：方法调用延迟到帧末空闲时间执行
