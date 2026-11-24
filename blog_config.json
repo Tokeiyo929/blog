@@ -16,6 +16,10 @@
     "json",
     "markdown",
     "yaml",
-    "csharp"
+    "csharp",
+    "typescript",
+    "powershell",
+    "kotlin",
+    "apacheconf"
   ]
 }
