@@ -87,7 +87,7 @@ this.m_PropEffect);​
 
 表示把Spine\\SXGameSuccessAni这个文件，播放于PropEffect​
 
-```apache
+```csharp
 this.m_PropEffect.SetScale(100*yScale,100*yScale);​​
 ```
 
