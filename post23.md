@@ -1,70 +1,52 @@
 ---
-title: 血条的策略由数量决定：批量走池化轮询，唯一走事件驱动
+title: 血条分几段是画的事：快照只传 hp/maxHp，渲染侧除法自己算
 category: "[代码解析]"
-date: 2026-11-06
+date: 2026-11-26
 project: 炮塔大作战
 ---
 
-炮塔大作战的血条踩过完整的坑路：boss 多层血条六天就废弃、表现字段污染了逻辑快照，最终收敛成三条：小兵池化轮询，boss 事件驱动加 100 管假分段，战车补缓冲。
+炮塔大作战的 boss 血量上万，一根血条看不出打到了第几管。这条多层血条前后改了三版：phase 字段进过快照、33 天后整删；彩虹色轮换换成三张分段图；分段从「每管 1000 血」改成固定 100 管。改到最后，快照只传 hp/maxHp，分几段是渲染侧用除法算的。
 
-## 一、多层血条六天就死了：表现概念混进了逻辑快照
+## 一、phase 进过快照：三十三天的弯路
 
-10-15 的 `1efc00be`（「子母弹子弹，boss多层血条」）是当时的直觉做法：美术要多管血、颜色渐变，那就真建多根血条，配置里加阶段，快照里加字段：`EntitySnapshot.phase`（"当前血条/形态阶段，0-based"），prefab 上配「阶段节点」数组。当时觉得配置驱动最省事。
+boss 血条不是第一个碰到「分阶段」的 UI。9 月的 `9c790168`（09-18「新增 盾牌兵二阶段换spine」）为盾牌兵的二阶段变形态，给 `EntitySnapshot` 加了 `phase` 字段（注释写着「当前血条/形态阶段，0-based」），`EntityView` 上配「阶段节点」数组和「阶段受伤变色动画」数组，`syncPhase` 在快照变化时切骨架。当时觉得这样合理：盾牌兵是唯一的二阶段怪，给「阶段」留一条快照到渲染的通用通道，下一个多阶段怪直接复用。
 
-十天后的死亡回收重构（10-21 `08271c98`）把它整个废弃了：血条分几段是纯表现层的决定，逻辑快照却被迫携带 `phase`，每份快照复制、每个消费方都跟着这个字段走。换一次血条设计，改的是逻辑层。diff 里 `phase` 字段、赋值、阶段节点 property 连成一串删掉，boss 血条从此只靠快照里的 `hp/maxHp` 两个数字活着。教训就一条：**快照里只准有逻辑事实**，分段几根、什么颜色全是画的事，别让它进数据结构。
+结果通道等了 33 天没等到第二个用户。10-21 的 `08271c98`（「废弃多阶段血条设计」）把它整体拆掉，`EntityView` 一个 diff 清掉 46 行。回头看问题出在注释那句话里——「血条/形态阶段」搅在同一个字段：快照每帧复制它，逻辑层负责推进它，prefab 上还得配好节点数组，三方为一个实际上只有盾牌兵在用的概念立了协议。血条分几段、怪换什么形态，拆开看都是画的事；揉进快照，改一次设计就要动逻辑层。
 
-## 二、数量决定策略：小兵池化轮询，boss 事件驱动
+## 二、boss 血条三版：假分段怎么活下来的
 
-小兵同屏几十个，更新方式是**集中轮询**：渲染层不持有血量逻辑，唯一数据源是逻辑层下发的 `EntitySnapshot`，`HpBarManager` 持池、按 `entityId` 对账，怪死了回池不销毁。每帧对账用自增版本号兜底，不维护"上帧的怪列表"再做差集：
-
-```typescript
-public syncExistingBars(entities: EntitySnapshot[], resolveEntityView: HpBarViewResolver): void {
-    if (this.barCount <= 0) return;
-    this.existingEntityVersion++;
-    for (let i = 0; i < entities.length; i++) {
-        // 给 existingEntityVersions[entity.id] 打当前版本号，血量非法则 remove
-    }
-    this.removeMissingBars();   // 版本号落后的血条 = 怪已消失，回池
-}
-```
-
-位置同步不把血条挂到怪节点上：每帧把怪头顶锚点的世界坐标转进统一 UI 层，怪节点销毁、层级抖动都碰不到血条。boss 是屏幕顶部的唯一 UI，走**事件驱动**：`CombatEventBridge` 比对上次已播报的 `hp/maxHp`，没变化就不发事件，一帧最多一条，UI 层挂个监听就完事。
-
-美术给 boss 的图是"多管血"样式，这次没真建 100 根管，除法加取模就把分段 fake 出来了：
+boss 多层血条走了另一条路，第一版就没碰快照。10-15 的 `1efc00be`（「子母弹子弹，boss多层血条」）把 boss 血量按每管 1000 做除法，当前管序号、管内剩余比例全部现算，运行时克隆一根副条当「下一管」预览，配七个彩虹色按管序号取模轮换：
 
 ```typescript
-public showHp(hp: number, maxHp: number): boolean {
-    const hpPerBar = maxHp / BOSS_HEALTH_BAR_COUNT;   // 总血量均分 100 根管
-    const activeBarIndex = Math.min(BOSS_HEALTH_BAR_COUNT - 1,
-        Math.max(0, Math.floor((maxHp - hp) / hpPerBar)));   // 打空了几根管
-    // ...当前管内剩余血量的比例
-    this.progressBar.progress = activeBarRatio;
-    this.setFillImage(this.progressBar, activeBarIndex);     // 按管序号取模换色
-}
+const BOSS_HEALTH_BAR_UNIT_HP = 1000;
+const totalBarCount = Math.floor(maxHp / BOSS_HEALTH_BAR_UNIT_HP);
+const activeBarIndex = Math.floor((maxHp - hp) / BOSS_HEALTH_BAR_UNIT_HP);
+const activeColor = BOSS_HEALTH_BAR_COLORS[activeBarIndex % BOSS_HEALTH_BAR_COLORS.length];
+// ...当前管内剩余血量算出 activeBarRatio
+this.progressBar.progress = activeBarRatio;
+this.setFillColor(this.progressBar, activeColor);          // 直接改 barSprite 的 node.color
 ```
 
-一个 ProgressBar 只显示当前管，后面垫一个副本当"下一管"预览，换色不跳帧；`showHp` 只有从隐藏到显示那一次返回 `true`，UI 层拿它触发 boss 登场警告。10-22 的孵化兽重构（`4cf565d5`「preserve segmented boss health」）动过血条周边一圈，这套假分段原样活了下来，比节点方案扛重构。
+当时没真建几十根管，是算过账的：boss 配置血量是万级，prefab 上建几十个进度条节点配不动，而渲染侧从 maxHp/hp 算分段，快照和配置零改动。这版留下两个坑。第一个是克隆副条：`22514095`（10-20「修改了boss血条」）发现克隆出来的节点挂错了父节点、还带着背景图，血条叠层全乱，diff 里专门补了注释「Both fills must render after the shared background and before the current fill」，手动 `setSiblingIndex` 压到正确层级、关掉克隆带出的背景 sprite。第二个是彩虹色本身：美术看了说颜色没有语义，出了 3 张分段条纹理（`assets/Frames/FrameGame/Texture/new/1.png` 到 `3.png`），同一提交把改颜色换成了按管序号取模换图。
 
-## 三、缓冲终落地：给战车，不给小兵
-
-参考的教程（[BV15J411x7do](https://www.bilibili.com/video/BV15J411x7do/)，源码在 [zheyuanzhou/Youtube-Unity-Tutorial EP45](https://github.com/zheyuanzhou/Youtube-Unity-Tutorial/tree/master/EP45_Health%20Bar)）招牌是受伤缓冲：底层黄条慢追上层红条，打击感的核心。我们 10 月没给小兵做缓冲，掉血瞬间落底。11-05 的 `0501f46a`（「血量缓冲」）把它补在了**战车血条**上：缓冲条由 `GameFrame` 集中持有驱动，不引入第二个每帧组件：
+第三版改的是分段的来源。`b9e3a556`（10-21「替换了3选1特效」）把「每管固定 1000 血」翻转成「固定 100 管」：
 
 ```typescript
-if (!visible || !wasVisible || progress > previousProgress) {
-    cc.Tween.stopAllByTarget(this.carHpBufferBar);
-    this.carHpBufferBar.progress = progress;        // 回血/首显/隐藏：直接对齐，只降不升
-} else if (progress < previousProgress) {
-    cc.Tween.stopAllByTarget(this.carHpBufferBar);
-    cc.tween(this.carHpBufferBar).delay(0.3).to(0.5, { progress }).start();   // 掉血：慢追
-}
+const BOSS_HEALTH_BAR_COUNT = 100;
+const hpPerBar = maxHp / BOSS_HEALTH_BAR_COUNT;
+const activeBarIndex = Math.min(BOSS_HEALTH_BAR_COUNT - 1,
+    Math.max(0, Math.floor((maxHp - hp) / hpPerBar)));     // 两头 clamp 防越界
 ```
 
-`onDisable` 停掉 tween 并对齐，缓冲状态不跨局残留；`tools/tests/car-hp-buffer.test.cjs`（117 行）把只降不升、回血对齐、隐藏清理全部钉死。战车是玩家唯一盯着的一条血，缓冲的打击感收益全落在它身上；小兵几十条，瞬间落底反而干脆。
+翻转的理由在两天后的 `51aa0f08` 里写得明白：boss 关卡要运行时覆写怪物血量（`BossDependencies` 的注释「Boss 运行时副本可覆盖血量，绝不改地图默认怪物或全局武器数值」）。每管 1000 血时，覆写一次血量，管数就跟着 maxHp 跳变；固定 100 管后段数恒定，改血量只改每管的血。分层之外的两个细节也活到了终版：副条预览让换管不跳帧，剩余管数用「x N」计数压在条上。
 
-两条主流做法都对得上。教程的双层 Image 缓冲是社区通用做法，我们原样借了"只降不升"这条规则；池化是官方标准，Cocos Creator 文档原话："假如玩家在一关中要杀死 100 个敌人，但同时出现的敌人不超过 5 个，那我们就只需要生成 5 个节点大小的对象池，然后循环使用就可以了”，对账这一环则换成了自增版本号。血条小到没人把它当架构问题，但多层血条那六天证明它值得复盘：这次没发明新东西，双层缓冲、对象池都是现成答案，我们做的只是让每条策略跟着数量走。
+## 三、引擎本来就只给一根条
+
+这套做法没发明新东西。Cocos 引擎源码 `cocos/ui/progress-bar.ts` 里，ProgressBar 组件的 progress 就一个 `@range([0, 1])` 的比例值，类注释写着「进度条组件，可用于显示加载资源时的进度」——引擎层不存在分段血条这个概念。Unity 那边同构，uGUI 的 `Image.fillAmount` 文档原句："0-1 range with 0 being nothing shown, and 1 being the full Image"。两家引擎都只有一根 0 到 1 的条，分段数是上层 UI 自己除出来的；快照里真正需要的，也只有 hp/maxHp。
+
+代价记两条：固定 100 管意味着血量几百的低配 boss 也会被切出 100 管，视觉上瞬时掉一整管，目前项目里 boss 血量都在几千以上没触发，算遗留观察项；副条是运行时 `cc.instantiate` 出来的，首次显示才有这笔开销，prefab 里不占节点。phase 那条弯路也留了痕迹——后来再有人说「给快照加个字段」，我们先问一句：这是逻辑事实，还是画的事。
 
 ## 参考
 
-- [【中文字幕】Unity血条UI设计和受伤缓冲效果（B站）](https://www.bilibili.com/video/BV15J411x7do/)
-- [zheyuanzhou/Youtube-Unity-Tutorial EP45_Health Bar（GitHub）](https://github.com/zheyuanzhou/Youtube-Unity-Tutorial/tree/master/EP45_Health%20Bar)
-- [Cocos Creator 2.x 手册：对象池](https://docs.cocos.com/creator/2.4/manual/zh/scripting/pooling.html)
+- [Cocos Creator 引擎源码 progress-bar.ts（GitHub）](https://github.com/cocos/cocos-engine/blob/v3.8.2/cocos/ui/progress-bar.ts)
+- [Unity uGUI 手册：Image.fillAmount（Unity 文档）](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/api/UnityEngine.UI.Image.html)
