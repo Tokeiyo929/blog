@@ -9,6 +9,7 @@ import os
 import re
 import shutil
 import json
+import subprocess
 from datetime import datetime
 from html import escape, unescape
 import sys
@@ -29,6 +30,14 @@ def configure_stdio():
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, 'reconfigure'):
             stream.reconfigure(encoding='utf-8')
+
+def push_blog_facts():
+    """把 posts-config.json 全量推给他的档案（幂等，失败不影响主流程）"""
+    try:
+        subprocess.run(["node", r"D:\GitHub\ai-girlfriend\bridge\watchers\push-blog.mjs"],
+                       timeout=60, capture_output=True)
+    except Exception:
+        pass  # 幂等，下次发布再推也能补上
 
 def extract_post_number(filename):
     """从文章文件名中提取编号"""
@@ -477,7 +486,8 @@ def sync_all_posts():
         print(f"配置文件: {CONFIG_PATH}")
         print("\n提示: 刷新 index.html 即可看到所有文章")
         print("=" * 80)
-        
+        push_blog_facts()
+
     except Exception as e:
         print(f"\n✗ 保存配置文件失败: {e}")
 
@@ -630,6 +640,7 @@ def main():
         if update_posts_config(post_data, post_filename, is_new_post=is_new_post):
             action_text = "更新" if not is_new_post else "添加"
             print(f"\n✓ 文章已成功{action_text}到配置文件")
+            push_blog_facts()
         else:
             print("\n✗ 更新 posts-config.json 失败")
         
